@@ -1,0 +1,107 @@
+site: https://linuxhint.com/install-intellij-idea-on-ubuntu-20-04/
+JRE là (Môi trường thực thi Java - Java Runtime Environment) những gì bạn thường cần để chạy một ứng dụng Java. Đây là tất cả những gì bạn cần nếu bạn không phải là một lập trình viên Java.
+
+JDK là (Bộ công cụ phát triển Java - Java Development Kit) là những gì bạn cần nếu bạn phải thực hiện một số chương trình hoặc phát triển phần mềm liên quan đến Java.
+
+OpenJDK là mã nguồn mở của Java Development Kit (JDK) trong khi Oracle JDK là phiên bản chính thức của JDK. Mặc dù OpenJDK thỏa mãn cho hầu hết các trường hợp, nhưng một số chương trình như Android Studio đề nghị sử dụng Oracle JDK để tránh vấn đề về UI / Performance
+#################################################################
+Phương thức: tập hợp một hoặc nhiều câu lệnh thực hiện 1 phép toán
+các tham số là một cách để truyền thông tin tới phương thức
+Expression (Biểu thức) là sự kết hợp giữa các toán tử (Operator) và biến số (Operand) theo một trật tự nhất định, trong đó toán hạng có thể là hằng số, biến hoặc một biểu thức khác
+Operators (Toán tử)
+	Toán tử số học: (Arithmetic Operator): cộng, trừ, nhân, chia, chia lấy dư
+	Toán tử gán (Assignment Operator): kết quả của một biểu thức sẽ được gán vào biến
+	Toán tử một ngôi (Unary Operators): + (biểu diễn số dương), - (biểu diễn số âm), ++, --, %
+	Toán tử quan hệ (Relational Operator): ==, !=, >, >=, <, <=
+	Toán tử luận lý (Logical Operator): && (AND), || (OR), ! (NOT)
+	Toán tử bit (Bitwise Operator):  thao tác tên từng bit một, có thể được áp dụng cho kiểu dữ liệu Integer, long, short, char và byte: & (AND), | (OR), ^ (XOR), ~ (NOT), >> (dịch trái), << (dịch phải)
+	Toán tử bậc 3 (Ternary): cách viết ngắn gọn thay thế cho if else: condition ? expression_if_condition_is_True : expression_if_condition_is_False
+		return "Hello " + (v != null ? userName : "Guest"); ~ (python) userName = userName if userName is not None else "Guest"
+vòng lặp
+	Biểu thức khởi tạo
+	Biểu thức kiểm tra
+	Cập nhật biểu thức
+	Thân vòng lặp
+#################################################################
+* biến là tên của vùng nhớ được lưu trong bộ nhớ stack
+Có 3 kiểu biến trong Java
+	biến cục bộ (hay còn gọi là biến local)
+		được khai báo trong các phương thức, hàm constructor hoặc trong các block
+		nằm trên vùng bộ nhớ stack của bộ nhớ
+	biến toàn cục (biến instance)
+		được khai báo trong một lớp (class), bên ngoài các phương thức, constructor và các block
+		được lưu trong bộ nhớ heap
+	biến tĩnh (biến static)
+		được khai báo trong một class với từ khóa "static", phía bên ngoài các phương thức, constructor và block
+		được lưu trữ trong bộ nhớ static riêng
+* Có 2 kiểu dữ liệu trong Java
+	kiểu dữ liệu nguyên thủy (primitive) là kiểu dữ liệu cơ bản nhất
+		tám kiểu dữ liệu nguyên thủy trong java là
+			boolean
+			byte
+			char
+			short
+			int
+			long
+			float
+			double
+	kiểu dữ liệu đối tượng
+* khai báo hàm: modifier returnType nameOfMethod (Parameter List) {
+    // method body
+}
+	modifier: Phạm vi truy cập
+	returnType: Kiểu dữ liệu trả về
+	nameOfMethod: Tên của hàm
+	Parameter: Tham số của hàm, có thể có hoặc không
+		Tham số kiểu tham trị là dành cho các biến có kiểu dữ liệu nguyên thủy (primitive) như: byte, short, int, long, float, double, boolean, char.
+		Tham số kiểu tham chiếu là dành cho các biến có kiểu đối tượng, kiểu mảng, kiểu chuỗi ký tự.
+	body: Phần thân hàm nơi mã code được thực thi.
+	Code reusability: định nghĩa hàm 1 lần và dùng lại nhiều nơi.
+	Code readable: Dễ sửa lỗi, dễ nhìn, dễ hiểu
+* Thông thường, mảng (array) là một tập hợp các phần tử có cùng kiểu được lưu trữ gần nhau trong bộ nhớ
+	trong Java, Mảng là một cấu trúc dữ liệu nơi lưu trữ các phần tử giống nhau
+	Mảng một chiều
+		int[] age = {12, 4, 5, 2, 5};
+
+		// declare an array
+		double[] data;
+
+		// allocate memory
+		data = new double[10];
+	Mảng đa chiều
+		double[][] matrix = {{1.2, 4.3, 4.0},
+			{4.1, -1.1}
+		};
+	Tối ưu code
+	Truy cập ngẫu nhiên
+* Collection trong Java là một khuôn khổ cung cấp một kiến trúc để lưu trữ và thao tác tới nhóm các đối tượng. Tất cả các hoạt động mà bạn thực hiện trên một dữ liệu như tìm kiếm, phân loại, chèn, xóa, ... có thể được thực hiện bởi Java Collection
+* ArrayList là một Collection kiểu danh sách sử dụng cấu trúc mảng để lưu trữ phần tử. Thứ tự các phần tử dựa theo thứ tự lúc thêm vào và giá trị của các phần tử này có thể trùng nhau, sử dụng khi cần truy xuất phần tử nhiều hơn cập nhật và xóa phần tử
+	không thể lưu giữ dữ liệu nguyên thủy trong ArrayList
+		import java.util.ArrayList;
+		// create ArrayList
+		ArrayList<String> languages = new ArrayList<>();
+
+		// Add elements to ArrayList
+		languages.add("Java");
+		languages.add("Python");
+		languages.add("Swift");
+		System.out.println("ArrayList: " + languages);
+		
+		// get the element from the arraylist
+		String str = languages.get(1);
+		
+		// change the element of the array list
+		languages.set(2, "JavaScript");
+		
+		// remove element from index 2
+		String str = languages.remove(2);
+		
+
+		for (int i = 0; i < languages.size(); i++) {
+		    System.out.print(languages.get(i));
+		    System.out.print(", ");
+		}
+
+#################################################################
+a package is a way to organize your java project: gói là một cách để tổ chức các dự án java
+đối tượng Scanner được sử dụng để đọc dữ liệu nhập từ bàn phím

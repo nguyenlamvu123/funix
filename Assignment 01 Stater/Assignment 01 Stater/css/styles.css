@@ -2,15 +2,6 @@ body {
     margin: 0px;
 }
 
-h1.section-title {
-text-transform: uppercase;
-}
-
-p.dam-viethoachucaidau {
-	font-weight: bold;
-	text-transform: capitalize;
-}
-
 .cv-document {
 	box-sizing: border-box;
 	border: none;
@@ -24,17 +15,6 @@ p.dam-viethoachucaidau {
 	width: 100%;
 	font-family: arial, sans-serif, tahoma;
 	font-size: 10pt;
-}
-
-div.cv-page div.section::after {
-content:url(https://onedrive.live.com/?cid=D4DD958CEBC42BA1&id=D4DD958CEBC42BA1%2112465&parId=D4DD958CEBC42BA1%2113343&o=OneUp);
-}
-
-div.section {
-	text-transform: uppercase;
-	font-weight: bold;
-	/*border-bottom: solid;*/
-	margin: 40px;
 }
 
 .cv-page {

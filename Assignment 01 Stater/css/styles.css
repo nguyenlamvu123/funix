@@ -1,0 +1,58 @@
+body {
+    margin: 0px;
+}
+
+h1.section-title {
+text-transform: uppercase;
+}
+
+p.dam-viethoachucaidau {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+.cv-document {
+	box-sizing: border-box;
+	border: none;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	vertical-align: baseline;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-family: arial, sans-serif, tahoma;
+	font-size: 10pt;
+}
+
+div.cv-page img {
+position: absolute;
+top: 0px;
+right: 0px;
+}
+
+div.section {
+	position: relative;
+	text-transform: uppercase;
+	font-weight: bold;
+	/*border-bottom: solid;*/
+	margin: 40px;
+}
+
+.cv-page {
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    text-decoration: none;
+    width: 900px;
+    min-height: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 1px rgba(0,0,0,.5);
+    background-color: #fff;
+    position: relative;
+
+    padding: 40px
+}
