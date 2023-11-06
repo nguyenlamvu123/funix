@@ -1,0 +1,32 @@
+Cơ sở dữ liệu (Database) là một tập hợp dữ liệu hoặc thông tin có tổ chức để có thể dễ dàng truy cập, cập nhật hoặc thao tác
+Hệ quản trị cơ sở dữ liệu (Database management system - DBMS) như một phần mềm để giúp quản lý cơ sở dữ liệu. DBMS sẽ bao gồm các chức năng để xác định, thao tác cũng như truy xuất và quản lý dữ liệu, đồng thời giúp xác định những quy tắc nhằm xác thực cũng như thao tác với những dữ liệu được lưu trữ trong DBMS
+Có hai DBMS rất phổ biến là MySQL và SQL Server
+	MySQL được phát hành từ giữa thập niên 90s (sau đó bị thâu tóm bởi Oracle), MySQL ban đầu là một DBMS mã nguồn mở và cũng vẫn mở cho tới tận bây giờ
+	Microsoft phát triển SQL Server từ giữa thập niên 80s, với mục tiêu hướng đến là SQL Server sẽ cung cấp giải pháp đáng tin cậy và có thể mở rộng, nó là một nền tảng được chọn cho những phần mềm doanh nghiệp cần mở rộng lớn theo thời gian.
+	SQL Server hoạt động tốt trong hệ sinh thái của Microsoft nhưng chưa được hỗ trợ tốt trong Linux, trong khi đó MySQL hoạt động tốt ở cả Windown và Linux.
+	MySQL là một hệ quản trị cơ sở dữ liệu được sử dụng để lưu trữ, quản lý dữ liệu có cấu trúc trong khi đó SQL (Structured Query Language - SQL) là một ngôn ngữ truy vấn dữ liệu được sử dụng bên trong MySQL
+	
+mysql-ctl cli (truy cập vào chương trình dòng lệnh mysql)
+show databases; (hiển thị các cơ sở dữ liệu hiện có);
+	show tables;
+CREATE DATABASE soap_store; (tạo mới database tên là soap_store);
+DROP DATABASE data_name; (Xoá một database hiện có)
+	DROP TABLE table_name; (Xoá một bảng hiện có)
+USE dog_walking_app;
+SELECT DATABASE(); (In ra database đang được sử dụng)
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+Một số kiểu dữ liệu:
+	int: Kiểu số nguyên
+	float: Kiểu số thực
+	char: Kiểu chuỗi nhưng sẽ có độ dài cố định
+	varchar: Kiểu chuỗi nhưng sẽ có độ dài động
+	date: Kiểu dữ liệu ngày tháng có dạng  YYYY-MM-DD
+	datetime: Kiểu dữ liệu thời gian có dạng YYYY-MM-DD HH:MM:SS
+	timestamp: Kiểu dữ liệu thời gian có dạng hiển thị HH:MM:SS
+
