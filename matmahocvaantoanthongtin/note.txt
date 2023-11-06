@@ -1,0 +1,263 @@
+dừng lại tại: Chứng thư SSL
+
+plaintext: nguyên bản gốc của thông tin
+ciphertext: dạng bí mật
+
+phân loại các thuật toán mã hóa
+	Các thuật toán cổ điển
+		Thuật toán thay thế (Substitution)
+		Thuật toán chuyển vị (Transposition)
+	Các thuật toán hiện đại: được chia thành 3 loại khi phân biệt theo số chìa khóa sử dụng trong một thuật toán
+		Mã hóa khóa đối xứng hay khóa bí mật SKC (Secret Key Cryptography)
+			Chỉ dùng một chìa khóa cho cả mã hóa và giải mã (biến đổi theo hai chiều ngược nhau)
+			tốc độ lập mã và giải mã nhanh chóng
+			có thể chia thành 2 nhóm phụ
+				Thuật toán mã hóa theo khối (Block ciphers)
+					từng khối dữ liệu trong văn bản gốc ban đầu được thay thế bằng một khối dữ liệu khác có cùng độ dài
+					Độ dài mỗi khối gọi là kích thước khối (block size), thường được tính bằng đơn vị bit
+					Một số thuật toán khối thông dụng: DES, 3DES, RC5, RC6, 3-Way, CAST, Camelia, Blowfish, MARS, Serpent, Twofish, GOST...
+				Thuật toán mã hóa dòng (Stream ciphers)
+					dữ liệu đầu vào được mã hóa từng bit một
+					có tốc độ nhanh hơn các thuật toán khối, được dùng khi khối lượng dữ liệu cần mã hóa chưa được biết trước
+					Có thể coi thuật toán dòng là thuật toán khối với kích thước mỗi khối là 1 bit.
+					Một số thuật toán dòng thông dụng: RC4, A5/1, A5/2, Chameleon...
+
+			Tiêu chuẩn mã hóa dữ liệu DES (Data Encryption Standard)
+				Thuật toán mã hóa theo tiêu chuẩn DES gọi là DEA (Data Encryption Algorithm)
+				Năm 1972, một tiêu chuẩn quốc gia về bảo mật dữ liệu lấy tên là Tiêu chuẩn mã hóa dữ liệu (quốc gia) DES
+					(Data Encryption Standard) được xây dựng
+				Năm 1974, một thuật toán mã hóa do IBM giới thiệu được chọn làm thuật toán đạt tiêu chuẩn và gắn tên cho
+					thuật toán đó là Thuật toán mã hóa tiêu chuẩn DEA (Data Encryption Algorithm)
+				Năm 1997, DES bắt đầu bộc lộ những bất cập, được tìm cách thay thế bằng các thuật toán mã hóa mới có độ
+					bảo mật cao hơn qua các kỳ thi tuyển chọn các thuật toán mã hóa tiên tiến AEA
+					(Advanced Encryption Algorithm)	sử dụng mạng Feistel
+			Tiêu chuẩn mã hóa tiên tiến AES (Advanced Encryption Standard)
+				Năm 2001, một thuật toán mới là Tiêu chuẩn mã hóa tiên tiến AES (Advanced Encryption Standard) được chọn để thay thế cho DES
+				Thuật toán được trình diện dưới tên là Rijndael
+				sử dụng mạng thay thế-chuyển vị
+				Quá trình mã hóa gồm 4 bước:
+					AddRoundKey
+					SubBytes
+					ShiftRows
+					MixColumns
+			MỘT SỐ PHẦN MỀM MÃ HÓA ĐỐI XỨNG
+				Blowfish
+				CAST
+				IDEA
+				RC2
+				RC4
+				RC6
+				Serpent
+				Twofish
+
+		Mã hóa bất đối xứng hay mã hóa khóa công khai và khóa riêng PKC (Public and Private Keys Cryptography)
+			Sử dụng hai khóa riêng biệt: *************************************************************************************************E(P) = C; D(C) = P
+				một khóa để mã hóa (khóa công khai: public key)
+				một khóa khác để giải mã (khóa riêng: private key)
+			tốc độ lập mã, giải mã rất chậm
+			Thường được thực hiện với 3 bước cơ bản
+				Công đoạn sinh khóa: một cặp khóa public key và private key có quan hệ về toán học được tạo ra dựa vào
+					các bài toán cửa lật một chiều (giả sử khóa công khai E và khóa bí mật riêng D)
+				Mã hóa: sử dụng khóa công khai (public key), khóa này có thể được chuyển giao trên môi trường mở
+					có thông điệp gốc P, người gửi dùng khóa công khai E mã hóa E(P) = C, C là thông điệp mã hóa được gửi đi
+				Giải mã: sử dụng khóa riêng bí mật (private key)
+					người nhận dùng D giải mã D(C) = P, nhận được lại thông điệp gốc
+		Phong bì số (Digital envelope)
+		Hàm băm (Hash function)
+			Mã hóa một chiều (one-way cryptography)
+				dùng một biến đổi toán học để “mã hóa” thông tin gốc thành một dạng không biến đổi ngược được
+				không có chìa khóa vì từ ciphertext không tìm ngược lại được plaintext
+			là một giải thuật toán học (một ánh xạ một-một (một chiều))
+				duyệt dọc theo chuỗi dữ liệu và liên tục cộng thêm vào một giá trị xuất phát từ một giá trị được tính cho mỗi phần tử trong dữ liệu
+				ứng với mỗi khối dữ liệu (một dãy bit hay một đối tượng trong lập trình hướng đối tượng của thông điệp gốc) một giá trị băm duy nhất
+				lưu ý về tính một chiều: có thể có một giá trị băm ứng với hai khối dữ liệu gốc khác nhau <- sự đụng độ
+					vì vậy không thể từ giá trị băm tìm ngược lại khối dữ liệu đã sinh ra nó
+					Một hàm băm tốt phải thỏa mãn các điều kiện sau:
+						Tính toán nhanh
+						Các khóa được phân bố đều trong bảng
+						Ít xảy ra đụng độ
+						Xử lý được các loại khóa có kiểu dữ liệu khác nhau.
+			hai phương pháp chính để tạo hàm băm thường dùng
+				phương pháp cộng và nhân
+					Giá trị tăng thêm ứng với mỗi phần tử thường được tính dưới dạng nhân với một số nguyên tố
+				phương pháp quay vòng
+					Giá trị tăng thêm được xét từ cả hai phía bên trái và bên phải, tính toán để cộng thêm vào tại mỗi phần tử
+			người nhận có thể tính lại giá trị băm của thông điệp nhận được rồi so sánh với giá trị tính được khi giải mã chữ ký điện tử
+				nếu hai giá trị khác nhau thì có thể khẳng định nội dung thông điệp đã bị thay đổi
+			Các dạng hàm băm thông dụng
+				RS Hash Function
+				JS Hash Function
+				PJW Hash Function
+				BKDR Hash Function
+				SDBM Hash Function: Đây là dạng hàm băm được chọn sử dụng trong các dự án mã nguồn mở SDBM
+				DJB Hash Function
+				Message Digest (MD) algorithms: Những dãy thuật toán hướng byte
+					sản sinh ra một giá trị băm 128 bit cho các thông điệp có độ dài bất kỳ
+					MD2 (RFC 1319)
+					MD4 (RFC 1320)
+					MD5 (RFC 1321)
+				Secure Hash Algorithm (SHA)
+					SHA-1 tạo ra một giá trị băm 160 bit ban đầu được công bố với tên gọi là FIPS 180-1 và RFC 3174
+					FIPS 180-2 (tức là SHA-2) mô tả 5 thuật toán trong chuẩn SHA
+						SHA-1
+						SHA-224
+						SHA-256
+						SHA-384
+						SHA-512
+						có thể tạo ra giá trị băm có độ dài 224, 256, 384, hoặc 512 bit.
+				RIPEMD
+					RIPEMD-160 được thiết kế và tối ưu hóa cho quá trình xử lý 32 bit
+					những phiên bản khác là RIPEMD-256, RIPEMD-320, và RIPEMD-128
+				HAVAL (HAsh of VAriable Length): Hàm băm có độ dài biến thiên
+					có thể tạo các giá trị băm với độ dài 128, 160, 192, 224, hoặc 256 bit
+				Whirlpool: làm việc trên các thông điệp có độ dài không quá 2256 bit và tạo ra giá trị băm với 512 bit
+				Tiger
+					được thiết kế đảm bảo an toàn cao chạy hiệu quả với bộ xử lý 64 bit
+			Hàm băm thường được dùng để xây dựng các bảng băm ghi các giá trị băm ứng với một số khối dữ liệu mẫu
+				khi cần so sánh hai khối dữ liệu nào đó (thường có kích thước rất lớn) chỉ cần so sánh các giá trị băm có kích thước rất nhỏ
+			Chữ ký điện tử
+				là một bộ phận thường có kích thước nhỏ tạo ra từ thông điệp, được người gửi mã hóa bằng khóa K đã trao đổi thống
+					nhất giữa hai đối tác gửi và nhận thông điệp, gửi kèm với toàn bộ thông điệp cho người nhận
+				giải quyết được bốn yêu cầu sau mà không cần mã hóa toàn bộ thông điệp
+					Tính bảo mật
+					Tính toàn vẹn thông tin
+					Tính nhận biết
+					Tính không chối bỏ
+					ngoài ra còn đảm bảo được các nguyên lý khác của vấn đề bảo mật dữ liệu như
+						tính xác thực
+						tính nhận dạng đối tác
+						...
+			Chữ ký số có thể xem là một lớp con của chữ ký điện tử: *********************************************************************K(S) = S’; K(S’) = S
+				dùng khóa mã K để mã hóa một nội dung dữ liệu cố định S nào đó: K(S) = S’ -> chữ ký số
+				gắn chữ ký số S’ vào mọi thông điệp được phát hành
+				Khi nhận được một thông điệp có gắn S’, dùng khóa mã K để giải mã được lại S
+			kiểm tra thặng dư
+				bên gửi: hàm băm H() được tính cho dữ liệu được gửi, giá trị băm H(V) được gửi cùng dữ liệu V, mã hóa bằng khóa K
+					***************************************************************************************************************K[H(V)] = H’
+					H’ chính là chữ ký điện tử
+				bên nhận
+					giải mã H’ kết hợp với thông điệp nhận được V’ tìm ra một giá trị băm H(V’). Tiếp đó dùng khóa K tính lại giá trị băm
+					nếu các giá trị băm không trùng nhau thì xác định là có lỗi
+Trung tâm phân phối khóa (KDC: Key Distribution Center) là một phần của một hệ thống mật mã có mục đích giảm thiểu
+	những hiểm họa khi trao đổi khóa mã giữa các đối tác
+TRAO ĐỔI KHÓA DIFFIE (D-H)
+Kerberos là một hệ thống giao thức xác thực an toàn trên mạng máy tính
+
+Các hệ thống mật mã hiện nay đang được sử dụng phổ biến nói chung có thể chia làm hai nhóm chính
+	các chương trình và giao diện được sử dụng trong mã hóa dữ liệu trong các thư điện tử
+	các hệ thống giao diện mạng được sử dụng với mục đích cung cấp các tính năng như bảo mật,
+		xác nhận, đồng bộ hóa và lọc thông tin trong môi trường mạng
+GIAO THỨC TRUYỀN THÔNG CÓ BẢO MẬT
+	HTTPS (Hypertext Transfer Protocol Secure) là một tổ hợp của HTTP (Hypertext Transfer Protocol: giao thức truyền thông siêu văn bản) với SSL/TLS
+		Netscape Communications tạo ra HTTPS trong năm 1994
+		Thoạt đầu, HTTPS được dùng với chuẩn mã hóa SSL
+			sau đó SSL phát triển thành TLS cho nên phiên bản hiện nay của HTTPS được ký hiệu định danh là RFC 2818
+		Địa chỉ URL của các website thông thường dùng giao thức HTTP bắt đầu với cụm ký tự “http://” và mặc định sử dụng cổng 80
+		Các website sử dụng giao thức có bảo mật HTTPS có địa chỉ URL bắt đầu bởi cụm ký tự “https://” và sử dụng mặc định cổng 443
+		HTTP hoạt động ngay ở tầng ứng dụng, tầng cao nhất trong mô hình tham chiếu OSI
+			nhưng giao thức bảo mật thì lại hoạt động ở một tầng phụ thấp hơn
+			giao thức này mã hóa thông điệp trước khi gửi đi và giải mã thông điệp sau khi nhận được
+		Hầu hết các trình duyệt khi nhận được một chứng thư không có giá trị đều đưa ra một cảnh báo
+	S-HTTP (Secure HTTP) là một giao thức truyền thông hướng thông điệp có bảo mật được sử dụng kết hợp với HTTP
+		S-HTTP mã hóa từng thông điệp riêng lẻ trong khi HTTPS mã hóa toàn bộ một kênh truyền thông
+		S-HTTP chỉ hoạt động với hệ thống khóa đối xứng
+	FTPS (File Transfer Protocol Secure) Giao thức truyền tệp có bảo mật là sự bổ sung kết hợp sự hỗ trợ của các giao thức bảo mật
+		SSL hay TLS vào giao thức truyền tệp FTP
+		FTP được soạn thảo từ 1971 để sử dụng cho công tác trao đổi nghiên cứu khoa học trên liên mạng ARPANET
+		ARPANET phân rã một bộ phận thành liên mạng NSFnet
+			mạng này về sau trở thành Internet
+		Năm 1994, Công ty Netscape tung ra bộ giao thức SSL để bảo vệ cho việc truyền thông trên Internet
+######################################################################################################################################
+dừng lại tại: QUẢN LÝ NGƯỜI DÙNG – TƯỞNG DỄ ĂN MÀ KHÔNG ĐƠN GIẢN
+
+HTTP là một giao thức dùng để truyền nhận dữ liệu
+	Các ứng dụng Web hoặc Mobile cũng gọi Restful API thông qua giao thức HTTP
+	Đặc điểm của giao thức này là stateless, Server không thể biết được 2 request có tới từ cùng 1 client hay không
+	dữ liệu được truyền dưới dạng plain text, không hề được mã hoá hay bảo mật -> hacker có thể dễ dàng nghe lén, đọc và
+		chỉnh sửa dữ liệu <- Man-in-the-middle attack, viết tắt là MITM
+			Sniff packet để đọc lén dữ liệu
+			Sửa đổi packet
+Dữ liệu giao tiếp qua HTTPS đã được mã hoá nên người ngoài không thể đọc trộm hay chỉnh sửa
+
+Cookie là một file text nhỏ được server gửi về client, sau đó browser lưu vào máy người dùng
+	Khi client gửi request tới server, nó sẽ gửi kèm cookie. Server dựa vào cookie này để nhận ra người dùng
+	Cookie thường có name, value, domain và expiration:
+		Name, đi kèm với value: Tên cookie và giá trị của cookie đó
+		Domain: Domain mà cookie được gửi lên
+		Expiration: Thời gian cookie tồn tại ở máy client. Quá thời gian này, cookie sẽ bị xoá.
+	Dùng Fiddler, Wireshark,... đọc lén cookie
+	Dùng EditThisCookie để dump cookie và đăng nhập
+	Cách phòng chống thường dùng:
+		Cookie có Flag HTTP Only sẽ không thể truy cập thông qua hàm js document.cookie
+			Do đó, dù web có bị lỗi XSS thì hacker không thể đánh cắp
+		Cookie có Flag Secure chỉ được gửi qua giao thức HTTPS, hacker sẽ không thể sniff
+
+CSRF (Cross Site Request Forgery) (Tên khác là XSRF)
+	Nguyên tắc hoạt động
+		Tạo ra 1 web độc, khi người dùng truy cập vào, một request sẽ được gửi đến trang mà hacker muốn tấn công (thông qua form, img, …).
+		Do trong request này có đính kèm cookie của người dùng, trang web A đích sẽ nhầm rằng đây là request do người dùng thực hiện.
+	ví dụ:
+		tạo 1 web độc có một form ẩn với các giá trị tương tự form đổi mật khẩu trong trang web muốn tấn công
+		khi người dùng truy cập hình ảnh (thẻ img) trên web độc, trình duyệt tự gọi GET request tới trang web muốn tấn công, gắn kèm với cookie của người dùng
+	Một số cách phòng chống CSRF cơ bản
+		Sử dụng CSRF Token
+		Kiểm tra giá trị Referer và Origin trong header: Origin cho biết trang web gọi request này
+			Giá trị này được đính kèm trong mỗi request, hacker không chỉnh sửa được
+			Kiểm tra giá trị này, nếu nó là trang lạ thì không xử lý request
+		Kiểm tra header X-Requested-With: Request chứa header này là request an toàn, vì header này ngăn không cho ta gửi request đến domain khác
+		Cần cẩn thận đề phòng lỗi XSS
+
+XSS (Cross Site Scripting) là một lỗi bảo mật cho phép hacker nhúng mã độc (javascript) vào một trang web khác
+	Hacker có thể lợi dụng mã độc này để deface trang web, cài keylog, chiếm quyền điều khiển
+	Persistent XSS
+		mã độc đựợc lưu trong database trên server, hiển thị ra với toàn bộ người dùng
+		ví dụ: nhập mã javascript vào ô input -> server lưu lại đoạn mã vừa nhập
+	Reflected XSS
+		chèn mã độc vào URL dưới dạng query string. Khi người dùng nhấp vào URL này, trang web sẽ đọc query string, render mã độc vào HTML
+		ví dụ: phát tán link https://news.google.com/foryou?hl=vi&gl=VN&ceid=VN%3Avi&q=<script>deleteAccount();</script>.
+	Client XSS
+	hầu như các Web Framework nổi tiếng (Spring, Django, ASP.NET MVC) đều tích hợp sẵn cách phòng chống
+	cách phòng chống khác
+		Encoding
+			sử dụng hàm encode có sẵn trong ngôn ngữ/framework để chuyển các kí tự < > thành &lt; %gt từ input của người dùng
+		Validation/Sanitize
+			loại bỏ hoàn toàn các kí tự khả nghi trong input của người dùng, hoặc thông báo lỗi nếu trong input có các kí tự này
+		dùng chuẩn CSP (Content Security Policy)
+			trình duyệt chỉ chạy JavaScript từ những domain được chỉ định
+			Để sử dụng CSP, server chỉ cần thêm header Content-Security-Policy vào mỗi response
+
+SQL Injection
+	dùng ORM (Object-Relational Mapping) framework web thay cho SQL thuần là cách phòng chống thường dùng
+	Lọc dữ liệu từ người dùng
+	Không cộng chuỗi để tạo SQL: Sử dụng parameter thay vì cộng chuỗi
+	Không hiển thị exception, message lỗi: Hacker dựa vào message lỗi để tìm ra cấu trúc database
+	Phân quyền rõ ràng trong DB
+	Backup dữ liệu thường xuyên
+
+Insecure Direct Object References: chương trình không check xem người dùng có quyền truy cập các dữ liệu khác hay không
+	cách phòng chống thường dùng
+		Test cẩn thận: Nếu để sản phẩm bị lỗi thì đây là lỗi của tester
+		Bảo vệ dữ liệu “nhạy cảm” -như source code, config, database key- cần hạn chế truy cập
+			Cách tốt nhất là chỉ cho phép các IP nội bộ truy cập các dữ liệu này
+		Kiểm tra chặt chẽ quyền truy cập của user
+		Tránh để lộ key của đối tượng
+
+Một số lỗi để lộ thông tin hệ thống
+	Hiển thị ở footer trang web
+	Hiển thị rõ phiên bản .NET, Exception khi bị lỗi
+	Để trong header trả về từ server
+	để trong html
+	https://builtwith.com/ -> đọc các header trả về từ server, xem HTML include các thư viện nào
+	hậu quả
+		https://nvd.nist.gov/ -> Dựa theo phiên bản framework/server/database, hacker có thể thấy được những lỗ hổng bảo mật của các phiên bản này
+		có thể mò ra đường dẫn tới trang admin nếu để lộ framework đang sử dụng
+			wordpress -> /wp-admin
+			joomla -> /administrator
+			phpmyadmin -> /phpmyadmin
+		decompile file API hoặc security
+	Một số phương pháp “giấu thông tin” hay dùng
+		Config server hoặc viết code để loại bỏ những HTTP header dư thừa.
+		Khi deploy, obfustace hoặc uglify code để code trở nên khó đọc
+		bundle toàn bộ thư viện và code thành 1 file -> giấu thông tin thư viện js
+		không hiển thị trực tiếp error/exception trên custom Error Page khi hệ thống bị lỗi
+		Thường xuyên cập nhật/nâng cấp framework lên phiên bản mới nhất để vá các lỗ hỗng
