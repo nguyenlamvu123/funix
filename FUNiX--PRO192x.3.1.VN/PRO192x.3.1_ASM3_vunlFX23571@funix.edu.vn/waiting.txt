@@ -1,0 +1,8 @@
+https://courses.funix.edu.vn/courses/course-v1:FUNiX+PRO192x.3.1.VN+1022.SE.DN/courseware/e7d108ffb3174759a0cb69be7521d4e8/9283d125857145a2a268141620f59279/?activate_block_id=block-v1%3AFUNiX%2BPRO192x.3.1.VN%2B1022.SE.DN%2Btype%40sequential%2Bblock%409283d125857145a2a268141620f59279
+
+File ReportService.java: định nghĩa interface cho nghiệp vụ báo cáo
+- Hàm log, không có kiểu trả về, có tham số amount, kiểu double, dùng để In ra biên lai theo từng loại tài khoản mỗi khi rút tiền (Xem yêu cầu chức năng 4)
+
+File Withdraw.java: định nghĩa interface cho nghiệp vụ rút tiền.
+- Hàm withdraw có kiểu trả về là boolean, có tham số amount, kiểu double. Xử lý nghiệp vụ rút tiền (Chức năng 4)
+- Hàm isAccepted có kiểu trả về là boolean, có tham số amount, kiểu double, xác định xem giá trị có thoả điều kiện rút tiền hay không. Xử lý nghiệp vụ rút tiền (Chức năng 4)

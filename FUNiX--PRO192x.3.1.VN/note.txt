@@ -1,6 +1,6 @@
     - một số lab trước 9.7 cần xem lại, tách file để chạy được trên codelearn
 
-    - chưa làm Assignment số: 01 và Assignment số: 02
+    - chưa làm Assignment số: 01 và Assignment số: 02 -> ok
 
     - cần code thêm lab 10.2
 
