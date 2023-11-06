@@ -1,0 +1,8 @@
+mysql-ctl cli;
+show databases;
+use book_shop;
+select * from books where released_year > 1980;
+select * from books where author_lname = 'Chabon' or author_lname = 'Eggers';
+select * from books where author_lname = 'Lahiri' and released_year > 1980;
+select * from books where pages between 100 and 200;
+select title, author_lname, case when title like '%stories%' then 'Short Stories' when title like '%Just Kids%' or title like '%A Heartbreaking Work of Staggering Genius%' then 'Memoir' else 'Novel' end as type from books;

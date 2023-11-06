@@ -1,0 +1,8 @@
+n = int(input())
+tong: int = 0
+
+for i in range(n):
+    tong += int(input())
+
+print(tong)
+

@@ -1,0 +1,9 @@
+mysql-ctl cli;
+show databases;
+use book_shop;
+
+select count(title) as soluongcuonsach from books;
+select released_year, count(released_year) as soluongcuonsachxuatbanmoinam from books group by released_year;
+select count(stock_quantity) as tongsoluongsachtonkho from books;
+select author_lname, avg(released_year) from books group by author_lname;
+select concat_ws(' ', author_fname, author_lname), pages as tendaydu from books order by pages desc limit 1;

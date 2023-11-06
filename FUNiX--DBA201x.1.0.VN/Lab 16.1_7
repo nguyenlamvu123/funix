@@ -1,0 +1,8 @@
+n = input()
+a = dict()
+
+for aa in range(int(n)):
+    aa = input()
+    a[aa] = a[aa] + 1 if aa in a else 1
+
+print('; '.join([f'{aa[0]} - {aa[1]}' for aa in sorted(a.items(), key=lambda x: x and x[0])]) + '; ')

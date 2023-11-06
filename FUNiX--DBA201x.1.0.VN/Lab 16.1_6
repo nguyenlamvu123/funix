@@ -1,0 +1,31 @@
+n = input()
+a = ''
+
+def timsonguyento(a):
+    phannguyencanbac2 = 1
+    if a < 2:
+        return False
+    elif a < 4:
+        return True
+    else:
+        while not all([
+            phannguyencanbac2 * phannguyencanbac2 <= a,
+            (phannguyencanbac2 + 1) * (phannguyencanbac2 + 1) > a,
+        ]):
+            phannguyencanbac2 += 1
+        else:
+            for i in range(2, phannguyencanbac2 + 1):
+                if i == 1:
+                    continue 
+                if a % i == 0:
+                    break
+            else:
+                return True
+    return False
+
+for i in range(int(n)):
+    aa = input()
+    if timsonguyento(int(aa)):
+        a += aa + ' '
+
+print(a)

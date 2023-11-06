@@ -1,0 +1,58 @@
+mysql-ctl cli;
+show databases;
+use book_shop;
+
+#create table students(id int auto_increment, primary key (id), first_name varchar(150) not null);
+#create table papers(student_id int, FOREIGN KEY(student_id) REFERENCES students(id), title 
+create table Reviewers(id int primary key auto_increment, first_name varchar(100), last_name varchar(100));
+create table Series(id int primary key auto_increment, title varchar(100) not null, released_year year(4), genre varchar(100));
+create table Reviews(id int primary key auto_increment, rating float, series_id int, foreign key(series_id) references Series(id), reviewer_id int, foreign key(reviewer_id) references Reviewers(id));
+
+INSERT INTO Series (title, released_year, genre) VALUES
+    ('Archer', 2009, 'Animation'),
+    ('Arrested Development', 2003, 'Comedy'),
+    ("Bob's Burgers", 2011, 'Animation'),
+    ('Bojack Horseman', 2014, 'Animation'),
+    ("Breaking Bad", 2008, 'Drama'),
+    ('Curb Your Enthusiasm', 2000, 'Comedy'),
+    ("Fargo", 2014, 'Drama'),
+    ('Freaks and Geeks', 1999, 'Comedy'),
+    ('General Hospital', 1963, 'Drama'),
+    ('Halt and Catch Fire', 2014, 'Drama'),
+    ('Malcolm In The Middle', 2000, 'Comedy'),
+    ('Pushing Daisies', 2007, 'Comedy'),
+    ('Seinfeld', 1989, 'Comedy'),
+    ('Stranger Things', 2016, 'Drama');
+INSERT INTO Reviewers (first_name, last_name) VALUES
+    ('Thomas', 'Stoneman'),
+    ('Wyatt', 'Skaggs'),
+    ('Kimbra', 'Masters'),
+    ('Domingo', 'Cortes'),
+    ('Colt', 'Steele'),
+    ('Pinkie', 'Petit'),
+    ('Marlon', 'Crafford');
+INSERT INTO Reviews(series_id, reviewer_id, rating) VALUES
+    (1,1,8.0),(1,2,7.5),(1,3,8.5),(1,4,7.7),(1,5,8.9),
+    (2,1,8.1),(2,4,6.0),(2,3,8.0),(2,6,8.4),(2,5,9.9),
+    (3,1,7.0),(3,6,7.5),(3,4,8.0),(3,3,7.1),(3,5,8.0),
+    (4,1,7.5),(4,3,7.8),(4,4,8.3),(4,2,7.6),(4,5,8.5),
+    (5,1,9.5),(5,3,9.0),(5,4,9.1),(5,2,9.3),(5,5,9.9),
+    (6,2,6.5),(6,3,7.8),(6,4,8.8),(6,2,8.4),(6,5,9.1),
+    (7,2,9.1),(7,5,9.7),
+    (8,4,8.5),(8,2,7.8),(8,6,8.8),(8,5,9.3),
+    (9,2,5.5),(9,3,6.8),(9,4,5.8),(9,6,4.3),(9,5,4.5),
+    (10,5,9.9),
+    (13,3,8.0),(13,4,7.2),
+    (14,2,8.5),(14,3,8.9),(14,4,8.9);
+select * from Series;
+select * from Reviewers;
+select * from Reviews;
+
+select title, released_year, genre, Reviews.rating from Series right join Reviews on Series.id = Reviews.series_id;
+select title, avg(rating) from (select title, released_year, genre, Reviews.rating from Series right join Reviews on Series.id = Reviews.series_id) as a group by title;
+select genre, avg(rating) from (select title, released_year, genre, Reviews.rating from Series right join Reviews on Series.id = Reviews.series_id) as a group by genre;
+# select fullname, avg(Reviews.rating) as average from (select select concat_ws(' ', first_name, last_name) as fullname from Reviewers) as a join Reviews on Reviewers.id = Reviews.reviewer_id group by first_name;
+select first_name, last_name, Reviews.rating as rating from Reviewers join Reviews on Reviewers.id = Reviews.reviewer_id;
+select title from (select DISTINCT title, Reviews.series_id as findnull from Series left join Reviews on Series.id = Reviews.series_id) as a where findnull is null;
+#9#select Reviewers.id, Reviewers.first_name, Reviewers.last_name, count(reviewer_id) from Reviews right join Reviewers on Reviews.reviewer_id = Reviewers.id group by Reviews.reviewer_id;
+#10#select series_id from (select title, released_year, genre, Reviews.rating, Reviews.series_id from Series left join Reviews on Reviews.series_id = Series.id) as a join Series on Series.id = Reviews.series_id;
