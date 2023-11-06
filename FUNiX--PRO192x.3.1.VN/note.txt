@@ -1,0 +1,322 @@
+    - một số lab trước 9.7 cần xem lại, tách file để chạy được trên codelearn
+
+    - chưa làm Assignment số: 01 và Assignment số: 02
+
+    - cần code thêm lab 10.2
+
+    - xem lại Lab 14.1
+
+    - xem lại Lab 15.1 15.2 15.3
+
+    - Lab 10.4 chưa chạy -> ok
+
+    - need to add lab 12.2, 12.4, 12.5 -> ok
+
+    - lab 11.7 chưa chạy -> ok
+
+    done Exercise 12.2 and temporarily ignore unit 13
+
+mảng (array) là một tập hợp các phần tử có cùng kiểu được lưu trữ gần nhau trong bộ nhớ
+	Mảng trong Java là một đối tượng chứa các phần tử có kiểu dữ liệu giống nhau, có số lượng phần tử cố định (https://www.javatpoint.com/array-in-java)
+	Mảng trong java lưu các phần tử theo chỉ số, chỉ số của phần tử đầu tiên là 0.
+		Mảng một chiều
+		Mảng đa chiều	
+	int[] age = new int[5];
+	age[0] = 12;
+	age[1] = 4;
+	age[2] = 5;
+		int[] age = {12, 4, 5, 2, 5};
+	Lợi thế của mảng trong Java
+		Tối ưu code
+		Truy cập ngẫu nhiên
+
+ArrayList là một Collection kiểu danh sách (list) sử dụng cấu trúc mảng để lưu trữ phần tử.
+	Thứ tự các phần tử dựa theo thứ tự lúc thêm vào và giá trị của các phần tử này có thể trùng nhau.
+	Collection trong Java là một khuôn khổ cung cấp một kiến trúc để lưu trữ và thao tác tới nhóm các đối tượng.
+		Tất cả các hoạt động mà bạn thực hiện trên một dữ liệu như tìm kiếm, phân loại, chèn, xóa, ... có thể được thực hiện bởi Java Collection
+
+	ArrayList<String> languages = new ArrayList<>();
+	languages.add("Java");
+	languages.add("Kotlin");
+	languages.add("Python");
+	String str = languages.get(1);  // get the element from the arraylist
+	languages.set(2, "JavaScript");  // change the element of the array list
+	String str = languages.remove(2);  // remove element from index 2
+	Collections.sort(languages);
+		languages.sort(Comparator.naturalOrder());
+
+duyệt qua 1 Iterator (trình lặp) thì được từng Object (đối tượng)
+        Object element = it.next();
+        if(element instanceof String) {
+                if (String.valueOf(element).matches("[a-zA-Z]")) {
+                    System.out.println(element);
+                }
+            }
+
+map trong Java tương ứng với dict trong Python
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put(name, phone);
+        if (map.get(s) == null) {
+            System.out.println("Not found");
+        } else {System.out.println(s + "=" + map.get(s));}
+
+ngăn xếp: vào sau ra trước
+
+Trong Java có 2 kiểu dữ liệu:
+	kiểu dữ liệu nguyên thủy (Primitivies type) như int, double, …
+	kiểu dữ liệu tham chiếu (parameter) như các Wraper class: Integer, Double, …
+
+Một lớp là một nhóm đối tượng có các thuộc tính. Nó là một mẫu hoặc thiết kế từ đó các đối tượng được tạo ra, có thể chứa:
+	Thành viên dữ liệu
+	Constructor
+		Default: Nếu 1 class được triển khai không chứa bất kỳ một constructor nào thì trình biên dịch sẽ tự động thêm default constructor cho class đó.
+		No-arg: Là 1 constructor không nhận bất kỳ một tham số nào, điểm khác biệt duy nhất với default constructor nó bên trong no-arg constructor có chứa mã triển khai.
+		Parameterized: Constructor có ít nhất một tham số đầu vào gọi là parameterized constructor.
+	Phương thức
+		Mục đích của constructor là để khởi tạo một object trong khi đó method thực thi các nhiệm vụ để đáp ứng nhu cầu của một object chứa nó.
+		Constructor không có kết quả trả về còn method thì có.
+		Constructor không thể đi cùng với các từ khoá abstract, final, static etc, method thì được.
+		Phương thức static
+			Khai báo với mức truy cập là static
+			Không thể truy cập vào các phương thức instance và biến instance trực tiếp
+			Không thể sử dụng từ khóa this
+		Phương thức instance
+			Instance method là method mà được gọi trên thể hiện của một lớp.
+			Để sử dụng instance method thì phải khởi tạo một object bằng từ khóa new.
+			Có thể truy cập vào instance method và instance variable, static method và static variable trực tiếp.
+	Phạm vi truy cập
+		Với các access modifier, tính đóng gói sẽ có thể giúp ngăn chặn những lớp bên ngoài truy cập, thay đổi thuộc tính và phương thức của một lớp -> che giấu dữ liệu (data hiding)
+		Access Modifier trong Java xác định phạm vi có thể truy cập của biến, phương thức, constructor hoặc lớp gồm 4 từ khóa
+			public: Có thể truy cập từ bất kỳ đâu
+			protected: Có thể truy cập từ các lớp con trong cùng package hoặc các lớp con trong các package khác mà kế thừa lớp đó
+			default (Không có chỉ định): Chỉ có thể truy cập từ class trong cùng package
+			private: Chỉ có thể truy cập từ trong cùng class
+		Ngoài ra, còn có nhiều Non-access Modifier như static, abstract, synchronized, native, volatile, transient, ...
+	Lớp trừu tượng trong Java là lớp đại diện cho một khái niệm và không thể tạo đối tượng của nó
+Đối tượng được cấp bộ nhớ khi nó được tạo ra. Lớp không được cấp bộ nhớ khi nó được tạo ra.
+	mối quan hệ giữa các đối tượng
+		Quan hệ phụ thuộc
+		Quan hệ kết hợp (Association)
+		Quan hệ thu nạp (Aggregation)
+	class <tên_lớp> {
+		// Khai báo danh sách các thuộc tính
+		<kiểu_dữ_liệu> <tên_thuộc_tính>;
+		...
+		// Khai báo danh sách các phương thức
+		public <kiểu_trả_về> <tên_phương_thức>(<kiểu_tham_số> <tên_tham_số>, ...) {
+			...
+		}
+		...
+	}
+		class Student{
+			String name;
+			int age;
+			public void getInformation() {
+				
+			}
+			public void display() {
+				
+			}
+		}
+		Student s1 = new Student();
+		// Gán giá trị cho thuộc tính name của đối tượng s1
+		s1.name = "Long";
+Sơ đồ lớp chính là sơ đồ mà nhìn vào đó bạn thấy được mô tả của các lớp, mối quan hệ giữa các đối tượng trong hệ thống.
+	Ký tự '-' sẽ tương ứng với phạm vi truy cập private.
+	Ký tự '~' sẽ tương ứng với phạm vi truy cập default.
+	Ký tự '#' sẽ tương ứng với phạm vi truy cập protected.
+	Ký tự '+' sẽ tương ứng với phạm vi truy cập public.
+Constructor (phương thức khởi tạo) trong Java được chia làm 2 loại là constructor không tham số (như bài trước bạn đã học) và constructor có tham số
+Một lớp có thể chứa các loại biến sau:
+	Biến Local
+		được định nghĩa bên trong các phương thức, constructor hoặc block code
+		sẽ bị hủy khi phương thức đã hoàn thành.
+	Biến Instance
+		là các biến trong một lớp nhưng ở bên ngoài bất kỳ phương thức nào
+		được khởi tạo khi lớp được tải
+		có thể được truy cập từ bên trong bất kỳ phương thức, constructor hoặc khối nào của lớp cụ thể đó.
+	Biến Class
+		được khai báo với một lớp, bên ngoài bất kỳ phương thức nào, với từ khóa static
+Generics
+	Các phương thức Generic là một cách rất hiệu quả để xử lý nhiều kiểu dữ liệu bằng một phương thức duy nhất
+	https://viblo.asia/p/java-generic-aWj53Xw1K6m
+	https://gpcoder.com/2868-huong-dan-su-dung-java-generics/
+		giúp chỉ định rõ kiểu dữ liệu một class, một interface hay một phương thức nào đó làm việc cùng
+	https://codelearn.io/sharing/lam-quen-voi-generics-trong-java
+		package Generics;
+		class MyArrayGeneric<T> {
+			private T[] array; // khởi tạo mảng
+			public MyArrayGeneric(T[] array) {
+				this.array = array;
+			}
+		}
+		String[] names = new String[] { "Dat", "Khoa", "Tin" };
+		MyArrayGeneric<String> myArrayGeneric = new MyArrayGeneric<String>(names);
+
+		Một số quy ước
+			T - Type (Kiểu dữ liệu bất kỳ thuộc Wrapper class: String, Integer, Long, Float, …)
+			E – Element (phần tử – được sử dụng phổ biến trong Collection Framework)
+			K – Key (khóa)
+			V – Value (giá trị)
+			N – Number (kiểu số: Integer, Double, Float, …)
+			U,S,I,G, … (tùy theo kiểu của người dùng đặt)
+		class Generic với kiểu tham số generic
+			class Dictionary<K, V> {
+				private K key;
+				private V value;
+				public Dictionary(K key, V value) {}
+				public K getKey() {}
+				public void setKey(K key) {}
+				public V getValue() {}
+				public void setValue(V value) {}
+			}
+			Dictionary<String, String> d = new Dictionary<String, String>("Study", "hoc");
+		Thừa kế lớp Generics
+			class Book extends Dictionary<String, String> {}
+			Book l = new Book("Study", "hoc");
+
+			class Book<K, V> extends Dictionary<K, V> {}
+			Book<String, String> l = new Book<String, String>("Study", "hoc");
+
+			class Book<V> extends Dictionary<String, V> {}
+			Book<String> l = new Book<String>("Study", "hoc");
+
+			class Book<K, V, I> extends Dictionary<K, V> {
+				private I info; // khởi tạo thêm tham số generic
+				public Book(K key, V value) {
+					super(key, value);
+				}
+				public Book(K key, V value, I info) {
+					super(key, value);
+					this.info = info; // truyền Kiểu generic mới vào 
+				}
+				public I getInfo() {}
+				public void setInfo(I info) {}
+			}
+		Generics Interface
+			interface writer<T> {}
+			class Book<T> implements writer<T> {}
+			Book<String> t = new Book<String>();
+		phương thức generic
+			public static <E> E getFirstElement(ArrayList<E> arr) {}
+			ArrayList<String> list = new ArrayList<>();
+			System.out.println(getFirstElement(list));
+
+		Generics với ký tự đại diện Generic method (wildcard)
+			Collection<?>: mô tả một tập hợp chấp nhận tất cả các loại đối số (chứa mọi kiểu đối tượng)
+			List<? extends Number>: mô tả một danh sách, nơi mà các phần tử là kiểu Number hoặc kiểu con của Number
+			Comparator<? super String>: Mô tả một bộ so sánh (Comparator) mà thông số phải là String hoặc cha của String
+
+Hai cách tiếp cận để xử lý lỗi trong lập trình
+	LBYL
+		Look before you leap
+		kiểm tra rõ ràng các điều kiện trước khi thực hiện goi hoặc sử dụng, đặc trưng bởi sự hiện diện của nhiều câu lệnh if
+	EAFP
+		Easier to Ask Forgiveness Than Permission
+		Code theo luồng mong đợi
+			Nếu nó không hoạt động và một ngoại lệ xảy ra, thì chỉ cần bắt ngoại lệ và xử lý nó một cách thích hợp
+			đặc trưng bởi khối try catch
+
+(https://vietjack.com/java/)
+Character Stream trong Java được sử dụng để thực hiện input và output cho Unicode 16 bit
+	FileReader, FileWriter
+Byte Stream trong Java được sử dụng để thực hiện input và output của các byte (8 bit)
+	FileInputStream, FileOutputStream
+3 Standard Stream gồm Đầu vào chuẩn (Standard Input), Đầu ra chuẩn (Standard Output), Lỗi chuẩn (Standard Error) nhận đầu vào từ một bàn phím và sau đó tạo kết quả trên màn hình máy tính
+	InputStreamReader
+FileInputStream trong Java
+	InputStream f = new FileInputStream("C:/java/hello");
+
+	File f = new File("C:/java/hello");
+	InputStream f = new FileInputStream(f);
+FileOutputStream trong Java
+	OutputStream f = new FileOutputStream("C:/java/hello")
+
+	File f = new File("C:/java/hello");
+	OutputStream f = new FileOutputStream(f);
+tạo thư mục trong Java
+	File d = new File(dirname);
+	d.mkdirs();  // tạo cả một thư mục và tất cả các thư mục cha
+	d.mkdir();  // tạo một thư mục, trả về true nếu thành công và false nếu thất bại
+Liệt kê thư mục trong Java
+	file = new File("/tmp");
+	paths = file.list();
+
+dạng nhị phân có thể đọc và ghi bất kỳ kiểu dữ liệu nguyên thủy nào
+
+định nghĩa exception
+	public class InvalidDiceException extends RuntimeException {
+ 	   public InvalidDiceException(String message) {
+        	super(message);
+    		}
+	}
+
+Tính kế thừa trong Java: các lớp mới có thể được xây dựng dựa trên các lớp đang tồn tại, là sự liên quan giữa hai class với nhau, trong đó có class cha (superclass) và class con (subclass).
+	Khi kế thừa class con được hưởng tất cả các phương thức và thuộc tính của class cha. Tuy nhiên, nó chỉ được truy cập các thành viên public và protected, không được phép truy cập đến thành viên private của class cha.
+	Các yếu tố quan trọng trong kế thừa trong Java:
+		Class (Lớp): Lớp là một kiểu dữ liệu do người dùng định nghĩa trong Java về cơ bản là một nhóm các đối tượng. Nó là một bản thiết kế hoặc mẫu mà từ đó chúng ta tạo ra các đối tượng.
+		Super Class: Lớp mà các tính năng và chức năng đang được kế thừa hoặc sử dụng được gọi là lớp cha hoặc lớp cơ sở.
+		The extends keyword: Lớp kế thừa các thuộc tính và tính năng từ một lớp khác được gọi là lớp con hoặc lớp dẫn xuất hoặc lớp mở rộng. Lớp con có thể thêm các tính năng và chức năng của riêng nó ngoài các trường và phương thức của lớp cha hoặc lớp cha của nó. 
+		The super keyword được sử dụng ở một số trường hợp, cụ thể:
+			Có một số tình huống mà các thành viên của lớp cha và lớp con có tên giống nhau. Khi đó từ khóa super được sử dụng để phân biệt các thành viên của lớp cha với các thành viên của lớp con.
+			Để gọi hàm tạo lớp cha từ lớp con.
+	Ép kiểu (typecasting)
+		Up-casting
+		Down-casting
+			class Animal {}
+			class Dog extends Animal {
+				public void sound() {}
+				public void play() {}
+			}
+			public static void main(String[] args) {
+				Animal animal = new Dog();  // Up-casting
+				animal.sound();
+				((Dog)animal).play();  // Down-casting
+			}
+			
+Tính đa hình (Polymorphism) trong Java:
+	khái niệm cho phép một đối tượng của một lớp hoạt động khác nhau để phản hồi lại một thông điệp hoặc hành động
+		Đa hình tĩnh
+			trình biên dịch quyết định phân tích đa hình trong quá trình biên dịch
+			có thể thực hiện hoặc đạt được với sự hỗ trợ của phương thức nạp chồng
+		Đa hình động
+			giải quyết các hành động tại thời gian chạy chứ không phải thời gian biên dịch
+	Overloading là một kĩ thuật cho phép trong cùng một class có thể có nhiều phương thức cùng tên nhưng khác nhau về số lượng tham số hoặc kiểu dữ liệu tham số, chương trình tự phân biệt dựa trên tham số truyền vào, thể hiện tính đa hình tại compile time.
+	Overriding (tên đầy đủ là Method Overriding): lớp con ghi đè phương thức của lớp cha, được dùng để tận dụng được tính đa hình tại runtime
+		Các phương thức final, static, private không thể ghi đè.
+		tùy chọn @Override: nếu phương thức bị ghi đè không nằm trong lớp cha thì sẽ báo lỗi
+
+Tính đóng gói (ancapsulation) trong java
+	là cơ chế cho phép hạn chế quyền truy cập vào các thành phần nhất định trong các đối tượng mà bạn tạo ra, ngăn chặn các class bên ngoài truy cập làm thay đổi hoạt động bên trong của một lớp
+		Mục đích chính của đóng gói trong Java là giảm thiểu mức độ phức tạp phát triển phần mềm và bảo vệ trạng thái bên trong của một đối tượng, che giấu dữ liệu
+		Với các access modifier, tính đóng gói sẽ có thể giúp ngăn chặn những lớp bên ngoài truy cập, thay đổi thuộc tính và phương thức của một lớp -> che giấu dữ liệu (data hiding)
+			(https://viblo.asia/p/lap-trinh-huong-doi-tuong-trong-python-cho-nguoi-moi-3RlL5GYm4bB)
+			Dễ bảo trì: Code được đóng gói trong những phần riêng biệt, như là class, interface, v.v... Vì vậy khi thay đổi hay cập nhật thì chúng không ảnh hưởng đến phần còn lại.
+			Testing khỏe hơn: Chúng ta dễ test hơn vì sẽ chỉ phải tập trung ở 1 nơi chứ không phải lo nó còn ảnh hưởng đến nơi nào khác không. Tiết kiệm thời gian.
+			Che giấu dữ liệu: Khi sử dụng người dùng chỉ sẽ nhận được kết quả mà không biết hay truy cập được chi tiết bên trong của object.
+	Ẩn hoạt động bên trong của một lớp khỏi một lớp khác để bạn có thể kiểm soát và cho phép bạn thay đổi mọi thứ mà không ảnh hưởng đến code ở nơi khác
+	có thể tạo lớp read-only hoặc write-only bằng việc cài đặt phương thức setter hoặc getter, kiểm soát đối với dữ liệu
+	Đối tượng Composite là sự tổng hợp những thành phần có quan hệ với nhau để tạo ra thành phần lớn hơn
+Tính trừu tượng () trong java
+	là một tính chất mà chỉ tập trung vào những tính năng của đối tượng và ẩn đi những thông tin không cần thiết
+		giúp trọng tâm hơn vào những tính năng thay vì phải quan tâm tới cách mà nó được thực hiện
+	Có 2 cách để đạt được sự trừu tượng hóa trong Java
+		Sử dụng lớp abstract
+			khai báo một lớp trừu tượng bằng cách sử dụng từ khóa trừu tượng - abstract
+			không thể khởi tạo hoặc tạo một đối tượng của một lớp trừu tượng
+			có thể có các biến thành viên được kế thừa
+			có thể cung cấp nội dung cài đặt cho phương thức của interface
+			có các biến final, non-final, static and non-static
+			không hỗ trợ đa kế thừa
+			một lớp được kế thừa từ lớp trừu tượng phải ghi đè tất cả các phương thức trừu tượng
+		Sử dụng interface
+			interface (giao diện) là một bản thiết kế hoặc mẫu của một lớp, sự khác biệt duy nhất với lớp là nó có các phương thức trừu tượng và các hằng số tĩnh
+				Chỉ có thể có các phương thức trừu tượng, tức là không có body method nào bên trong
+					Tất cả phương thức trong interface đều được trình biên dịch hiểu là phương thức trừu tượng
+					tất cả biến trong interface đều được trình biên dịch hiểu là các hằng số
+				Từ java 8, nó có thêm các phương thức default và static
+				keyword implements: định nghĩa (gọi là thực hiện implement interfac) theo interface
+			không thể khởi tạo hoặc tạo một đối tượng của một interface
+			chỉ có các biến static final, không có hàm tạo
+			Các phương thức trong inteface tự động là public
+			có hỗ trợ đa kế thừa
