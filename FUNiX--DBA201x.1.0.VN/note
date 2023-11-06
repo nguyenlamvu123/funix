@@ -408,7 +408,7 @@ Danh sách liên kết đôi (Doubly Linked List)
 			)
 			dp là mảng lưu kết quả của các bài toán con
 		Bài toán tổ hợp
-			R[s] = F1(R[i], R[j], ..., R[k]) + 
+			R[s] = F1(R[i], R[j], ..., R[k]) +
 				F2(R[u], R[v], ..., R[w]) +
 				... +
 				Fl(R[q], R[p], ..., R[z])
