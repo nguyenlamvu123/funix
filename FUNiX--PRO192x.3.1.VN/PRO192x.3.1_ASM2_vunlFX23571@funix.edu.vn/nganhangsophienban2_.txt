@@ -1,0 +1,7 @@
+ |      1. Kiem tra noi sinh               |
+
+|      2. Kiem tra nam sinh, gioi tinh    |
+
+|      3. Kiem tra so ngau nhien          |
+
+|      0. Thoat                           |

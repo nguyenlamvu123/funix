@@ -1,0 +1,16 @@
++------+---------------------------+------+
+| NGAN HANG SO | FX23571@V2.0.0
++------+---------------------------+------+
+
+|      1. Them khach hang                 |
+
+|      2. Them tai khoan cho khach hang   |
+
+|      3. Hien thi danh sach khach hang   |
+
+|      4. Tim theo CCCD                   |
+
+|      5. Tim theo ten khach hang         |
+
+|      0. Thoat                           |
++-----------------------------------------+
