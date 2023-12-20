@@ -1,11 +1,14 @@
 Cơ sở dữ liệu (Database) là một tập hợp dữ liệu hoặc thông tin có tổ chức để có thể dễ dàng truy cập, cập nhật hoặc thao tác
 Hệ quản trị cơ sở dữ liệu (Database management system - DBMS) như một phần mềm để giúp quản lý cơ sở dữ liệu. DBMS sẽ bao gồm các chức năng để xác định, thao tác cũng như truy xuất và quản lý dữ liệu, đồng thời giúp xác định những quy tắc nhằm xác thực cũng như thao tác với những dữ liệu được lưu trữ trong DBMS
+ngôn ngữ truy vấn dữ liệu (Structured Query Language - SQL)
 Có hai DBMS rất phổ biến là MySQL và SQL Server
 	MySQL được phát hành từ giữa thập niên 90s (sau đó bị thâu tóm bởi Oracle), MySQL ban đầu là một DBMS mã nguồn mở và cũng vẫn mở cho tới tận bây giờ
 	Microsoft phát triển SQL Server từ giữa thập niên 80s, với mục tiêu hướng đến là SQL Server sẽ cung cấp giải pháp đáng tin cậy và có thể mở rộng, nó là một nền tảng được chọn cho những phần mềm doanh nghiệp cần mở rộng lớn theo thời gian.
 	SQL Server hoạt động tốt trong hệ sinh thái của Microsoft nhưng chưa được hỗ trợ tốt trong Linux, trong khi đó MySQL hoạt động tốt ở cả Windown và Linux.
 	MySQL là một hệ quản trị cơ sở dữ liệu được sử dụng để lưu trữ, quản lý dữ liệu có cấu trúc trong khi đó SQL (Structured Query Language - SQL) là một ngôn ngữ truy vấn dữ liệu được sử dụng bên trong MySQL
-	
+ngôn ngữ định nghĩa dữ liệu (Data Definition Language - DDL) là các lệnh để định nghĩa cấu trúc lưu trữ dữ liệu, sử dụng các câu lệnh này để thao tác trên Database (cơ sở dữ liệu), Table (bảng), các trường (cột), gồm CREATE, DROP, TRUNCATE, ALTER, ...
+ngôn ngữ thao tác dữ liệu (Data Manipulation Language - DML) là các lệnh để thao tác với dữ liệu trên một bảng, gồm DELETE, INSERT, UPDATE, SELECT, ...
+
 mysql-ctl cli (truy cập vào chương trình dòng lệnh mysql)
 show databases; (hiển thị các cơ sở dữ liệu hiện có);
 	show tables;
@@ -21,6 +24,8 @@ CREATE TABLE Persons (
     Address varchar(255),
     City varchar(255)
 );
+Lệnh DELETE chỉ xóa các hàng từ bảng dựa trên điều kiện đã được định nghĩa bởi mệnh đề WHERE hoặc xóa tất cả các hàng từ bảng nếu điều kiện này không được xác định
+Lệnh TRUNCATE xóa tất cả các hàng từ bảng và giải phóng bộ nhớ chứa bảng đó
 Một số kiểu dữ liệu:
 	int: Kiểu số nguyên
 	float: Kiểu số thực
