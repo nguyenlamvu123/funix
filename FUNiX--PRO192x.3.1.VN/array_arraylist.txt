@@ -12,7 +12,7 @@ mảng (array) là một tập hợp các phần tử có cùng kiểu được 
 		Tối ưu code
 		Truy cập ngẫu nhiên
 
-ArrayList là một Collection kiểu danh sách sử dụng cấu trúc mảng để lưu trữ phần tử.
+ArrayList là một Collection kiểu danh sách (list) sử dụng cấu trúc mảng để lưu trữ phần tử.
 	Thứ tự các phần tử dựa theo thứ tự lúc thêm vào và giá trị của các phần tử này có thể trùng nhau.
 	Collection trong Java là một khuôn khổ cung cấp một kiến trúc để lưu trữ và thao tác tới nhóm các đối tượng.
 		Tất cả các hoạt động mà bạn thực hiện trên một dữ liệu như tìm kiếm, phân loại, chèn, xóa, ... có thể được thực hiện bởi Java Collection
@@ -34,6 +34,15 @@ duyệt qua 1 Iterator (trình lặp) thì được từng Object (đối tượ
                     System.out.println(element);
                 }
             }
+
+map trong Java tương ứng với dict trong Python
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put(name, phone);
+        if (map.get(s) == null) {
+            System.out.println("Not found");
+        } else {System.out.println(s + "=" + map.get(s));}
+
+ngăn xếp: vào sau ra trước
 
 Trong Java có 2 kiểu dữ liệu:
 	kiểu dữ liệu nguyên thủy (Primitivies type) như int, double, …
