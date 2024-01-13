@@ -23,10 +23,10 @@ USE dog_walking_app;
 	  );
 	show tables;
 	desc cats3;
+	INSERT INTO table_name(field1, field2 …)  VALUES (values1, values 2…);
 	DROP TABLE table_name; (Xoá một bảng hiện có)
 	Lệnh DELETE xóa dữ liệu, giữ nguyên cấu trúc bảng; chỉ xóa các hàng từ bảng dựa trên điều kiện đã được định nghĩa bởi mệnh đề WHERE hoặc xóa tất cả các hàng từ bảng nếu điều kiện này không được xác định; không giải phóng bộ nhớ
 	Lệnh TRUNCATE xóa dữ liệu, giữ nguyên cấu trúc bảng; xóa tất cả các hàng từ bảng và giải phóng bộ nhớ chứa bảng đó
-	INSERT INTO table_name(field1, field2 …)  VALUES (values1, values 2…);
 
 select * from cats3;
 select name as gskohaoi from cats3 where age = 7834634;
@@ -34,6 +34,9 @@ SELECT DATABASE(); (In ra database đang được sử dụng)
 update cats set age = 12 where breed = 'Maine Coon';
 DELETE FROM cats WHERE age=4;
 DROP DATABASE soap_store; (Xoá một database hiện có)
+
+INSERT INTO bang_2 (cot_1, cot_2, cot_3, ...) SELECT cot_1, cot_2, cot_3 FROM bang_1;  # sao chép cột từ bảng cũ sang bảng mới
+SELECT * INTO bang_moi FROM bang_cu;                                                   # sao chép dữ liệu từ bảng cũ sang bảng mới
 
 Một số kiểu dữ liệu:
 	int: Kiểu số nguyên
