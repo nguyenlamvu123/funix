@@ -30,6 +30,15 @@ USE dog_walking_app;
 
 select * from cats3;
 select name as gskohaoi from cats3 where age = 7834634;
+*******************************************************************
+SELECT
+CASE
+    WHEN Category  = "Danh mục A" THEN "A"
+    WHEN Category  = "Danh mục B" THEN "B"
+    ELSE "OTHER"
+END  as type
+FROM Product;
+*******************************************************************
 SELECT DATABASE(); (In ra database đang được sử dụng)
 update cats set age = 12 where breed = 'Maine Coon';
 DELETE FROM cats WHERE age=4;
@@ -38,11 +47,31 @@ DROP DATABASE soap_store; (Xoá một database hiện có)
 INSERT INTO bang_2 (cot_1, cot_2, cot_3, ...) SELECT cot_1, cot_2, cot_3 FROM bang_1;  # sao chép cột từ bảng cũ sang bảng mới
 SELECT * INTO bang_moi FROM bang_cu;                                                   # sao chép dữ liệu từ bảng cũ sang bảng mới
 
+một số toán tử logic:
+	LIKE: Để khớp với chuỗi mong muốn 
+		SELECT * FROM STUDENT WHERE name LIKE "Nguyễn%"
+	and
+	or
+	in
+	not in
+	between
+		SELECT * FROM STUDNT WHERE age BETWEEN 30 and 50
+
 Một số kiểu dữ liệu:
 	int: Kiểu số nguyên
 	float: Kiểu số thực
 	char: Kiểu chuỗi nhưng sẽ có độ dài cố định
 	varchar: Kiểu chuỗi nhưng sẽ có độ dài động
+		làm việc với chuỗi:
+			CONCAT(x, y, z, ...)
+				CONCAT_WS(chuoi_ngan_cach, x, y, z)
+			SUBSTRING(x, vi_tri_bat_dau, so_ky_tu_muon_cat)
+			REPLACE(x, chuoi_muon_thay_the, chuoi_thay_the)
+			REPLACE(x, chuoi_muon_thay_the, chuoi_thay_the)
+			REVERSE(x)
+			CHAR_LENGTH(x)
+			UPPER(x)
+			LOWER(x)
 	date: Kiểu dữ liệu ngày tháng có dạng  YYYY-MM-DD
 	datetime: Kiểu dữ liệu thời gian có dạng YYYY-MM-DD HH:MM:SS
 	timestamp: Kiểu dữ liệu thời gian có dạng hiển thị HH:MM:SS

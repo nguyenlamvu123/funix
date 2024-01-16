@@ -1,0 +1,17 @@
+mysql-ctl cli;
+show databases;
+use book_shop;
+select concat(author_fname, author_lname) as fullname from books;
+	alter table books add fullname varchar(200);
+	insert into books(fullname) values concat(author_fname, author_lname);
+select substring('data analyst', 6, 7);
+select replace('data analyst', 'analyst', 'science') as repl_str;
+select replace(title, ' ', '->') as repl_str from books;
+select reverse('data analyst');
+select CHAR_LENGTH('database');
+select CHAR_LENGTH(title) as dodai from books;
+select upper('database');
+select upper(title) as chuhoa from books;
+select lower('database');
+select lower(title) as chuthuong from books;
+
