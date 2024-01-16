@@ -47,3 +47,44 @@ ngăn xếp: vào sau ra trước
 Trong Java có 2 kiểu dữ liệu:
 	kiểu dữ liệu nguyên thủy (Primitivies type) như int, double, …
 	kiểu dữ liệu tham chiếu (parameter) như các Wraper class: Integer, Double, …
+
+Một lớp là một nhóm đối tượng có các thuộc tính. Nó là một mẫu hoặc thiết kế từ đó các đối tượng được tạo ra, có thể chứa:
+	Thành viên dữ liệu
+	Constructor
+	Phương thức
+	Phạm vi truy cập: gồm có những từ khoá public, protected, private
+Đối tượng được cấp bộ nhớ khi nó được tạo ra. Lớp không được cấp bộ nhớ khi nó được tạo ra.
+	class <tên_lớp> {
+		// Khai báo danh sách các thuộc tính
+		<kiểu_dữ_liệu> <tên_thuộc_tính>;
+		...
+		// Khai báo danh sách các phương thức
+		public <kiểu_trả_về> <tên_phương_thức>(<kiểu_tham_số> <tên_tham_số>, ...) {
+			...
+		}
+		...
+	}
+		class Student{
+			String name;
+			int age;
+			public void getInformation() {
+				
+			}
+			public void display() {
+				
+			}
+		}
+		Student s1 = new Student();
+		// Gán giá trị cho thuộc tính name của đối tượng s1
+		s1.name = "Long";
+Một lớp có thể chứa các loại biến sau:
+	Biến Local
+		được định nghĩa bên trong các phương thức, constructor hoặc block code
+		sẽ bị hủy khi phương thức đã hoàn thành.
+	Biến Instance
+		là các biến trong một lớp nhưng ở bên ngoài bất kỳ phương thức nào
+		được khởi tạo khi lớp được tải
+		có thể được truy cập từ bên trong bất kỳ phương thức, constructor hoặc khối nào của lớp cụ thể đó.
+	Biến Class
+		được khai báo với một lớp, bên ngoài bất kỳ phương thức nào, với từ khóa static
+
