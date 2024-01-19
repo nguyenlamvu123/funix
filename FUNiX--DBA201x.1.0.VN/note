@@ -39,6 +39,10 @@ CASE
 END  as type
 FROM Product;
 *******************************************************************
+SELECT DISTINCT name FROM STUDENT; lấy tất cả giá trị không trùng nhau ở cột name trong bảng STUDENT
+SELECT * FROM STUDENT ORDER BY name ASC; lấy các hàng từ bảng STUDENT được sắp xếp tăng dần theo name (ASC là mặc định)
+SELECT * FROM STUDENT ORDER BY name DESC; lấy các hàng từ bảng STUDENT được sắp xếp giảm dần theo name.
+SELECT * FROM STUDENT LIMIT 5 OFFSET 20; lấy 5 hàng đầu tiên bắt đầu từ hàng 21
 SELECT DATABASE(); (In ra database đang được sử dụng)
 update cats set age = 12 where breed = 'Maine Coon';
 DELETE FROM cats WHERE age=4;
@@ -50,6 +54,8 @@ SELECT * INTO bang_moi FROM bang_cu;                                            
 một số toán tử logic:
 	LIKE: Để khớp với chuỗi mong muốn 
 		SELECT * FROM STUDENT WHERE name LIKE "Nguyễn%"
+			"%" đại diện cho không hoặc nhiều ký tự
+			"_" đại diện cho một ký tự.
 	and
 	or
 	in
