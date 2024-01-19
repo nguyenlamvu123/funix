@@ -51,8 +51,20 @@ Trong Java có 2 kiểu dữ liệu:
 Một lớp là một nhóm đối tượng có các thuộc tính. Nó là một mẫu hoặc thiết kế từ đó các đối tượng được tạo ra, có thể chứa:
 	Thành viên dữ liệu
 	Constructor
+		Default: Nếu 1 class được triển khai không chứa bất kỳ một constructor nào thì trình biên dịch sẽ tự động thêm default constructor cho class đó.
+		No-arg: Là 1 constructor không nhận bất kỳ một tham số nào, điểm khác biệt duy nhất với default constructor nó bên trong no-arg constructor có chứa mã triển khai.
+		Parameterized: Constructor có ít nhất một tham số đầu vào gọi là parameterized constructor.
 	Phương thức
-	Phạm vi truy cập: gồm có những từ khoá public, protected, private
+		Mục đích của constructor là để khởi tạo một object trong khi đó method thực thi các nhiệm vụ để đáp ứng nhu cầu của một object chứa nó.
+		Constructor không có kết quả trả về còn method thì có.
+		Constructor không thể đi cùng với các từ khoá abstract, final, static etc, method thì được.
+	Phạm vi truy cập
+		Access Modifier trong Java xác định phạm vi có thể truy cập của biến, phương thức, constructor hoặc lớp, 4 phạm vi truy cập của Access Modifier như sau:
+			private
+			default
+			protected
+			public
+		Ngoài ra, còn có nhiều Non-access Modifier như static, abstract, synchronized, native, volatile, transient, ...
 Đối tượng được cấp bộ nhớ khi nó được tạo ra. Lớp không được cấp bộ nhớ khi nó được tạo ra.
 	class <tên_lớp> {
 		// Khai báo danh sách các thuộc tính
@@ -77,6 +89,12 @@ Một lớp là một nhóm đối tượng có các thuộc tính. Nó là mộ
 		Student s1 = new Student();
 		// Gán giá trị cho thuộc tính name của đối tượng s1
 		s1.name = "Long";
+Sơ đồ lớp chính là sơ đồ mà nhìn vào đó bạn thấy được mô tả của các lớp, mối quan hệ giữa các đối tượng trong hệ thống.
+	Ký tự '-' sẽ tương ứng với phạm vi truy cập private.
+	Ký tự '~' sẽ tương ứng với phạm vi truy cập default.
+	Ký tự '#' sẽ tương ứng với phạm vi truy cập protected.
+	Ký tự '+' sẽ tương ứng với phạm vi truy cập public.
+Constructor (phương thức khởi tạo) trong Java được chia làm 2 loại là constructor không tham số (như bài trước bạn đã học) và constructor có tham số
 Một lớp có thể chứa các loại biến sau:
 	Biến Local
 		được định nghĩa bên trong các phương thức, constructor hoặc block code
