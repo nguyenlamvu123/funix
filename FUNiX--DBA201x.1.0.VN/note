@@ -43,6 +43,16 @@ SELECT DISTINCT name FROM STUDENT; lấy tất cả giá trị không trùng nha
 SELECT * FROM STUDENT ORDER BY name ASC; lấy các hàng từ bảng STUDENT được sắp xếp tăng dần theo name (ASC là mặc định)
 SELECT * FROM STUDENT ORDER BY name DESC; lấy các hàng từ bảng STUDENT được sắp xếp giảm dần theo name.
 SELECT * FROM STUDENT LIMIT 5 OFFSET 20; lấy 5 hàng đầu tiên bắt đầu từ hàng 21
+*******************************************************************
+SELECT CLASS, AVG(point) as tong_diem FROM STUDENT GROUP BY class;
+Một số Aggregate_Function hay sử dụng như sau:
+	COUNT: Hàm đếm số lượng hàng
+	MIN: Hàm tìm giá trị nhỏ nhất
+	MAX: Hàm tìm giá trị lớn nhất
+	SUM: Hàm tính tổng
+	AVG: Hàm tính giá trị trung bình
+*******************************************************************
+SELECT title, pages FROM books WHERE pages = (SELECT Min(pages) FROM books);
 SELECT DATABASE(); (In ra database đang được sử dụng)
 update cats set age = 12 where breed = 'Maine Coon';
 DELETE FROM cats WHERE age=4;
@@ -64,10 +74,17 @@ một số toán tử logic:
 		SELECT * FROM STUDNT WHERE age BETWEEN 30 and 50
 
 Một số kiểu dữ liệu:
-	int: Kiểu số nguyên
-	float: Kiểu số thực
+	int: Kiểu số nguyên, mỗi một số sẽ có dung lượng là 4 byte
+	FLOAT(size,d): kiểu dữ liệu số thực, mỗi một số sẽ có dung lượng là 4 byte.
+		Số lượng chữ số tối đa có thể được chỉ định trong tham số size.
+		Số chữ số tối đa ở bên phải dấu thập phân được chỉ định trong tham số d. 
+	DOUBLE(size,d): kiểu dữ liệu số thực, mỗi một số sẽ có dung lượng là 8 byte.
+		Số lượng chữ số tối đa có thể được chỉ định trong tham số size.
+		Số chữ số tối đa ở bên phải dấu thập phân được chỉ định trong tham số d.
 	char: Kiểu chuỗi nhưng sẽ có độ dài cố định
+		nếu độ dài chuỗi vượt quá giới hạn thì MySQL sẽ báo lỗi "Data too long".
 	varchar: Kiểu chuỗi nhưng sẽ có độ dài động
+		nếu độ dài chuỗi vượt quá giới hạn thì giá trị này sẽ được chuyển thành loại TEXT.
 		làm việc với chuỗi:
 			CONCAT(x, y, z, ...)
 				CONCAT_WS(chuoi_ngan_cach, x, y, z)
@@ -78,7 +95,29 @@ Một số kiểu dữ liệu:
 			CHAR_LENGTH(x)
 			UPPER(x)
 			LOWER(x)
-	date: Kiểu dữ liệu ngày tháng có dạng  YYYY-MM-DD
+	DECIMAL(size,d): Một số thực được lưu trữ dưới dạng một chuỗi, cho phép một dấu thập phân cố định
+		Số lượng chữ số tối đa có thể được chỉ định trong tham số size
+		Số chữ số tối đa ở bên phải dấu thập phân được chỉ định trong tham số d.
+	date: Kiểu dữ liệu ngày tháng có dạng YYYY-MM-DD
 	datetime: Kiểu dữ liệu thời gian có dạng YYYY-MM-DD HH:MM:SS
 	timestamp: Kiểu dữ liệu thời gian có dạng hiển thị HH:MM:SS
+		giá trị của TIMESTAMP được chuyển đổi từ múi giờ hiện tại sang UTC trong khi lưu trữ, và chuyển ngược trở lại từ UTC sang múi giờ hiện tại trong lúc lấy ra
+		Một số hàm hay sử dụng để thao tác với thời gian như sau:
+			CURDATE: Hàm CURDATE() trong MySQL trả về ngày hiện tại trong định dạng 'YYYY-MM-DD'.
+			CURTIME: Hàm CURTIME() trong MySQL trả về thời gian hiện tại trong định dạng giá trị 'HH: MM: SS'.
+			NOW: Hàm NOW() trong MySQL trả về datetime hiện tại trong định dạng 'YYYY-MM-DD HH:MM:SS'.
+			DAYOFWEEK(date): Hàm này trả về ngày trong tuần của date truyền vào. Ví dụ DAYOFWEEK("2017-06-15") sẽ trả về giá trị là 5.
+			DAYNAME(date): Trả về tên ngày trong tuần của date truyền vào. Ví dụ DAYNAME("2017-06-15") sẽ trả về giá trị là  "Thursday".
+			DATE_FORMAT(date, format): Hàm này trả về định dạng của date theo format đã truyền vào. Ví dụ DATE_FORMAT("2018-06-15", "%Y") sẽ trả về giá trị là 2018.
+		Một số ký hiệu cho format ngày tháng:
+			%Y: Đại diện cho năm được biểu thị bằng 4 chữ số ví dụ như 2009, 2010 ...
+			%y: Đại diện cho năm được biểu thị bằng 2 chữ số cuối của năm ví dụ như năm 2017 thì trở thành 17, 1017 cũng trở thành 17.
+			%M: Đại diện cho tháng được biểu thị bằng tên tháng, ví dụ tháng 12 thì sẽ là December.
+			%m: Đại diện cho tháng được biểu thị bằng số, ví dụ tháng một của năm thì sẽ là 01.
+			%D: Đại diện cho thứ tự ngày của tháng. Ví dụ ngày 18 của tháng thì sẽ là 18th
+			%d: Đại diện cho ngày của tháng. Ví dụ ngày 18 của tháng thì sẽ là 18.
+			%H: Đại diện cho giờ được biểu thị qua các số từ 00 đến 23. Ví dụ 3 giờ chiều thì sẽ là 15.
+			%h: Đại diện cho giờ được biểu thị qua các số từ 01 đến 12. Ví dụ 3 giờ chiều thì sẽ là 3.
+			%i: Đại diện cho phút được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi ba phút sẽ là 23.
+			%S và %s: Đại diện cho giây được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi hai giây thì sẽ là 22.
 
