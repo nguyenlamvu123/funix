@@ -1,3 +1,7 @@
+mysql-ctl cli;
+show databases;
+use book_shop;
+
 select count(title) as soluongcuonsach from books;
 select released_year, count(released_year) as soluongcuonsachxuatbanmoinam from books group by released_year;
 select count(stock_quantity) as tongsoluongsachtonkho from books;

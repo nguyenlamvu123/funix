@@ -16,11 +16,21 @@ show databases; (hiển thị các cơ sở dữ liệu hiện có);
 CREATE DATABASE soap_store; (tạo mới database tên là soap_store);
 USE dog_walking_app;
 
-	CREATE TABLE cats3
-	  (
-	    name VARCHAR(20) DEFAULT 'no name provided',
-	    age INT auto_increment DEFAULT 99
-	  );
+	CREATE TABLE customers(
+	    id INT AUTO_INCREMENT,
+	    primary key (id),
+	    first_name VARCHAR(100),
+	    last_name VARCHAR(100),
+	    age int DEFAULT 99,
+	    email VARCHAR(100)
+	);
+	CREATE TABLE orders(
+	    id INT AUTO_INCREMENT PRIMARY KEY,
+	    order_date DATE,
+	    amount DECIMAL(8,2),
+	    customer_id INT,
+	    FOREIGN KEY(customer_id) REFERENCES customers(id)
+	);
 	show tables;
 	desc cats3;
 	INSERT INTO table_name(field1, field2 …)  VALUES (values1, values 2…);
@@ -72,6 +82,37 @@ một số toán tử logic:
 	not in
 	between
 		SELECT * FROM STUDNT WHERE age BETWEEN 30 and 50
+
+Các kiểu quan hệ dữ liệu như sau:
+	Quan hệ one-to-one
+		bảng SINHVIEN và bảng THONGTINCANCUOC thì mỗi một sinh viên chỉ có một thông tin căn cước và ngược lại, mỗi một thông tin căn cước chỉ đại diện cho một sinh viên.
+	Quan hệ one-to-many
+		bảng LOP và bảng SINHVIEN thì mỗi một lớp sẽ có thể chứa nhiều sinh viên nhưng một sinh viên chỉ có trong một lớp.
+	Quan hệ many-to-many
+		bảng SINHVIEN và bảng MONHOC thì mỗi sinh viên sẽ học nhiều môn học và ngược lại, một môn học sẽ được học bởi nhiều sinh viên.
+Có các kiểu JOIN chính như sau:
+	INNER JOIN: Trả về các bản ghi có giá trị phù hợp trong cả hai bảng.
+		SELECT first_name, last_name, order_date, amount
+		FROM customers, orders 
+		    WHERE customers.id = orders.customer_id;
+		SELECT * FROM customers
+		JOIN orders
+		    ON customers.id = orders.customer_id;
+	LEFT JOIN: Trả về tất cả các bản ghi từ bảng bên trái và các bản ghi phù hợp từ bảng bên phải, các giá trị có ở bảng bên trái mà không có ở bảng bên phải thì sẽ được thay bằng null.
+		SELECT 
+		    first_name, last_name, SUM(amount) AS total_spent
+		FROM customers
+		JOIN orders
+		    ON customers.id = orders.customer_id
+		GROUP BY orders.customer_id ORDER BY total_spent DESC;
+	RIGHT JOIN: Trả về tất cả các bản ghi từ bảng bên phải và các bản ghi phù hợp từ bảng bên trái, các giá trị có ở bảng bên phải mà không có ở bảng bên trái thì sẽ được thay bằng null.
+	FULL JOIN: Trả về tất cả các bản ghi từ cả hai bảng, các bản ghi có ở bảng bên trái không có ở bảng bên phải hoặc có ở bảng bên phải mà không có ở bảng bên trái sẽ được thay bằng null.
+	CROSS JOIN: Lấy một bản ghi từ bảng đầu tiên (T1) và sau đó tạo một bản ghi mới cho mỗi bản ghi trong bảng thứ hai (T2). Sau đó làm tương tự cho bản ghi tiếp theo trong bảng đầu tiên (T1), vv.
+		SELECT * FROM orders WHERE customer_id =
+		    (
+			SELECT id FROM customers
+			WHERE last_name='George'
+		    );
 
 Một số kiểu dữ liệu:
 	int: Kiểu số nguyên, mỗi một số sẽ có dung lượng là 4 byte

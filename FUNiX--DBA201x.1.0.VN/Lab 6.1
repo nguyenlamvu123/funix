@@ -1,6 +1,7 @@
 mysql-ctl cli;
 show databases;
-use books;
+use book_shop;
+
 select * from books order by pages desc limit 1;
 select title, released_year from books order by released_year desc;
 select title, author_lname from books where author_lname like "% %";
