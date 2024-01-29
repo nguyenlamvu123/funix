@@ -1,0 +1,21 @@
+mysql-ctl cli;
+show databases;
+use book_shop;
+
+create table students(id int auto_increment, primary key (id), first_name varchar(150) not null);
+create table papers(student_id int, FOREIGN KEY(student_id) REFERENCES students(id), title varchar(150), grade int)
+INSERT INTO students (first_name) VALUES ('Caleb'), ('Samantha'), ('Raj'), ('Carlos'), ('Lisa');
+INSERT INTO papers (student_id, title, grade ) VALUES
+(1, 'My First Book Report', 60),
+(1, 'My Second Book Report', 75),
+(2, 'Russian Lit Through The Ages', 94),
+(2, 'De Montaigne and The Art of The Essay', 98),
+(4, 'Borges and Magical Realism', 89);
+select * from students;
+select * from papers;
+select students.first_name, papers.title, papers.grade from papers right join students on students.id = papers.student_id order by students.id;
+select students.first_name, ifnull(papers.title, "MISSING"), IFNULL(papers.grade, 0) from papers right join students on students.id = papers.student_id order by students.id;
+select students.first_name, avg(ifnull(grade, 0)) as average from papers right join students on students.id = papers.student_id group by students.first_name order by average desc;
+select students.first_name, avg(ifnull(grade, 0)) as average, case when avg(ifnull(grade, 0)) > 70 then "passing" else "failing" end as passing_status from papers right join students on students.id = papers.student_id group by students.first_name order by average desc;
+	select first_name, average, case when average > 70 then "passing" else "failing" end as passing_status from (select students.first_name, avg(ifnull(grade, 0)) as average from papers right join students on students.id = papers.student_id group by students.first_name order by average desc) as a;
+

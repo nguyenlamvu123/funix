@@ -98,14 +98,17 @@ Có các kiểu JOIN chính như sau:
 		SELECT * FROM customers
 		JOIN orders
 		    ON customers.id = orders.customer_id;
-	LEFT JOIN: Trả về tất cả các bản ghi từ bảng bên trái và các bản ghi phù hợp từ bảng bên phải, các giá trị có ở bảng bên trái mà không có ở bảng bên phải thì sẽ được thay bằng null.
+	LEFT JOIN: Trả về tất cả các bản ghi từ bảng bên trái (sau chuỗi `from`, trước chuỗi `join`) và các bản ghi phù hợp từ bảng bên phải, các giá trị có ở bảng bên trái mà không có ở bảng bên phải thì sẽ được thay bằng null.
 		SELECT 
 		    first_name, last_name, SUM(amount) AS total_spent
 		FROM customers
 		JOIN orders
 		    ON customers.id = orders.customer_id
 		GROUP BY orders.customer_id ORDER BY total_spent DESC;
-	RIGHT JOIN: Trả về tất cả các bản ghi từ bảng bên phải và các bản ghi phù hợp từ bảng bên trái, các giá trị có ở bảng bên phải mà không có ở bảng bên trái thì sẽ được thay bằng null.
+		
+		select students.first_name, papers.title, papers.grade from papers left join students on students.id = papers.student_id;
+	RIGHT JOIN: Trả về tất cả các bản ghi từ bảng bên phải (sau chuỗi `join`) và các bản ghi phù hợp từ bảng bên trái, các giá trị có ở bảng bên phải mà không có ở bảng bên trái thì sẽ được thay bằng null.
+		select students.first_name, papers.title, papers.grade from papers right join students on students.id = papers.student_id;
 	FULL JOIN: Trả về tất cả các bản ghi từ cả hai bảng, các bản ghi có ở bảng bên trái không có ở bảng bên phải hoặc có ở bảng bên phải mà không có ở bảng bên trái sẽ được thay bằng null.
 	CROSS JOIN: Lấy một bản ghi từ bảng đầu tiên (T1) và sau đó tạo một bản ghi mới cho mỗi bản ghi trong bảng thứ hai (T2). Sau đó làm tương tự cho bản ghi tiếp theo trong bảng đầu tiên (T1), vv.
 		SELECT * FROM orders WHERE customer_id =
