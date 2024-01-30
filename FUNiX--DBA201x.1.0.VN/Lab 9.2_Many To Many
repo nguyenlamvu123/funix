@@ -52,6 +52,7 @@ select title, released_year, genre, Reviews.rating from Series right join Review
 select title, avg(rating) from (select title, released_year, genre, Reviews.rating from Series right join Reviews on Series.id = Reviews.series_id) as a group by title;
 select genre, avg(rating) from (select title, released_year, genre, Reviews.rating from Series right join Reviews on Series.id = Reviews.series_id) as a group by genre;
 # select fullname, avg(Reviews.rating) as average from (select select concat_ws(' ', first_name, last_name) as fullname from Reviewers) as a join Reviews on Reviewers.id = Reviews.reviewer_id group by first_name;
-select first_name, last_name, Reviews.rating as average from Reviewers join Reviews on Reviewers.id = Reviews.reviewer_id;
-select Series.title from Reviews right join Series on Series.id = Reviews.series_id;
-
+select first_name, last_name, Reviews.rating as rating from Reviewers join Reviews on Reviewers.id = Reviews.reviewer_id;
+select title from (select DISTINCT title, Reviews.series_id as findnull from Series left join Reviews on Series.id = Reviews.series_id) as a where findnull is null;
+#9#select Reviewers.id, Reviewers.first_name, Reviewers.last_name, count(reviewer_id) from Reviews right join Reviewers on Reviews.reviewer_id = Reviewers.id group by Reviews.reviewer_id;
+#10#select series_id from (select title, released_year, genre, Reviews.rating, Reviews.series_id from Series left join Reviews on Reviews.series_id = Series.id) as a join Series on Series.id = Reviews.series_id;
