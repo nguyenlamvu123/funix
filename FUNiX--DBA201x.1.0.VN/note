@@ -117,6 +117,19 @@ Có các kiểu JOIN chính như sau:
 			WHERE last_name='George'
 		    );
 
+Trong MySQL, có thể có nhiều user và mỗi user cũng có thể có những quyền khác nhau.
+	Cú pháp tạo user: CREATE USER user1@localhost IDENTIFIED BY '1' -> tạo một USER có tài khoản là user và password là 1. Đây là lệnh tạo user1 tại máy local, trong trường hợp các bạn tạo user trên một remote server, các bạn cần đăng nhập vào server đó sau đó có thể thay localhost bằng IP của server.
+	Cú pháp cấp quyền cho user: GRANT ALL PRIVILEGES ON *.* TO user1@localhost WITH GRANT OPTION; -> cấp toàn bộ quyền cho user1.
+VIEW hay còn được gọi là bảng tạm trong MySQL, sử dụng View giúp đơn giản hóa các câu truy vấn phức tạp. Cú pháp thông thường để tạo VIEW:
+	CREATE
+	[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+	VIEW view_name [(column_list)]
+	AS cau_truy_van_select
+	ALGORITHM nhận một trong ba giá trị
+		UNDEFINED: MySQL tự động để chế độ algorithm là temptable nếu trong câu truy vấn chứa các hàm tổng hợp khi tạo view, ngược lại sẽ chọn merge 
+		MERGE: MySQL truy vấn trực tiếp đến bảng chính
+		TEMPTABLE: MySQL lưu dữ liệu vào một bảng tạm, và khi truy vấn từ view, MySQL truy vấn từ bảng tạm.
+
 Một số kiểu dữ liệu:
 	int: Kiểu số nguyên, mỗi một số sẽ có dung lượng là 4 byte
 	FLOAT(size,d): kiểu dữ liệu số thực, mỗi một số sẽ có dung lượng là 4 byte.
