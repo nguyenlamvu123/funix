@@ -106,3 +106,17 @@ Một lớp có thể chứa các loại biến sau:
 	Biến Class
 		được khai báo với một lớp, bên ngoài bất kỳ phương thức nào, với từ khóa static
 
+Tính kế thừa trong Java: các lớp mới có thể được xây dựng dựa trên các lớp đang tồn tại, là sự liên quan giữa hai class với nhau, trong đó có class cha (superclass) và class con (subclass).
+	Khi kế thừa class con được hưởng tất cả các phương thức và thuộc tính của class cha. Tuy nhiên, nó chỉ được truy cập các thành viên public và protected, không được phép truy cập đến thành viên private của class cha.
+	Các yếu tố quan trọng trong kế thừa trong Java:
+		Class (Lớp): Lớp là một kiểu dữ liệu do người dùng định nghĩa trong Java về cơ bản là một nhóm các đối tượng. Nó là một bản thiết kế hoặc mẫu mà từ đó chúng ta tạo ra các đối tượng.
+		Super Class: Lớp mà các tính năng và chức năng đang được kế thừa hoặc sử dụng được gọi là lớp cha hoặc lớp cơ sở.
+		The extends keyword: Lớp kế thừa các thuộc tính và tính năng từ một lớp khác được gọi là lớp con hoặc lớp dẫn xuất hoặc lớp mở rộng. Lớp con có thể thêm các tính năng và chức năng của riêng nó ngoài các trường và phương thức của lớp cha hoặc lớp cha của nó. 
+		The super keyword được sử dụng ở một số trường hợp, cụ thể:
+			Có một số tình huống mà các thành viên của lớp cha và lớp con có tên giống nhau. Khi đó từ khóa super được sử dụng để phân biệt các thành viên của lớp cha với các thành viên của lớp con.
+			Để gọi hàm tạo lớp cha từ lớp con.
+Tính đa hình trong Java: 
+	Overloading là một kĩ thuật cho phép trong cùng một class có thể có nhiều phương thức cùng tên nhưng khác nhau về số lượng tham số hoặc kiểu dữ liệu tham số, chương trình tự phân biệt dựa trên tham số truyền vào, thể hiện tính đa hình tại compile time.
+	Overriding (tên đầy đủ là Method Overriding): lớp con ghi đè phương thức của lớp cha, được dùng để tận dụng được tính đa hình tại runtime.
+		Các phương thức final, static, private không thể ghi đè.
+		tùy chọn @Override: nếu phương thức bị ghi đè không nằm trong lớp cha thì sẽ báo lỗi
