@@ -58,6 +58,14 @@ Một lớp là một nhóm đối tượng có các thuộc tính. Nó là mộ
 		Mục đích của constructor là để khởi tạo một object trong khi đó method thực thi các nhiệm vụ để đáp ứng nhu cầu của một object chứa nó.
 		Constructor không có kết quả trả về còn method thì có.
 		Constructor không thể đi cùng với các từ khoá abstract, final, static etc, method thì được.
+		Phương thức static
+			Khai báo với mức truy cập là static
+			Không thể truy cập vào các phương thức instance và biến instance trực tiếp
+			Không thể sử dụng từ khóa this
+		Phương thức instance
+			Instance method là method mà được gọi trên thể hiện của một lớp.
+			Để sử dụng instance method thì phải khởi tạo một object bằng từ khóa new.
+			Có thể truy cập vào instance method và instance variable, static method và static variable trực tiếp.
 	Phạm vi truy cập
 		Access Modifier trong Java xác định phạm vi có thể truy cập của biến, phương thức, constructor hoặc lớp, 4 phạm vi truy cập của Access Modifier như sau:
 			private
