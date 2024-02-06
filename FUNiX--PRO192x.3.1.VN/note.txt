@@ -1,5 +1,5 @@
 mảng (array) là một tập hợp các phần tử có cùng kiểu được lưu trữ gần nhau trong bộ nhớ
-	Mảng trong Java là một đối tượng chứa các phần tử có kiểu dữ liệu giống nhau, có số lượng phần tử cố định.
+	Mảng trong Java là một đối tượng chứa các phần tử có kiểu dữ liệu giống nhau, có số lượng phần tử cố định (https://www.javatpoint.com/array-in-java)
 	Mảng trong java lưu các phần tử theo chỉ số, chỉ số của phần tử đầu tiên là 0.
 		Mảng một chiều
 		Mảng đa chiều	
