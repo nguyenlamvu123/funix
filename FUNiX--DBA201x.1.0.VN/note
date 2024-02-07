@@ -178,3 +178,20 @@ Một số kiểu dữ liệu:
 			%i: Đại diện cho phút được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi ba phút sẽ là 23.
 			%S và %s: Đại diện cho giây được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi hai giây thì sẽ là 22.
 
+thuật toán tính toán các số Fibonacci
+	ban đầu được sử dụng như một mô hình toán học cho các quần thể thỏ (thỏ được biết đến với khả năng sinh sản nhanh)
+	lời giải đơn giản: chi phí tính toán lớn
+		def FibRecurs(n):
+			return n if n <= 1 else FibRecurs(n-1) + FibRecurs(n-2)
+	lời giải hiệu quả:
+		def FibList(n):
+			f: list = [0, 1, ]
+			for i in range(2, n):
+				f.append(f[i-1] + f[i-2])
+			return f[-1]
+thuật toán tính toán ước số chung lớn nhất
+mã giả
+đệ qui
+	khi chương trình thực thi, mỗi khi nhập vào một phương thức mới, nó sẽ đặt thông tin cho phương thức đó và callstack
+	base-case: điều kiện chấm dứt chu trình đệ qui
+	StackOverFlowError: lỗi callstack bị quá tải do bộ nhớ được cấp phát không đáp ứng được chiều sâu
