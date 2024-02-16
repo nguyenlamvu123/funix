@@ -195,3 +195,20 @@ mã giả
 	khi chương trình thực thi, mỗi khi nhập vào một phương thức mới, nó sẽ đặt thông tin cho phương thức đó và callstack
 	base-case: điều kiện chấm dứt chu trình đệ qui
 	StackOverFlowError: lỗi callstack bị quá tải do bộ nhớ được cấp phát không đáp ứng được chiều sâu
+
+ý tưởng đằng sau khái niệm tiệm cận:
+	không quan tâm nhiều đến các hằng số phụ thuộc vào phần cứng máy tính, hệ thống phân cấp bộ nhớ, trình biên dịch mà tập trung vào điều gì sẽ xảy ra khi input quá lớn, chúng sẽ có tỉ lệ thế nào
+	Big-O
+		thể hiện rõ tỷ lệ tăng trưởng
+		làm gọn biểu thức
+		một số qui luật chung:
+			thừa số là hằng số có thể bỏ qua
+			n^a << n^b với 0<a<b
+			n^a << b^n với a>0, b>1
+			(log n)^a << n^b với a>0, b>0
+			một đa thức tương đương với số hạng (đơn thức) lớn nhất trong đa thức đó
+		tạo mảng n phần tử -> O(n)
+		vòng lặp n lần -> O(n)
+		phép gán -> một số lượng thao tác máy cố định -> O(1)
+		return -> O(1)
+
