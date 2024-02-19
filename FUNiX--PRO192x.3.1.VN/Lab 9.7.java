@@ -20,7 +20,7 @@ class Employee {
     }
 
     public int getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void display() {
@@ -42,8 +42,12 @@ class Manager extends Employee {
         this.bonus = bonus;
     }
 
+    public int getBonus() {
+        return this.bonus;
+    }
+
     public int getSalary() {
-        return super.salary + this.bonus;
+        return super.getSalary() + this.bonus;
     }
 
     public void display() {

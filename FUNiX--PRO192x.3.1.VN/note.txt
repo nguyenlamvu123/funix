@@ -123,8 +123,25 @@ Tính kế thừa trong Java: các lớp mới có thể được xây dựng d�
 		The super keyword được sử dụng ở một số trường hợp, cụ thể:
 			Có một số tình huống mà các thành viên của lớp cha và lớp con có tên giống nhau. Khi đó từ khóa super được sử dụng để phân biệt các thành viên của lớp cha với các thành viên của lớp con.
 			Để gọi hàm tạo lớp cha từ lớp con.
+	Ép kiểu (typecasting)
+		Up-casting
+		Down-casting
+			class Animal {}
+			class Dog extends Animal {
+				public void sound() {}
+				public void play() {}
+			}
+			public static void main(String[] args) {
+				Animal animal = new Dog();  // Up-casting
+				animal.sound();
+				((Dog)animal).play();  // Down-casting
+			}
+			
 Tính đa hình trong Java: 
 	Overloading là một kĩ thuật cho phép trong cùng một class có thể có nhiều phương thức cùng tên nhưng khác nhau về số lượng tham số hoặc kiểu dữ liệu tham số, chương trình tự phân biệt dựa trên tham số truyền vào, thể hiện tính đa hình tại compile time.
 	Overriding (tên đầy đủ là Method Overriding): lớp con ghi đè phương thức của lớp cha, được dùng để tận dụng được tính đa hình tại runtime.
 		Các phương thức final, static, private không thể ghi đè.
 		tùy chọn @Override: nếu phương thức bị ghi đè không nằm trong lớp cha thì sẽ báo lỗi
+
+Tính đóng gói trong java
+	Đối tượng Composite là sự tổng hợp những thành phần có quan hệ với nhau để tạo ra thành phần lớn hơn
