@@ -183,7 +183,7 @@ thuật toán tính toán các số Fibonacci
 	lời giải đơn giản: chi phí tính toán lớn
 		def FibRecurs(n):
 			return n if n <= 1 else FibRecurs(n-1) + FibRecurs(n-2)
-	lời giải hiệu quả:
+	lời giải hiệu quả (giải thuật qui hoạch động)
 		def FibList(n):
 			f: list = [0, 1, ]
 			for i in range(2, n):
@@ -217,22 +217,22 @@ Giải thuật tham lam (https://topdev.vn/blog/thuat-toan-tham-lam/)
 	Nhược điểm
 		Có thể kết quả cuối cùng không chính xác
 		phụ thuộc nhiều vào bài toán con được chọn ra để kiểm chứng
-	ưu điểm:
+	ưu điểm
 		tốc độ xử lý nhanh
 	tiêu chí
 		được cung cấp một danh sách các tài nguyên giống như coins, tasks, v.v…
 		có thể bắt đầu với nguồn tài nguyên có giá trị lớn nhất
 		có thể tiếp tục bổ sung các tài nguyên có giá trị lớn hơn để đạt đưuọc giải pháp tối ưu hóa nhất
+	phương pháp chung (https://viblo.asia/p/tham-lam-greedy-method-6J3ZgaeP5mB)
+		cố gắng chọn thành phần tốt nhất trong tập hợp
+		Để đánh giá được độ tốt thì cần xây dựng một hàm chọn
+		Tiếp tục xây dựng như vậy cho tới khi tạo ra đủ thành phần
 	(https://vietjack.com/cau-truc-du-lieu-va-giai-thuat/giai-thuat-tham-lam.jsp)
 		lựa chọn giải pháp nào được cho là tốt nhất ở thời điểm hiện tại
 		giải bài toán con nảy sinh từ việc thực hiện lựa chọn đó
 		Lựa chọn của giải thuật tham lam có thể phụ thuộc vào lựa chọn trước đó
 		Việc quyết định sớm và thay đổi hướng đi của giải thuật cùng với việc không bao giờ xét lại các quyết định cũ
 			sẽ dẫn đến kết quả là giải thuật này không tối ưu để tìm giải pháp toàn cục
-	phương pháp chung (https://viblo.asia/p/tham-lam-greedy-method-6J3ZgaeP5mB)
-		cố gắng chọn thành phần tốt nhất trong tập hợp
-		Để đánh giá được độ tốt thì cần xây dựng một hàm chọn
-		Tiếp tục xây dựng như vậy cho tới khi tạo ra đủ thành phần
 	ví dụ
 		Cho trước một phân số a/b, hãy tìm biểu diễn phân số Ai Cập của nó với số lượng số hạng là ít nhất có thể
 			Với một phân số a/b (1<a<b), tìm phân số đơn vị lớn nhất không vượt quá a/b bằng cách tính giá trị x=a//b
@@ -283,4 +283,36 @@ Giải thuật chia để trị (https://hocspringboot.net/2021/06/15/tim-hieu-v
 			Đến đây hoàn thành bước chia (divide)
 			Gọi đệ quy để tiếp tục chia nhỏ các bài toán con ra, cho đến khi gặp bài toán con với độ dài là 1, tức ở trạng thái đã được sắp xếp rồi
 			Đến đây hoàn thành bước trị (conquer)
-			ghép dãy bên trái, pivote, dãy bên phải về thành 1 mảng là có được kết quả cuối cùng là dãy được sắp xếp.
+			ghép dãy bên trái, pivote, dãy bên phải về thành 1 mảng là có được kết quả cuối cùng là dãy được sắp xếp
+
+Giải thuật qui hoạch động (https://topdev.vn/blog/thuat-toan-quy-hoach-dong/)
+	Có một kỹ thuật khác gọi là “memoization” cũng có cách tiếp cận tương tự với quy hoạch động
+		Memoization không phải là một thuật toán theo đúng nghĩa
+		quy hoạch động thực hiện việc tính toán theo một thứ tự định trước, trong khi memoization duyệt theo chiều sâu
+	tiêu chí
+		Về mặt cài đặt, quy hoạch động thường lưu kết quả vào một mảng
+		Bài toán có các bài toán con gối nhau
+			ví dụ: thuật toán tính toán các số Fibonacci - lời giải hiệu quả
+			tính chất:
+				chia bài toán lớn thành các bài toán con nhỏ hơn
+				các bài toán con này được gọi đi gọi lại
+				Mỗi bài toán con sẽ được lưu lại trước khi tính những bài toán con lớn hơn
+		Bài toán có cấu trúc con tối ưu
+			ví dụ: Thuật toán Dijkstra tìm đường đi ngắn nhất (https://dothanhspyb.com/thuat-toan-dijkstra)
+			giải bài toán lớn dựa vào các bài toán con đã giải được
+			Không phải bài toán nào cũng có tính chất cấu trúc con tối ưu; Nếu không có tính chất này thì không thể áp dụng quy hoạch động
+	Các dạng toán quy hoạch động
+		Bài toán tối ưu
+			tính chất cấu trúc con tối ưu: Mỗi bài toán được giải dựa trên bài toán đã được giải trước đó
+			dp[s] = min(
+				F1(dp[i], dp[j], ..., dp[k]),
+				F2(dp[u], dp[v], ..., dp[w]),
+				...,
+				Fl(dp[q], dp[p], ..., dp[z])
+			)
+			dp là mảng lưu kết quả của các bài toán con
+		Bài toán tổ hợp
+			R[s] = F1(R[i], R[j], ..., R[k]) + 
+				F2(R[u], R[v], ..., R[w]) +
+				... +
+				Fl(R[q], R[p], ..., R[z])
