@@ -1,0 +1,28 @@
+n = input()
+m = input()
+a = list()
+
+for i in range(int(n)):
+    listcon = list()
+    for j in range(int(m)):
+        aa = input()
+        listcon.append(int(aa))
+    a.append(listcon)
+
+
+def tonghaiso(lis):
+    if len(lis) > 2:
+        chianholist = len(lis) // 2
+        L = lis[: chianholist]
+        R = lis[chianholist: ]
+        sl = tonghaiso(L)
+        sr = tonghaiso(R)
+        return sl + sr
+    else:
+        return lis[0] + lis[1] if len(lis) == 2 else lis[0]
+
+
+tong = 0
+for lis in a:
+    tong += tonghaiso(lis)
+print(tong)

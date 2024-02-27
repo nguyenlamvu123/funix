@@ -178,6 +178,47 @@ Một số kiểu dữ liệu:
 			%i: Đại diện cho phút được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi ba phút sẽ là 23.
 			%S và %s: Đại diện cho giây được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi hai giây thì sẽ là 22.
 
+Mảng (Array) là một trong các cấu trúc dữ liệu cũ và quan trọng nhất
+	Mảng gồm các bản ghi có kiểu giống nhau, có kích thước cố định, mỗi phần tử được xác định bởi chỉ số, là cấu trúc dữ liệu được cấp phát liên tục cơ bản
+	Truy cập tới phần tử ngẫu nhiên trực tiếp bằng cách sử dụng chỉ số mảng: O(1)
+	Ưu điểm
+		Truy câp phần tử với thời gian hằng số O(1)
+		Sử dụng bộ nhớ hiệu quả
+		Tính cục bộ về bộ nhớ
+	Nhược điểm
+		Không thể thay đổi kích thước của mảng khi chương trình dang thực hiện
+Mảng động (dynamic aray)
+	bắt đầu với mảng có một phần tử
+	khi số lượng phần tử vượt qua khả năng của mảng thì gấp đôi kích thước mảng cũ và copy phần tử mảng cũ vào nửa đầu của mảng mới
+	Ưu điểm
+		Tránh lãng phí bộ nhớ khi phải khai báo mảng có kích thước lớn ngay từ đầu
+	Nhược điểm
+		Phải thực hiện them thao tác copy phần tử mỗi khi thay đổi kích thước
+		Một số thời gian thực hiện thao tác không còn là hằng số nữa
+Danh sách liên kết đơn (Single linked list)
+	là một tập hợp các đối tượng được gọi là các nút (Node), được lưu trữ ngẫu nhiên trong bộ nhớ
+	Truy cập tới phần tử ngẫu nhiên cần phải duyệt từ đầu/cuối đến phần tử đó: O(n)
+	Mỗi nút chứa
+		Một giá trị (Data)
+		Một con trỏ (Next) sẽ trỏ đến phần tử kế tiếp của danh sách liên kết
+	Nút cuối cùng của danh sách chứa con trỏ tới null
+Danh sách liên kết đôi (Doubly Linked List)
+	là một tập hợp các nút (Node) được phân bố động, được sắp xếp theo cách sao cho mỗi Node chứa
+		Một giá trị (Data)
+		Một con trỏ (Next) sẽ trỏ đến phần tử kế tiếp của danh sách liên kết
+			Nút cuối cùng của danh sách chứa con trỏ tới null
+		Một con trỏ (Pre) sẽ trỏ đến phần tử trước của danh sách liên kết
+			Nút đầu tiên của danh sách chứa con trỏ tới null
+	Các hoạt động cơ bản trên Danh sách liên kết đôi
+		Hoạt động chèn: thêm một phần tử vào vị trí đầu của Danh sách liên kết
+		Hoạt động xóa: xóa một phần tử tại vị trí đầu của Danh sách liên kết
+		Hoạt động chèn vào cuối: thêm một phần tử vào vị trí cuối của Danh sách liên kết
+		Hoạt động xóa phần tử cuối: xóa một phần tử tại vị trí cuối của Danh sách liên kết
+		Hoạt động chèn vào sau: thêm một phần tử vào sau một phần tử của Danh sách liên kết
+		Hoạt động xóa (bởi key): xóa một phần tử từ Danh sách liên kết bởi sử dụng khóa đã cung cấp
+		Hiển thị danh sách về phía trước: hiển thị toàn bộ Danh sách liên kết theo chiều về phía trước
+		Hiển thị danh sách về phía sau: hiển thị toàn bộ Danh sách liên kết theo chiều về phía sau
+
 thuật toán tính toán các số Fibonacci
 	ban đầu được sử dụng như một mô hình toán học cho các quần thể thỏ (thỏ được biết đến với khả năng sinh sản nhanh)
 	lời giải đơn giản: chi phí tính toán lớn

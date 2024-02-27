@@ -1,0 +1,18 @@
+n = input()
+a = list()
+
+for i in range(int(n)):
+    a.append(input())
+
+def dungphuongthuccosan(a, vitri, so):
+    a.insert(vitri, so)
+    return a
+
+def lamthucong(a, vitri, so):    
+    return a[:vitri] + [so] + a[vitri:]
+
+vitri: int = int(input())
+so: str = str(input())
+a = lamthucong(a, vitri, so)
+
+print(' '.join(s for s in a))

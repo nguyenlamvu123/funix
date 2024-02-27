@@ -1,0 +1,9 @@
+n = int(input())
+tong: str = ''
+
+for i in range(n):
+    ii = int(input())
+    tong += str(ii * ii) + ' '
+
+print(tong)
+
