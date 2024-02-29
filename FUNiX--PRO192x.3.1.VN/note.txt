@@ -67,11 +67,12 @@ Một lớp là một nhóm đối tượng có các thuộc tính. Nó là mộ
 			Để sử dụng instance method thì phải khởi tạo một object bằng từ khóa new.
 			Có thể truy cập vào instance method và instance variable, static method và static variable trực tiếp.
 	Phạm vi truy cập
-		Access Modifier trong Java xác định phạm vi có thể truy cập của biến, phương thức, constructor hoặc lớp, 4 phạm vi truy cập của Access Modifier như sau:
-			private
-			default
-			protected
-			public
+		Với các access modifier, tính đóng gói sẽ có thể giúp ngăn chặn những lớp bên ngoài truy cập, thay đổi thuộc tính và phương thức của một lớp -> che giấu dữ liệu (data hiding)
+		Access Modifier trong Java xác định phạm vi có thể truy cập của biến, phương thức, constructor hoặc lớp gồm 4 từ khóa
+			public: Có thể truy cập từ bất kỳ đâu
+			protected: Có thể truy cập từ các lớp con trong cùng package hoặc các lớp con trong các package khác mà kế thừa lớp đó
+			default (Không có chỉ định): Chỉ có thể truy cập từ class trong cùng package
+			private: Chỉ có thể truy cập từ trong cùng class
 		Ngoài ra, còn có nhiều Non-access Modifier như static, abstract, synchronized, native, volatile, transient, ...
 Đối tượng được cấp bộ nhớ khi nó được tạo ra. Lớp không được cấp bộ nhớ khi nó được tạo ra.
 	class <tên_lớp> {
@@ -146,6 +147,7 @@ Tính đa hình trong Java:
 Tính đóng gói (ancapsulation) trong java
 	là cơ chế cho phép hạn chế quyền truy cập vào các thành phần nhất định trong các đối tượng mà bạn tạo ra, ngăn chặn các class bên ngoài truy cập làm thay đổi hoạt động bên trong của một lớp
 		Mục đích chính của đóng gói trong Java là giảm thiểu mức độ phức tạp phát triển phần mềm và bảo vệ trạng thái bên trong của một đối tượng, che giấu dữ liệu
+		Với các access modifier, tính đóng gói sẽ có thể giúp ngăn chặn những lớp bên ngoài truy cập, thay đổi thuộc tính và phương thức của một lớp -> che giấu dữ liệu (data hiding)
 	Ẩn hoạt động bên trong của một lớp khỏi một lớp khác để bạn có thể kiểm soát và cho phép bạn thay đổi mọi thứ mà không ảnh hưởng đến code ở nơi khác
 	có thể tạo lớp read-only hoặc write-only bằng việc cài đặt phương thức setter hoặc getter, kiểm soát đối với dữ liệu
 	Đối tượng Composite là sự tổng hợp những thành phần có quan hệ với nhau để tạo ra thành phần lớn hơn
