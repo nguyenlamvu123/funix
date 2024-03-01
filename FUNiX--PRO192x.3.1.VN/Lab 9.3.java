@@ -1,7 +1,7 @@
 class ArrayCalculator {
     public int maxOfArray(int[] arr) {
         int ret = arr[0];
-        for (int i=1; i < arr.length ; i++) {
+        for (int i=1; i < arr.length; i++) {
             if (arr[i] > ret) {
                 ret = arr[i];
             }
@@ -11,7 +11,7 @@ class ArrayCalculator {
 
     public double maxOfArray(double[] arr) {
         double ret = arr[0];
-        for (int i=1; i < arr.length ; i++) {
+        for (int i=1; i < arr.length; i++) {
             if (arr[i] > ret) {
                 ret = arr[i];
             }
@@ -21,7 +21,7 @@ class ArrayCalculator {
 
     public int minOfArray(int[] arr) {
         int ret = arr[0];
-        for (int i=1; i < arr.length ; i++) {
+        for (int i=1; i < arr.length; i++) {
             if |(arr[i] < ret) {
                 ret = arr[i];
             }
@@ -31,7 +31,7 @@ class ArrayCalculator {
 
     public double minOfArray(double[] arr) {
         double ret = arr[0];
-        for (int i=1; i < arr.length ; i++) {
+        for (int i=1; i < arr.length; i++) {
             if (arr[i] < ret) {
                 ret = arr[i];
             }
