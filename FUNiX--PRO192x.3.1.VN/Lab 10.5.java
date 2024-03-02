@@ -21,7 +21,7 @@ class Student {
     private String address;
     private int score;
 
-    Student() {}
+    public Student() {}
 
     Student(int id, String name, int age, String address, int score) {
         this.id = id;
