@@ -138,9 +138,15 @@ Tính kế thừa trong Java: các lớp mới có thể được xây dựng d�
 				((Dog)animal).play();  // Down-casting
 			}
 			
-Tính đa hình trong Java: 
+Tính đa hình (Polymorphism) trong Java:
+	khái niệm cho phép một đối tượng của một lớp hoạt động khác nhau để phản hồi lại một thông điệp hoặc hành động
+		Đa hình tĩnh
+			trình biên dịch quyết định phân tích đa hình trong quá trình biên dịch
+			có thể thực hiện hoặc đạt được với sự hỗ trợ của phương thức nạp chồng
+		Đa hình động
+			giải quyết các hành động tại thời gian chạy chứ không phải thời gian biên dịch
 	Overloading là một kĩ thuật cho phép trong cùng một class có thể có nhiều phương thức cùng tên nhưng khác nhau về số lượng tham số hoặc kiểu dữ liệu tham số, chương trình tự phân biệt dựa trên tham số truyền vào, thể hiện tính đa hình tại compile time.
-	Overriding (tên đầy đủ là Method Overriding): lớp con ghi đè phương thức của lớp cha, được dùng để tận dụng được tính đa hình tại runtime.
+	Overriding (tên đầy đủ là Method Overriding): lớp con ghi đè phương thức của lớp cha, được dùng để tận dụng được tính đa hình tại runtime
 		Các phương thức final, static, private không thể ghi đè.
 		tùy chọn @Override: nếu phương thức bị ghi đè không nằm trong lớp cha thì sẽ báo lỗi
 
