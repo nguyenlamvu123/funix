@@ -5,21 +5,21 @@ class Animal {
 }
 
 class Dog extends Animal {
-    @Override
+	@Override
 	void sound() {
         System.out.println("bow wow");
     }
 }
 
 class Cat extends Animal {
-    @Override
+	@Override
 	void sound() {
         System.out.println("meow meow");
     }
 }
 
 class Duck extends Animal {
-    @Override
+	@Override
 	void sound() {
         System.out.println("quack quack");
     }
