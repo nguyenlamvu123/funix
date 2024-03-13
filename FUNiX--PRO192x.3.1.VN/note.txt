@@ -74,17 +74,6 @@ Một lớp là một nhóm đối tượng có các thuộc tính. Nó là mộ
 			default (Không có chỉ định): Chỉ có thể truy cập từ class trong cùng package
 			private: Chỉ có thể truy cập từ trong cùng class
 		Ngoài ra, còn có nhiều Non-access Modifier như static, abstract, synchronized, native, volatile, transient, ...
-	Có 2 cách để đạt được sự trừu tượng hóa trong Java
-		Sử dụng lớp abstract
-			khai báo một lớp trừu tượng bằng cách sử dụng từ khóa trừu tượng - abstract
-			không thể khởi tạo hoặc tạo một đối tượng của một lớp trừu tượng
-			có thể có các biến thành viên được kế thừa
-		Sử dụng interface
-			interface (giao diện) là một bản thiết kế hoặc mẫu của một lớp, sự khác biệt duy nhất với lớp là nó có các phương thức trừu tượng và các hằng số tĩnh
-				Chỉ có thể có các phương thức trừu tượng, tức là không có body method nào bên trong
-				keyword implements: định nghĩa (gọi là thực hiện implement interfac) theo interface
-			chỉ có các biến static final, không có hàm tạo
-			Các phương thức trong inteface tự động là public
 	Lớp trừu tượng trong Java là lớp đại diện cho một khái niệm và không thể tạo đối tượng của nó
 Đối tượng được cấp bộ nhớ khi nó được tạo ra. Lớp không được cấp bộ nhớ khi nó được tạo ra.
 	mối quan hệ giữa các đối tượng
@@ -177,3 +166,26 @@ Tính đóng gói (ancapsulation) trong java
 	Ẩn hoạt động bên trong của một lớp khỏi một lớp khác để bạn có thể kiểm soát và cho phép bạn thay đổi mọi thứ mà không ảnh hưởng đến code ở nơi khác
 	có thể tạo lớp read-only hoặc write-only bằng việc cài đặt phương thức setter hoặc getter, kiểm soát đối với dữ liệu
 	Đối tượng Composite là sự tổng hợp những thành phần có quan hệ với nhau để tạo ra thành phần lớn hơn
+Tính trừu tượng () trong java
+	là một tính chất mà chỉ tập trung vào những tính năng của đối tượng và ẩn đi những thông tin không cần thiết
+		giúp trọng tâm hơn vào những tính năng thay vì phải quan tâm tới cách mà nó được thực hiện
+	Có 2 cách để đạt được sự trừu tượng hóa trong Java
+		Sử dụng lớp abstract
+			khai báo một lớp trừu tượng bằng cách sử dụng từ khóa trừu tượng - abstract
+			không thể khởi tạo hoặc tạo một đối tượng của một lớp trừu tượng
+			có thể có các biến thành viên được kế thừa
+			có thể cung cấp nội dung cài đặt cho phương thức của interface
+			có các biến final, non-final, static and non-static
+			không hỗ trợ đa kế thừa
+			một lớp được kế thừa từ lớp trừu tượng phải ghi đè tất cả các phương thức trừu tượng
+		Sử dụng interface
+			interface (giao diện) là một bản thiết kế hoặc mẫu của một lớp, sự khác biệt duy nhất với lớp là nó có các phương thức trừu tượng và các hằng số tĩnh
+				Chỉ có thể có các phương thức trừu tượng, tức là không có body method nào bên trong
+					Tất cả phương thức trong interface đều được trình biên dịch hiểu là phương thức trừu tượng
+					tất cả biến trong interface đều được trình biên dịch hiểu là các hằng số
+				Từ java 8, nó có thêm các phương thức default và static
+				keyword implements: định nghĩa (gọi là thực hiện implement interfac) theo interface
+			không thể khởi tạo hoặc tạo một đối tượng của một interface
+			chỉ có các biến static final, không có hàm tạo
+			Các phương thức trong inteface tự động là public
+			có hỗ trợ đa kế thừa
