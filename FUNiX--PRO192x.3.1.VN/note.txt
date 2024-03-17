@@ -119,6 +119,74 @@ Một lớp có thể chứa các loại biến sau:
 		có thể được truy cập từ bên trong bất kỳ phương thức, constructor hoặc khối nào của lớp cụ thể đó.
 	Biến Class
 		được khai báo với một lớp, bên ngoài bất kỳ phương thức nào, với từ khóa static
+Generics
+	https://viblo.asia/p/java-generic-aWj53Xw1K6m
+	https://gpcoder.com/2868-huong-dan-su-dung-java-generics/
+		giúp chỉ định rõ kiểu dữ liệu một class, một interface hay một phương thức nào đó làm việc cùng
+	https://codelearn.io/sharing/lam-quen-voi-generics-trong-java
+		package Generics;
+		class MyArrayGeneric<T> {
+			private T[] array; // khởi tạo mảng
+			public MyArrayGeneric(T[] array) {
+				this.array = array;
+			}
+		}
+		String[] names = new String[] { "Dat", "Khoa", "Tin" };
+		MyArrayGeneric<String> myArrayGeneric = new MyArrayGeneric<String>(names);
+
+		Một số quy ước
+			T - Type (Kiểu dữ liệu bất kỳ thuộc Wrapper class: String, Integer, Long, Float, …)
+			E – Element (phần tử – được sử dụng phổ biến trong Collection Framework)
+			K – Key (khóa)
+			V – Value (giá trị)
+			N – Number (kiểu số: Integer, Double, Float, …)
+			U,S,I,G, … (tùy theo kiểu của người dùng đặt)
+		class Generic với kiểu tham số generic
+			class Dictionary<K, V> {
+				private K key;
+				private V value;
+				public Dictionary(K key, V value) {}
+				public K getKey() {}
+				public void setKey(K key) {}
+				public V getValue() {}
+				public void setValue(V value) {}
+			}
+			Dictionary<String, String> d = new Dictionary<String, String>("Study", "hoc");
+		Thừa kế lớp Generics
+			class Book extends Dictionary<String, String> {}
+			Book l = new Book("Study", "hoc");
+
+			class Book<K, V> extends Dictionary<K, V> {}
+			Book<String, String> l = new Book<String, String>("Study", "hoc");
+
+			class Book<V> extends Dictionary<String, V> {}
+			Book<String> l = new Book<String>("Study", "hoc");
+
+			class Book<K, V, I> extends Dictionary<K, V> {
+				private I info; // khởi tạo thêm tham số generic
+				public Book(K key, V value) {
+					super(key, value);
+				}
+				public Book(K key, V value, I info) {
+					super(key, value);
+					this.info = info; // truyền Kiểu generic mới vào 
+				}
+				public I getInfo() {}
+				public void setInfo(I info) {}
+			}
+		Generics Interface
+			interface writer<T> {}
+			class Book<T> implements writer<T> {}
+			Book<String> t = new Book<String>();
+		phương thức generic
+			public static <E> E getFirstElement(ArrayList<E> arr) {}
+			ArrayList<String> list = new ArrayList<>();
+			System.out.println(getFirstElement(list));
+
+		Generics với ký tự đại diện Generic method (wildcard)
+			Collection<?>: mô tả một tập hợp chấp nhận tất cả các loại đối số (chứa mọi kiểu đối tượng)
+			List<? extends Number>: mô tả một danh sách, nơi mà các phần tử là kiểu Number hoặc kiểu con của Number
+			Comparator<? super String>: Mô tả một bộ so sánh (Comparator) mà thông số phải là String hoặc cha của String
 
 Tính kế thừa trong Java: các lớp mới có thể được xây dựng dựa trên các lớp đang tồn tại, là sự liên quan giữa hai class với nhau, trong đó có class cha (superclass) và class con (subclass).
 	Khi kế thừa class con được hưởng tất cả các phương thức và thuộc tính của class cha. Tuy nhiên, nó chỉ được truy cập các thành viên public và protected, không được phép truy cập đến thành viên private của class cha.
