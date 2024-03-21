@@ -120,6 +120,7 @@ Một lớp có thể chứa các loại biến sau:
 	Biến Class
 		được khai báo với một lớp, bên ngoài bất kỳ phương thức nào, với từ khóa static
 Generics
+	Các phương thức Generic là một cách rất hiệu quả để xử lý nhiều kiểu dữ liệu bằng một phương thức duy nhất
 	https://viblo.asia/p/java-generic-aWj53Xw1K6m
 	https://gpcoder.com/2868-huong-dan-su-dung-java-generics/
 		giúp chỉ định rõ kiểu dữ liệu một class, một interface hay một phương thức nào đó làm việc cùng
