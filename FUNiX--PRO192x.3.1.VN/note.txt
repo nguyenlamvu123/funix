@@ -189,6 +189,36 @@ Generics
 			List<? extends Number>: mô tả một danh sách, nơi mà các phần tử là kiểu Number hoặc kiểu con của Number
 			Comparator<? super String>: Mô tả một bộ so sánh (Comparator) mà thông số phải là String hoặc cha của String
 
+Hai cách tiếp cận để xử lý lỗi trong lập trình
+	LBYL
+		Look before you leap
+		kiểm tra rõ ràng các điều kiện trước khi thực hiện goi hoặc sử dụng, đặc trưng bởi sự hiện diện của nhiều câu lệnh if
+	EAFP
+		Easier to Ask Forgiveness Than Permission
+		Code theo luồng mong đợi
+			Nếu nó không hoạt động và một ngoại lệ xảy ra, thì chỉ cần bắt ngoại lệ và xử lý nó một cách thích hợp
+			đặc trưng bởi khối try catch
+FileWriter, FileReader, BufferedReader
+	FileWriter locFile = new FileWriter("locations.txt");
+	locFile.write(location.getLocationID() + "," + location.getDescription() + "\n");
+	locFile.close();
+
+	scanner = new Scanner(new FileReader("locations.txt"));
+	scanner.useDelimiter(","); // 3. cho biết dữ liệu được ngăn cách bởi dấu phẩy
+	while(scanner.hasNextLine()) { // 4. bắt đầu đọc dữ liệu
+	}
+	scanner.close();
+DataInputStream, BufferInputStream và FileInputStream: Đọc dữ liệu nhị phân
+
+dạng nhị phân có thể đọc và ghi bất kỳ kiểu dữ liệu nguyên thủy nào
+
+định nghĩa exception
+	public class InvalidDiceException extends RuntimeException {
+ 	   public InvalidDiceException(String message) {
+        	super(message);
+    		}
+	}
+
 Tính kế thừa trong Java: các lớp mới có thể được xây dựng dựa trên các lớp đang tồn tại, là sự liên quan giữa hai class với nhau, trong đó có class cha (superclass) và class con (subclass).
 	Khi kế thừa class con được hưởng tất cả các phương thức và thuộc tính của class cha. Tuy nhiên, nó chỉ được truy cập các thành viên public và protected, không được phép truy cập đến thành viên private của class cha.
 	Các yếu tố quan trọng trong kế thừa trong Java:
