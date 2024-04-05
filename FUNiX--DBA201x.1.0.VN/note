@@ -1,3 +1,27 @@
+    - chưa làm Exercise 17 -> ok, bài 18 không làm được 
+
+    - mới chỉ tải về chứ chưa làm Lab 17.2
+
+    - chưa làm Lab 16.2 -> ok
+
+    cần quay lại từ bài 11 đến 15, đã đọc về các giải thuật nhưng trên nguồn tài liệu chữ tự tìm
+
+    - Assignment 1 - Truy vấn dữ liệu nhân sự -> ok
+
+    - lab 10.1 10.2 10.3 not done
+
+    - bỏ qua bài 9 exercise11
+
+    - xem lại Lab11.1, 11.2 -> ok
+
+    - lab 9.2 requirement 9, 10 not done -> ok
+
+    - lab 9.3 not done -> ok, phần medium không làm được
+
+    - lab 7.2 not done -> ok
+
+    - lab 6.2 not done -> ok
+
 Cơ sở dữ liệu (Database) là một tập hợp dữ liệu hoặc thông tin có tổ chức để có thể dễ dàng truy cập, cập nhật hoặc thao tác
 Hệ quản trị cơ sở dữ liệu (Database management system - DBMS) như một phần mềm để giúp quản lý cơ sở dữ liệu. DBMS sẽ bao gồm các chức năng để xác định, thao tác cũng như truy xuất và quản lý dữ liệu, đồng thời giúp xác định những quy tắc nhằm xác thực cũng như thao tác với những dữ liệu được lưu trữ trong DBMS
 ngôn ngữ truy vấn dữ liệu (Structured Query Language - SQL)
@@ -202,6 +226,10 @@ Danh sách liên kết đơn (Single linked list)
 		Một giá trị (Data)
 		Một con trỏ (Next) sẽ trỏ đến phần tử kế tiếp của danh sách liên kết
 	Nút cuối cùng của danh sách chứa con trỏ tới null
+	        Scanner scan = new Scanner(System.in);
+        	LinkedList<Integer> linkedlist = new LinkedList<Integer>();
+		linkedlist.offer(scan.nextInt());
+		linkedlist.add(x, k);
 Danh sách liên kết đôi (Doubly Linked List)
 	là một tập hợp các nút (Node) được phân bố động, được sắp xếp theo cách sao cho mỗi Node chứa
 		Một giá trị (Data)

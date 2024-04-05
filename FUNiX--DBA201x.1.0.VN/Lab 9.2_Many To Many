@@ -1,3 +1,4 @@
+#site:https://github.com/TestardR/ManyToManySQL/blob/master/ReviewersMovies.sql
 mysql-ctl cli;
 show databases;
 use book_shop;
@@ -54,5 +55,28 @@ select genre, avg(rating) from (select title, released_year, genre, Reviews.rati
 # select fullname, avg(Reviews.rating) as average from (select select concat_ws(' ', first_name, last_name) as fullname from Reviewers) as a join Reviews on Reviewers.id = Reviews.reviewer_id group by first_name;
 select first_name, last_name, Reviews.rating as rating from Reviewers join Reviews on Reviewers.id = Reviews.reviewer_id;
 select title from (select DISTINCT title, Reviews.series_id as findnull from Series left join Reviews on Series.id = Reviews.series_id) as a where findnull is null;
-#9#select Reviewers.id, Reviewers.first_name, Reviewers.last_name, count(reviewer_id) from Reviews right join Reviewers on Reviews.reviewer_id = Reviewers.id group by Reviews.reviewer_id;
-#10#select series_id from (select title, released_year, genre, Reviews.rating, Reviews.series_id from Series left join Reviews on Reviews.series_id = Series.id) as a join Series on Series.id = Reviews.series_id;
+
+SELECT 
+	first_name,
+	last_name,
+	COUNT(rating) AS COUNT,
+	IFNULL(MIN(rating),0) AS MIN,
+	IFNULL(MAX(rating),0) AS MAX,
+	IFNULL(AVG(rating),0) AS AVG,
+	IF(COUNT(rating) >= 1, 'ACTIVE', 'INACTIVE') 
+	AS STATUS
+FROM reviewers
+LEFT JOIN reviews
+	ON reviewers.id = reviews.reviewer_id
+GROUP BY reviewer_id
+ORDER BY AVG;
+
+SELECT 
+ 	title,
+ 	rating,
+ 	CONCAT(first_name, ' ', last_name) AS reviewer
+FROM reviewers
+INNER JOIN reviews
+	ON reviewers.id = reviews.reviewer_id
+INNER JOIN series
+	ON series.id = reviews.series_id;

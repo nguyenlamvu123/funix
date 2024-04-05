@@ -1,3 +1,12 @@
-select distinc CITY from STATION where ID + 2 = 5;
-select distinc city from station where city like "%a";
-select distinc city from station where city like "a%";
+select distinct city from station where id % 2 = 0;
+select distinct city from station where city like "a%" or  city like "e%" or city like "i%" or  city like "o%" or city like "u%";
+select DISTINCT (CITY) from STATION where substr(CITY,1,1) IN ('a', 'e', 'i', 'o', 'u');
+select distinct city from station where city like "%a" or city like "%e" or city like "%i" or city like "%o" or city like "%u";
+select DISTINCT (CITY) from STATION where substr(CITY,-1) IN ('a', 'e', 'i', 'o', 'u');
+select DISTINCT (CITY) from STATION where substr(CITY,1,1) IN ('a', 'e', 'i', 'o', 'u') and substr(CITY,-1) IN ('a', 'e', 'i', 'o', 'u');
+select distinct city from station where left(city,1) in ('a','e','i','o','u') and right(city,1) in ('a','e','i','o','u');
+select distinct city from station where left(city,1) not in ('a','e','i','o','u');
+select distinct city from station where not (left(city,1) in ('a','e','i','o','u') and right(city,1) in ('a','e','i','o','u'));
+select name from students where marks > 75 order by right(name, 3), id;
+SELECT CASE WHEN A = B AND B = C AND A = C THEN 'Equilateral' WHEN (A = B OR A = C OR B = C) AND A+B > C THEN 'Isosceles' WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle' ELSE 'Scalene' END as c FROM TRIANGLES;
+select name from employee order by name;
