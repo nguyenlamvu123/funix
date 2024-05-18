@@ -1,23 +1,39 @@
-import java.io.FileWriter;   // Import the FileWriter class
-import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.*;
 import java.util.Scanner;
 
 
 public class Array {
 	public static void main(String[] args) {
-    try {
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		FileWriter myWriter = new FileWriter("INPUT.TXT");
-		for (int i = 0; i < n; i++) {
-			int x = sc.nextInt();
-			myWriter.write(x);
+		luuvaotep();
+		docfile();
+	}
+
+	public static void luuvaotep() {
+		try {
+			Scanner sc = new Scanner(System.in);
+			int n = sc.nextInt();
+			FileWriter out = new FileWriter("INPUT.TXT");
+			for (int i = 0; i < n; i++) {
+				int x = sc.nextInt();
+				out.write(x);
+			}
+			out.close();
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
-		myWriter.close();
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
+	}
+
+	public static void docfile() {
+		try {
+			FileReader in = new FileReader("INPUT.TXT");
+			int [] mang1chieu = new int[20];
+			int c;
+			while ((c = in.read()) != -1) {
+				System.out.println(c);
+			}
+			in.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
-
