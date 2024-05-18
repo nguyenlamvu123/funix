@@ -198,17 +198,31 @@ Hai cách tiếp cận để xử lý lỗi trong lập trình
 		Code theo luồng mong đợi
 			Nếu nó không hoạt động và một ngoại lệ xảy ra, thì chỉ cần bắt ngoại lệ và xử lý nó một cách thích hợp
 			đặc trưng bởi khối try catch
-FileWriter, FileReader, BufferedReader
-	FileWriter locFile = new FileWriter("locations.txt");
-	locFile.write(location.getLocationID() + "," + location.getDescription() + "\n");
-	locFile.close();
 
-	scanner = new Scanner(new FileReader("locations.txt"));
-	scanner.useDelimiter(","); // 3. cho biết dữ liệu được ngăn cách bởi dấu phẩy
-	while(scanner.hasNextLine()) { // 4. bắt đầu đọc dữ liệu
-	}
-	scanner.close();
-DataInputStream, BufferInputStream và FileInputStream: Đọc dữ liệu nhị phân
+(https://vietjack.com/java/)
+Character Stream trong Java được sử dụng để thực hiện input và output cho Unicode 16 bit
+	FileReader, FileWriter
+Byte Stream trong Java được sử dụng để thực hiện input và output của các byte (8 bit)
+	FileInputStream, FileOutputStream
+3 Standard Stream gồm Đầu vào chuẩn (Standard Input), Đầu ra chuẩn (Standard Output), Lỗi chuẩn (Standard Error) nhận đầu vào từ một bàn phím và sau đó tạo kết quả trên màn hình máy tính
+	InputStreamReader
+FileInputStream trong Java
+	InputStream f = new FileInputStream("C:/java/hello");
+
+	File f = new File("C:/java/hello");
+	InputStream f = new FileInputStream(f);
+FileOutputStream trong Java
+	OutputStream f = new FileOutputStream("C:/java/hello")
+
+	File f = new File("C:/java/hello");
+	OutputStream f = new FileOutputStream(f);
+tạo thư mục trong Java
+	File d = new File(dirname);
+	d.mkdirs();  // tạo cả một thư mục và tất cả các thư mục cha
+	d.mkdir();  // tạo một thư mục, trả về true nếu thành công và false nếu thất bại
+Liệt kê thư mục trong Java
+	file = new File("/tmp");
+	paths = file.list();
 
 dạng nhị phân có thể đọc và ghi bất kỳ kiểu dữ liệu nguyên thủy nào
 
