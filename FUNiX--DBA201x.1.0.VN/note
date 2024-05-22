@@ -22,7 +22,7 @@
 
     - lab 6.2 not done -> ok
 
-Cơ sở dữ liệu (Database) là một tập hợp dữ liệu hoặc thông tin có tổ chức để có thể dễ dàng truy cập, cập nhật hoặc thao tác
+@@@@@@@@@@@@ Cơ sở dữ liệu (Database) là một tập hợp dữ liệu hoặc thông tin có tổ chức để có thể dễ dàng truy cập, cập nhật hoặc thao tác
 Hệ quản trị cơ sở dữ liệu (Database management system - DBMS) như một phần mềm để giúp quản lý cơ sở dữ liệu. DBMS sẽ bao gồm các chức năng để xác định, thao tác cũng như truy xuất và quản lý dữ liệu, đồng thời giúp xác định những quy tắc nhằm xác thực cũng như thao tác với những dữ liệu được lưu trữ trong DBMS
 ngôn ngữ truy vấn dữ liệu (Structured Query Language - SQL)
 Có hai DBMS rất phổ biến là MySQL và SQL Server
@@ -34,7 +34,7 @@ ngôn ngữ truy vấn dữ liệu (Structured Query Language - SQL)
 ngôn ngữ định nghĩa dữ liệu (Data Definition Language - DDL) là các lệnh để định nghĩa cấu trúc lưu trữ dữ liệu, sử dụng các câu lệnh này để thao tác trên Database (cơ sở dữ liệu), Table (bảng), các trường (cột), gồm CREATE, DROP, TRUNCATE, ALTER, ...
 ngôn ngữ thao tác dữ liệu (Data Manipulation Language - DML) là các lệnh để thao tác với dữ liệu trên một bảng, gồm DELETE, INSERT, UPDATE, SELECT, ...
 
-mysql-ctl cli (truy cập vào chương trình dòng lệnh mysql)
+@@@@@@@@@@@@ mysql-ctl cli (truy cập vào chương trình dòng lệnh mysql)
 
 show databases; (hiển thị các cơ sở dữ liệu hiện có);	
 CREATE DATABASE soap_store; (tạo mới database tên là soap_store);
@@ -107,7 +107,7 @@ một số toán tử logic:
 	between
 		SELECT * FROM STUDNT WHERE age BETWEEN 30 and 50
 
-Các kiểu quan hệ dữ liệu như sau:
+@@@@@@@@@@@@ Các kiểu quan hệ dữ liệu như sau:
 	Quan hệ one-to-one
 		bảng SINHVIEN và bảng THONGTINCANCUOC thì mỗi một sinh viên chỉ có một thông tin căn cước và ngược lại, mỗi một thông tin căn cước chỉ đại diện cho một sinh viên.
 	Quan hệ one-to-many
@@ -202,7 +202,7 @@ Một số kiểu dữ liệu:
 			%i: Đại diện cho phút được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi ba phút sẽ là 23.
 			%S và %s: Đại diện cho giây được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi hai giây thì sẽ là 22.
 
-Mảng (Array) là một trong các cấu trúc dữ liệu cũ và quan trọng nhất
+@@@@@@@@@@@@ Mảng (Array) là một trong các cấu trúc dữ liệu cũ và quan trọng nhất
 	Mảng gồm các bản ghi có kiểu giống nhau, có kích thước cố định, mỗi phần tử được xác định bởi chỉ số, là cấu trúc dữ liệu được cấp phát liên tục cơ bản
 	Truy cập tới phần tử ngẫu nhiên trực tiếp bằng cách sử dụng chỉ số mảng: O(1)
 	Ưu điểm
@@ -247,7 +247,20 @@ Danh sách liên kết đôi (Doubly Linked List)
 		Hiển thị danh sách về phía trước: hiển thị toàn bộ Danh sách liên kết theo chiều về phía trước
 		Hiển thị danh sách về phía sau: hiển thị toàn bộ Danh sách liên kết theo chiều về phía sau
 
-thuật toán tính toán các số Fibonacci
+@@@@@@@@@@@@ thuật toán sắp xếp nổi bọt (Bubble Sort) (https://niithanoi.edu.vn/bubble-sort.html)
+	cơ bản, dễ hiểu, ngắn gọn nhưng Hiệu suất chậm nhất trong các thuật toán sắp xếp, Không hiệu quả với những dữ liệu lớn
+	Độ phức tạp của giải thuật : O(n^2)
+	so sánh hai phần tử kề nhau, nếu chúng chưa đứng đúng thứ tự thì đổi chỗ (swap)
+	Nếu trong một lần duyệt, không phải đổi chỗ bất cứ cặp phần tử nào thì danh sách đã được sắp xếp xong
+	Có thể tiến hành từ trên xuống (bên trái sang) hoặc từ dưới lên (bên phải sang)
+
+@@@@@@@@@@@@ thuật toán sắp xếp chọn (Selection Sort) (https://niithanoi.edu.vn/selection-sort.html)
+	không phù hợp với các tập dữ liệu lớn vì độ phức tạp trung bình
+	Độ phức tạp của selection sort là: O(n^2)
+	Danh sách được chia thành hai phần; liên tục tìm giá trị nhỏ nhất ở phần này (lúc đầu là toàn bộ danh sách), đặt vào ngoài cùng của phần kia (lúc đầu rỗng)
+	Phương pháp chọn khóa hoặc phần tử đầu tiên...
+
+@@@@@@@@@@@@ thuật toán tính toán các số Fibonacci
 	ban đầu được sử dụng như một mô hình toán học cho các quần thể thỏ (thỏ được biết đến với khả năng sinh sản nhanh)
 	lời giải đơn giản: chi phí tính toán lớn
 		def FibRecurs(n):
@@ -258,15 +271,15 @@ thuật toán tính toán các số Fibonacci
 			for i in range(2, n):
 				f.append(f[i-1] + f[i-2])
 			return f[-1]
-thuật toán tính toán ước số chung lớn nhất
-mã giả
-giải thuật đệ quy (https://viblo.asia/p/tim-hieu-ve-giai-thuat-de-quy-3Q75wVVQlWb#_bai-toan-thap-ha-noi-5)
+@@@@@@@@@@@@ thuật toán tính toán ước số chung lớn nhất
+@@@@@@@@@@@@ mã giả
+@@@@@@@@@@@@ giải thuật đệ quy (https://viblo.asia/p/tim-hieu-ve-giai-thuat-de-quy-3Q75wVVQlWb#_bai-toan-thap-ha-noi-5)
 	khi chương trình thực thi, mỗi khi nhập vào một phương thức mới, nó sẽ đặt thông tin cho phương thức đó và callstack
 	base-case: điều kiện chấm dứt chu trình đệ qui
 		điều kiện mà ở đó hàm không còn được định nghĩa bởi chính nó (https://viblo.asia/p/tim-hieu-ve-giai-thuat-de-quy-3Q75wVVQlWb#_bai-toan-thap-ha-noi-5)
 	StackOverFlowError: lỗi callstack bị quá tải do bộ nhớ được cấp phát không đáp ứng được chiều sâu
 
-ý tưởng đằng sau khái niệm tiệm cận:
+@@@@@@@@@@@@ ý tưởng đằng sau khái niệm tiệm cận:
 	không quan tâm nhiều đến các hằng số phụ thuộc vào phần cứng máy tính, hệ thống phân cấp bộ nhớ, trình biên dịch mà tập trung vào điều gì sẽ xảy ra khi input quá lớn, chúng sẽ có tỉ lệ thế nào
 	Big-O
 		thể hiện rõ tỷ lệ tăng trưởng
@@ -282,7 +295,7 @@ giải thuật đệ quy (https://viblo.asia/p/tim-hieu-ve-giai-thuat-de-quy-3Q7
 		phép gán -> một số lượng thao tác máy cố định -> O(1)
 		return -> O(1)
 
-Giải thuật tham lam (https://topdev.vn/blog/thuat-toan-tham-lam/)
+@@@@@@@@@@@@ Giải thuật tham lam (https://topdev.vn/blog/thuat-toan-tham-lam/)
 	Nhược điểm
 		Có thể kết quả cuối cùng không chính xác
 		phụ thuộc nhiều vào bài toán con được chọn ra để kiểm chứng
@@ -316,7 +329,7 @@ Giải thuật tham lam (https://topdev.vn/blog/thuat-toan-tham-lam/)
 				kết thúc của công việc gần nhất vừa chọn bj thì lựa chọn nó, rồi cập nhật lại j=i
 			Do các công việc đã được sắp xếp tăng dần theo thời gian kết thúc, nên công việc được chọn sẽ luôn luôn có thời gian kết thúc nhỏ nhất
 
-Giải thuật chia để trị (https://hocspringboot.net/2021/06/15/tim-hieu-ve-giai-thuat-chia-de-tri-divide-and-conquer/)
+@@@@@@@@@@@@ Giải thuật chia để trị (https://hocspringboot.net/2021/06/15/tim-hieu-ve-giai-thuat-chia-de-tri-divide-and-conquer/)
 	thường được sử dụng trong những bài toán có kích thước lớn, chiến lược Chia để trị chính là một sự phát triển của Giải thuật đệ quy
 	Giải thuật chia để trị tồn tại hai hạn chế (https://vietjack.com/cau-truc-du-lieu-va-giai-thuat/giai-thuat-chia-de-tri.jsp)
 		Làm thế nào để chia tách bài toán một cách hợp lý thành các bài toán con
@@ -354,7 +367,7 @@ Giải thuật chia để trị (https://hocspringboot.net/2021/06/15/tim-hieu-v
 			Đến đây hoàn thành bước trị (conquer)
 			ghép dãy bên trái, pivote, dãy bên phải về thành 1 mảng là có được kết quả cuối cùng là dãy được sắp xếp
 
-Giải thuật qui hoạch động (https://topdev.vn/blog/thuat-toan-quy-hoach-dong/)
+@@@@@@@@@@@@ Giải thuật qui hoạch động (https://topdev.vn/blog/thuat-toan-quy-hoach-dong/)
 	Có một kỹ thuật khác gọi là “memoization” cũng có cách tiếp cận tương tự với quy hoạch động
 		Memoization không phải là một thuật toán theo đúng nghĩa
 		quy hoạch động thực hiện việc tính toán theo một thứ tự định trước, trong khi memoization duyệt theo chiều sâu
