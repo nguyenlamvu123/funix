@@ -6,13 +6,18 @@ public class Array {
 	public static void main(String[] args) {
 		int n = luuvaotep();  // yêu cầu 1
 		int[] mang1chieu = docfile(n);  // yêu cầu 2
-		int[] mang1chieu____ = indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
-		int[] mang1chieu_ = bubbleSort(mang1chieu);  // yêu cầu 3
-		int[] mang1chieu__ = selectionSort(mang1chieu);  // yêu cầu 4
+		// int[] mang1chieu____ = indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
+		// int[] mang1chieu_ = bubbleSort(mang1chieu);  // yêu cầu 3
+		// int[] mang1chieu__ = selectionSort(mang1chieu);  // yêu cầu 4
 		int[] mang1chieu___ = insertionSort(mang1chieu);  // yêu cầu 5
-		for (int m: mang1chieu____) {
-			System.out.print(m + " ");
-		}
+		// for (int m: mang1chieu____) {
+			// System.out.print(m + " ");
+		// }
+
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		int bs = binarySearch(mang1chieu, 0, n - 1, x);  // yêu cầu 7
+		System.out.print(bs);
 	}
 
 	public static int luuvaotep() {
@@ -139,4 +144,27 @@ public class Array {
 		chuyenmangsothanhmangkitu(indgreval, "INPUT4.TXT");
 		return indgreval;
 	}
+
+	public static int binarySearch(int arr[], int l, int r, int x) {
+        	if (r >= l) {
+			int mid = (l + r) / 2;
+			// System.out.println(l + "%%%%%%%%%" + r);
+			// System.out.println(mid + "____" + arr[mid]);
+			if (arr[mid] < x) {
+				return binarySearch(arr, mid + 1, r, x);
+			}
+			int bi = binarySearch(arr, l, mid - 1, x);
+			if (arr[mid] == x) {
+				if (bi == -1) {
+					return mid;
+				} else {
+					return bi;
+				}
+			}
+			if (arr[mid] > x) {
+		                return bi;
+			}
+		}
+	        return -1;
+        }
 }
