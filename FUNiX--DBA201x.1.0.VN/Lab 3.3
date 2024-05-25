@@ -1,0 +1,10 @@
+mysql-ctl cli
+USE cat_app;
+create table cats(cat_id int not null auto_increment, primary key (cat_id), name varchar(100), breed varchar(100), age int);
+insert into cats(name, breed, age) values('Ringo', 'Tabby', 4), ('Cindy', 'Maine Coon', 10), ('Dumbledore', 'Maine Coon', 11), ('Egg', 'Persian', 4), ('Misty', 'Persian', 4), ('George Michael', 'Ragdoll', 9), ('Jackson', 'Sphynx', 7);
+select cat_id from cats;
+select name, breed from cats;
+select name, age from cats;
+select cat_id as id, name from cats;
+select name as 'cat name', breed as 'kitty breed' from cats;
+

@@ -1,0 +1,26 @@
+#select sum(population) from city where  countrycode = (select code from country where continent = "asia");  # câu lệnh tự viết
+#select sum(population) from city join country on city.countrycode = country.code where country.continent = "asia";  # câu lệnh tự viết, thêm "city." vào trước population là câu lệnh sẽ đúng
+select sum(city.population) from city INNER JOIN country on city.countrycode=country.code where country.continent='Asia';
+select city.name from city join country on city.countrycode = country.code where country.continent = "Africa";
+#select country.continent, round(avg(city.population)) from city join country on city.countrycode = country.code group by country.continent;
+select country.continent, floor(avg(city.population)) from city join country on city.countrycode = country.code group by country.continent;
+select concat(name, "(", substring(occupation, 1, 1), ")") from occupations order by name;
+select hc.hacker_id, h.name from ( select s.hacker_id, count(s.challenge_id) as count_challenges from submissions as s inner join challenges as c on c.challenge_id = s.challenge_id inner join difficulty as d on d.difficulty_level = c.difficulty_level where s.score = d.score group by s.hacker_id ) as hc inner join hackers as h on h.hacker_id = hc.hacker_id and hc.count_challenges > 1 order by hc.count_challenges desc, hc.hacker_id;
+select concat( "There are a total of ", count(name), " ", lower(occupation), "s.") from occupationS GROUP BY Occupation ORDER BY COUNT(Occupation) ASC;
+SELECT W.id,S.age,S.coins,S.power FROM Wands AS W JOIN (SELECT age,power,MIN(coins_needed) AS coins, Wands.code FROM Wands JOIN Wands_Property ON Wands.code=Wands_Property.code WHERE is_evil=0 GROUP BY code, age,power) AS S ON W.code=S.code and W.coins_needed=S.coins ORDER BY S.power DESC,S.age DESC;
+#select h.hacker_id, h.name, count(c.challenge_id) from hackers as h join challenges as c on h.hacker_id = c.hacker_id group by c.hacker_id;
+select h.hacker_id, h.name, count(c.challenge_id) cid from Hackers h join Challenges c on h.hacker_id = c.hacker_id group by h.hacker_id, h.name having cid >7 and cid !=12 order by cid desc,h.hacker_id
+#select h.hacker_id, h.name, count(s.score) from hackers as h join submissions as s on h.hacker_id = s.hacker_id group by h.hacker_id, h.name order by count(s.score), h.hacker_id;
+select h.hacker_id, h.name, sum(t1.score) as ts from hackers h join (select hacker_id,challenge_id,max(score) as score from submissions group by hacker_id,challenge_id) as t1 on h.hacker_id=t1.hacker_id group by h.hacker_id, h.name having ts >0 order by ts desc,h.hacker_id
+select start_date, date_add(start_date, interval (lead(rn, 1, rn + 1) over (order by end_date) - rn) day) as endn_date from
+(select task_id, start_date, end_date, datediff(end_date, prev_end_date) as diff, row_number() over() as rn from
+(select task_id, start_date, end_date, lag(end_date,1, end_date) over (order by end_date) as prev_end_date from projects) temp
+order by end_date) temp2
+where diff !=1
+order by datediff(endn_date,start_date) asc, start_date asc;
+select s.name from Students s
+inner join friends f on s.id = f.id
+inner join packages pa on f.friend_id = pa.id
+left join Packages p on s.id = p.id
+where p.salary < pa.salary
+order by pa.salary;

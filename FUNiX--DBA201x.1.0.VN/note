@@ -1,0 +1,413 @@
+    - chưa làm Exercise 17 -> ok, bài 18 không làm được 
+
+    - mới chỉ tải về chứ chưa làm Lab 17.2
+
+    - chưa làm Lab 16.2 -> ok
+
+    cần quay lại từ bài 11 đến 15, đã đọc về các giải thuật nhưng trên nguồn tài liệu chữ tự tìm
+
+    - Assignment 1 - Truy vấn dữ liệu nhân sự -> ok
+
+    - lab 10.1 10.2 10.3 not done
+
+    - bỏ qua bài 9 exercise11
+
+    - xem lại Lab11.1, 11.2 -> ok
+
+    - lab 9.2 requirement 9, 10 not done -> ok
+
+    - lab 9.3 not done -> ok, phần medium không làm được
+
+    - lab 7.2 not done -> ok
+
+    - lab 6.2 not done -> ok
+
+@@@@@@@@@@@@ Cơ sở dữ liệu (Database) là một tập hợp dữ liệu hoặc thông tin có tổ chức để có thể dễ dàng truy cập, cập nhật hoặc thao tác
+Hệ quản trị cơ sở dữ liệu (Database management system - DBMS) như một phần mềm để giúp quản lý cơ sở dữ liệu. DBMS sẽ bao gồm các chức năng để xác định, thao tác cũng như truy xuất và quản lý dữ liệu, đồng thời giúp xác định những quy tắc nhằm xác thực cũng như thao tác với những dữ liệu được lưu trữ trong DBMS
+ngôn ngữ truy vấn dữ liệu (Structured Query Language - SQL)
+Có hai DBMS rất phổ biến là MySQL và SQL Server
+	MySQL được phát hành từ giữa thập niên 90s (sau đó bị thâu tóm bởi Oracle), MySQL ban đầu là một DBMS mã nguồn mở và cũng vẫn mở cho tới tận bây giờ
+	Microsoft phát triển SQL Server từ giữa thập niên 80s, với mục tiêu hướng đến là SQL Server sẽ cung cấp giải pháp đáng tin cậy và có thể mở rộng, nó là một nền tảng được chọn cho những phần mềm doanh nghiệp cần mở rộng lớn theo thời gian.
+	SQL Server hoạt động tốt trong hệ sinh thái của Microsoft nhưng chưa được hỗ trợ tốt trong Linux, trong khi đó MySQL hoạt động tốt ở cả Windown và Linux.
+	MySQL là một hệ quản trị cơ sở dữ liệu được sử dụng để lưu trữ, quản lý dữ liệu có cấu trúc trong khi đó SQL (Structured Query Language - SQL) là một ngôn ngữ truy vấn dữ liệu được sử dụng bên trong MySQL
+ngôn ngữ truy vấn dữ liệu (Structured Query Language - SQL)
+ngôn ngữ định nghĩa dữ liệu (Data Definition Language - DDL) là các lệnh để định nghĩa cấu trúc lưu trữ dữ liệu, sử dụng các câu lệnh này để thao tác trên Database (cơ sở dữ liệu), Table (bảng), các trường (cột), gồm CREATE, DROP, TRUNCATE, ALTER, ...
+ngôn ngữ thao tác dữ liệu (Data Manipulation Language - DML) là các lệnh để thao tác với dữ liệu trên một bảng, gồm DELETE, INSERT, UPDATE, SELECT, ...
+
+@@@@@@@@@@@@ mysql-ctl cli (truy cập vào chương trình dòng lệnh mysql)
+
+show databases; (hiển thị các cơ sở dữ liệu hiện có);	
+CREATE DATABASE soap_store; (tạo mới database tên là soap_store);
+USE dog_walking_app;
+
+	CREATE TABLE customers(
+	    id INT AUTO_INCREMENT,
+	    primary key (id),
+	    first_name VARCHAR(100),
+	    last_name VARCHAR(100),
+	    age int DEFAULT 99,
+	    email VARCHAR(100)
+	);
+	CREATE TABLE orders(
+	    id INT AUTO_INCREMENT PRIMARY KEY,
+	    order_date DATE,
+	    amount DECIMAL(8,2),
+	    customer_id INT,
+	    FOREIGN KEY(customer_id) REFERENCES customers(id)
+	);
+	show tables;
+	desc cats3;
+	INSERT INTO table_name(field1, field2 …)  VALUES (values1, values 2…);
+	DROP TABLE table_name; (Xoá một bảng hiện có)
+	Lệnh DELETE xóa dữ liệu, giữ nguyên cấu trúc bảng; chỉ xóa các hàng từ bảng dựa trên điều kiện đã được định nghĩa bởi mệnh đề WHERE hoặc xóa tất cả các hàng từ bảng nếu điều kiện này không được xác định; không giải phóng bộ nhớ
+	Lệnh TRUNCATE xóa dữ liệu, giữ nguyên cấu trúc bảng; xóa tất cả các hàng từ bảng và giải phóng bộ nhớ chứa bảng đó
+
+select * from cats3;
+select name as gskohaoi from cats3 where age = 7834634;
+*******************************************************************
+SELECT
+CASE
+    WHEN Category  = "Danh mục A" THEN "A"
+    WHEN Category  = "Danh mục B" THEN "B"
+    ELSE "OTHER"
+END  as type
+FROM Product;
+*******************************************************************
+SELECT DISTINCT name FROM STUDENT; lấy tất cả giá trị không trùng nhau ở cột name trong bảng STUDENT
+SELECT * FROM STUDENT ORDER BY name ASC; lấy các hàng từ bảng STUDENT được sắp xếp tăng dần theo name (ASC là mặc định)
+SELECT * FROM STUDENT ORDER BY name DESC; lấy các hàng từ bảng STUDENT được sắp xếp giảm dần theo name.
+SELECT * FROM STUDENT LIMIT 5 OFFSET 20; lấy 5 hàng đầu tiên bắt đầu từ hàng 21
+*******************************************************************
+SELECT CLASS, AVG(point) as tong_diem FROM STUDENT GROUP BY class;
+Một số Aggregate_Function hay sử dụng như sau:
+	COUNT: Hàm đếm số lượng hàng
+	MIN: Hàm tìm giá trị nhỏ nhất
+	MAX: Hàm tìm giá trị lớn nhất
+	SUM: Hàm tính tổng
+	AVG: Hàm tính giá trị trung bình
+*******************************************************************
+SELECT title, pages FROM books WHERE pages = (SELECT Min(pages) FROM books);
+SELECT DATABASE(); (In ra database đang được sử dụng)
+update cats set age = 12 where breed = 'Maine Coon';
+DELETE FROM cats WHERE age=4;
+DROP DATABASE soap_store; (Xoá một database hiện có)
+
+INSERT INTO bang_2 (cot_1, cot_2, cot_3, ...) SELECT cot_1, cot_2, cot_3 FROM bang_1;  # sao chép cột từ bảng cũ sang bảng mới
+SELECT * INTO bang_moi FROM bang_cu;                                                   # sao chép dữ liệu từ bảng cũ sang bảng mới
+
+một số toán tử logic:
+	LIKE: Để khớp với chuỗi mong muốn 
+		SELECT * FROM STUDENT WHERE name LIKE "Nguyễn%"
+			"%" đại diện cho không hoặc nhiều ký tự
+			"_" đại diện cho một ký tự.
+	and
+	or
+	in
+	not in
+	between
+		SELECT * FROM STUDNT WHERE age BETWEEN 30 and 50
+
+@@@@@@@@@@@@ Các kiểu quan hệ dữ liệu như sau:
+	Quan hệ one-to-one
+		bảng SINHVIEN và bảng THONGTINCANCUOC thì mỗi một sinh viên chỉ có một thông tin căn cước và ngược lại, mỗi một thông tin căn cước chỉ đại diện cho một sinh viên.
+	Quan hệ one-to-many
+		bảng LOP và bảng SINHVIEN thì mỗi một lớp sẽ có thể chứa nhiều sinh viên nhưng một sinh viên chỉ có trong một lớp.
+	Quan hệ many-to-many
+		bảng SINHVIEN và bảng MONHOC thì mỗi sinh viên sẽ học nhiều môn học và ngược lại, một môn học sẽ được học bởi nhiều sinh viên.
+Có các kiểu JOIN chính như sau:
+	INNER JOIN: Trả về các bản ghi có giá trị phù hợp trong cả hai bảng.
+		SELECT first_name, last_name, order_date, amount
+		FROM customers, orders 
+		    WHERE customers.id = orders.customer_id;
+		SELECT * FROM customers
+		JOIN orders
+		    ON customers.id = orders.customer_id;
+	LEFT JOIN: Trả về tất cả các bản ghi từ bảng bên trái (sau chuỗi `from`, trước chuỗi `join`) và các bản ghi phù hợp từ bảng bên phải, các giá trị có ở bảng bên trái mà không có ở bảng bên phải thì sẽ được thay bằng null.
+		SELECT 
+		    first_name, last_name, SUM(amount) AS total_spent
+		FROM customers
+		JOIN orders
+		    ON customers.id = orders.customer_id
+		GROUP BY orders.customer_id ORDER BY total_spent DESC;
+		
+		select students.first_name, papers.title, papers.grade from papers left join students on students.id = papers.student_id;
+	RIGHT JOIN: Trả về tất cả các bản ghi từ bảng bên phải (sau chuỗi `join`) và các bản ghi phù hợp từ bảng bên trái, các giá trị có ở bảng bên phải mà không có ở bảng bên trái thì sẽ được thay bằng null.
+		select students.first_name, papers.title, papers.grade from papers right join students on students.id = papers.student_id;
+	FULL JOIN: Trả về tất cả các bản ghi từ cả hai bảng, các bản ghi có ở bảng bên trái không có ở bảng bên phải hoặc có ở bảng bên phải mà không có ở bảng bên trái sẽ được thay bằng null.
+	CROSS JOIN: Lấy một bản ghi từ bảng đầu tiên (T1) và sau đó tạo một bản ghi mới cho mỗi bản ghi trong bảng thứ hai (T2). Sau đó làm tương tự cho bản ghi tiếp theo trong bảng đầu tiên (T1), vv.
+		SELECT * FROM orders WHERE customer_id =
+		    (
+			SELECT id FROM customers
+			WHERE last_name='George'
+		    );
+
+Trong MySQL, có thể có nhiều user và mỗi user cũng có thể có những quyền khác nhau.
+	Cú pháp tạo user: CREATE USER user1@localhost IDENTIFIED BY '1' -> tạo một USER có tài khoản là user và password là 1. Đây là lệnh tạo user1 tại máy local, trong trường hợp các bạn tạo user trên một remote server, các bạn cần đăng nhập vào server đó sau đó có thể thay localhost bằng IP của server.
+	Cú pháp cấp quyền cho user: GRANT ALL PRIVILEGES ON *.* TO user1@localhost WITH GRANT OPTION; -> cấp toàn bộ quyền cho user1.
+VIEW hay còn được gọi là bảng tạm trong MySQL, sử dụng View giúp đơn giản hóa các câu truy vấn phức tạp. Cú pháp thông thường để tạo VIEW:
+	CREATE
+	[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+	VIEW view_name [(column_list)]
+	AS cau_truy_van_select
+	ALGORITHM nhận một trong ba giá trị
+		UNDEFINED: MySQL tự động để chế độ algorithm là temptable nếu trong câu truy vấn chứa các hàm tổng hợp khi tạo view, ngược lại sẽ chọn merge 
+		MERGE: MySQL truy vấn trực tiếp đến bảng chính
+		TEMPTABLE: MySQL lưu dữ liệu vào một bảng tạm, và khi truy vấn từ view, MySQL truy vấn từ bảng tạm.
+
+Một số kiểu dữ liệu:
+	int: Kiểu số nguyên, mỗi một số sẽ có dung lượng là 4 byte
+	FLOAT(size,d): kiểu dữ liệu số thực, mỗi một số sẽ có dung lượng là 4 byte.
+		Số lượng chữ số tối đa có thể được chỉ định trong tham số size.
+		Số chữ số tối đa ở bên phải dấu thập phân được chỉ định trong tham số d. 
+	DOUBLE(size,d): kiểu dữ liệu số thực, mỗi một số sẽ có dung lượng là 8 byte.
+		Số lượng chữ số tối đa có thể được chỉ định trong tham số size.
+		Số chữ số tối đa ở bên phải dấu thập phân được chỉ định trong tham số d.
+	char: Kiểu chuỗi nhưng sẽ có độ dài cố định
+		nếu độ dài chuỗi vượt quá giới hạn thì MySQL sẽ báo lỗi "Data too long".
+	varchar: Kiểu chuỗi nhưng sẽ có độ dài động
+		nếu độ dài chuỗi vượt quá giới hạn thì giá trị này sẽ được chuyển thành loại TEXT.
+		làm việc với chuỗi:
+			CONCAT(x, y, z, ...)
+				CONCAT_WS(chuoi_ngan_cach, x, y, z)
+			SUBSTRING(x, vi_tri_bat_dau, so_ky_tu_muon_cat)
+			REPLACE(x, chuoi_muon_thay_the, chuoi_thay_the)
+			REPLACE(x, chuoi_muon_thay_the, chuoi_thay_the)
+			REVERSE(x)
+			CHAR_LENGTH(x)
+			UPPER(x)
+			LOWER(x)
+	DECIMAL(size,d): Một số thực được lưu trữ dưới dạng một chuỗi, cho phép một dấu thập phân cố định
+		Số lượng chữ số tối đa có thể được chỉ định trong tham số size
+		Số chữ số tối đa ở bên phải dấu thập phân được chỉ định trong tham số d.
+	date: Kiểu dữ liệu ngày tháng có dạng YYYY-MM-DD
+	datetime: Kiểu dữ liệu thời gian có dạng YYYY-MM-DD HH:MM:SS
+	timestamp: Kiểu dữ liệu thời gian có dạng hiển thị HH:MM:SS
+		giá trị của TIMESTAMP được chuyển đổi từ múi giờ hiện tại sang UTC trong khi lưu trữ, và chuyển ngược trở lại từ UTC sang múi giờ hiện tại trong lúc lấy ra
+		Một số hàm hay sử dụng để thao tác với thời gian như sau:
+			CURDATE: Hàm CURDATE() trong MySQL trả về ngày hiện tại trong định dạng 'YYYY-MM-DD'.
+			CURTIME: Hàm CURTIME() trong MySQL trả về thời gian hiện tại trong định dạng giá trị 'HH: MM: SS'.
+			NOW: Hàm NOW() trong MySQL trả về datetime hiện tại trong định dạng 'YYYY-MM-DD HH:MM:SS'.
+			DAYOFWEEK(date): Hàm này trả về ngày trong tuần của date truyền vào. Ví dụ DAYOFWEEK("2017-06-15") sẽ trả về giá trị là 5.
+			DAYNAME(date): Trả về tên ngày trong tuần của date truyền vào. Ví dụ DAYNAME("2017-06-15") sẽ trả về giá trị là  "Thursday".
+			DATE_FORMAT(date, format): Hàm này trả về định dạng của date theo format đã truyền vào. Ví dụ DATE_FORMAT("2018-06-15", "%Y") sẽ trả về giá trị là 2018.
+		Một số ký hiệu cho format ngày tháng:
+			%Y: Đại diện cho năm được biểu thị bằng 4 chữ số ví dụ như 2009, 2010 ...
+			%y: Đại diện cho năm được biểu thị bằng 2 chữ số cuối của năm ví dụ như năm 2017 thì trở thành 17, 1017 cũng trở thành 17.
+			%M: Đại diện cho tháng được biểu thị bằng tên tháng, ví dụ tháng 12 thì sẽ là December.
+			%m: Đại diện cho tháng được biểu thị bằng số, ví dụ tháng một của năm thì sẽ là 01.
+			%D: Đại diện cho thứ tự ngày của tháng. Ví dụ ngày 18 của tháng thì sẽ là 18th
+			%d: Đại diện cho ngày của tháng. Ví dụ ngày 18 của tháng thì sẽ là 18.
+			%H: Đại diện cho giờ được biểu thị qua các số từ 00 đến 23. Ví dụ 3 giờ chiều thì sẽ là 15.
+			%h: Đại diện cho giờ được biểu thị qua các số từ 01 đến 12. Ví dụ 3 giờ chiều thì sẽ là 3.
+			%i: Đại diện cho phút được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi ba phút sẽ là 23.
+			%S và %s: Đại diện cho giây được biểu thị qua các số từ 00 đến 59. Ví dụ hai mươi hai giây thì sẽ là 22.
+
+@@@@@@@@@@@@ Mảng (Array) là một trong các cấu trúc dữ liệu cũ và quan trọng nhất
+	Mảng gồm các bản ghi có kiểu giống nhau, có kích thước cố định, mỗi phần tử được xác định bởi chỉ số, là cấu trúc dữ liệu được cấp phát liên tục cơ bản
+	Truy cập tới phần tử ngẫu nhiên trực tiếp bằng cách sử dụng chỉ số mảng: O(1)
+	Ưu điểm
+		Truy câp phần tử với thời gian hằng số O(1)
+		Sử dụng bộ nhớ hiệu quả
+		Tính cục bộ về bộ nhớ
+	Nhược điểm
+		Không thể thay đổi kích thước của mảng khi chương trình dang thực hiện
+Mảng động (dynamic aray)
+	bắt đầu với mảng có một phần tử
+	khi số lượng phần tử vượt qua khả năng của mảng thì gấp đôi kích thước mảng cũ và copy phần tử mảng cũ vào nửa đầu của mảng mới
+	Ưu điểm
+		Tránh lãng phí bộ nhớ khi phải khai báo mảng có kích thước lớn ngay từ đầu
+	Nhược điểm
+		Phải thực hiện them thao tác copy phần tử mỗi khi thay đổi kích thước
+		Một số thời gian thực hiện thao tác không còn là hằng số nữa
+Danh sách liên kết đơn (Single linked list)
+	là một tập hợp các đối tượng được gọi là các nút (Node), được lưu trữ ngẫu nhiên trong bộ nhớ
+	Truy cập tới phần tử ngẫu nhiên cần phải duyệt từ đầu/cuối đến phần tử đó: O(n)
+	Mỗi nút chứa
+		Một giá trị (Data)
+		Một con trỏ (Next) sẽ trỏ đến phần tử kế tiếp của danh sách liên kết
+	Nút cuối cùng của danh sách chứa con trỏ tới null
+	        Scanner scan = new Scanner(System.in);
+        	LinkedList<Integer> linkedlist = new LinkedList<Integer>();
+		linkedlist.offer(scan.nextInt());
+		linkedlist.add(x, k);
+Danh sách liên kết đôi (Doubly Linked List)
+	là một tập hợp các nút (Node) được phân bố động, được sắp xếp theo cách sao cho mỗi Node chứa
+		Một giá trị (Data)
+		Một con trỏ (Next) sẽ trỏ đến phần tử kế tiếp của danh sách liên kết
+			Nút cuối cùng của danh sách chứa con trỏ tới null
+		Một con trỏ (Pre) sẽ trỏ đến phần tử trước của danh sách liên kết
+			Nút đầu tiên của danh sách chứa con trỏ tới null
+	Các hoạt động cơ bản trên Danh sách liên kết đôi
+		Hoạt động chèn: thêm một phần tử vào vị trí đầu của Danh sách liên kết
+		Hoạt động xóa: xóa một phần tử tại vị trí đầu của Danh sách liên kết
+		Hoạt động chèn vào cuối: thêm một phần tử vào vị trí cuối của Danh sách liên kết
+		Hoạt động xóa phần tử cuối: xóa một phần tử tại vị trí cuối của Danh sách liên kết
+		Hoạt động chèn vào sau: thêm một phần tử vào sau một phần tử của Danh sách liên kết
+		Hoạt động xóa (bởi key): xóa một phần tử từ Danh sách liên kết bởi sử dụng khóa đã cung cấp
+		Hiển thị danh sách về phía trước: hiển thị toàn bộ Danh sách liên kết theo chiều về phía trước
+		Hiển thị danh sách về phía sau: hiển thị toàn bộ Danh sách liên kết theo chiều về phía sau
+
+@@@@@@@@@@@@ thuật toán sắp xếp nổi bọt (Bubble Sort) (https://niithanoi.edu.vn/bubble-sort.html)
+	cơ bản, dễ hiểu, ngắn gọn nhưng Hiệu suất chậm nhất trong các thuật toán sắp xếp, Không hiệu quả với những dữ liệu lớn
+	Độ phức tạp của giải thuật : O(n^2)
+	so sánh hai phần tử kề nhau, nếu chúng chưa đứng đúng thứ tự thì đổi chỗ (swap)
+	Nếu trong một lần duyệt, không phải đổi chỗ bất cứ cặp phần tử nào thì danh sách đã được sắp xếp xong
+	Có thể tiến hành từ trên xuống (bên trái sang) hoặc từ dưới lên (bên phải sang)
+
+@@@@@@@@@@@@ thuật toán sắp xếp chọn (Selection Sort) (https://niithanoi.edu.vn/selection-sort.html)
+	không phù hợp với các tập dữ liệu lớn vì độ phức tạp trung bình
+	Độ phức tạp của selection sort là: O(n^2)
+	Danh sách được chia thành hai phần; liên tục tìm giá trị nhỏ nhất ở phần này (lúc đầu là toàn bộ danh sách), đặt vào ngoài cùng của phần kia (lúc đầu rỗng)
+	Phương pháp chọn khóa hoặc phần tử đầu tiên...
+
+
+@@@@@@@@@@@@ thuật toán sắp xếp chèn (Insertion Sort) (https://niithanoi.edu.vn/insertion-sort.html)
+	được sử dụng khi số lượng phần tử nhỏ
+	Độ phức tạp của insertion sort trong trường hợp xấu nhất là O(n^2), có thể giảm thành O(log n) bằng cách sử dụng tìm kiếm nhị phân
+	Lặp lại từ phần thử thứ 2 đến hết; so sánh lần lượt phần tử hiện tại với các phần tử trước đó: Di chuyển các phần tử lớn hơn lên một vị trí để tạo khoảng trống cho phần tử được hoán đổi
+
+
+@@@@@@@@@@@@ thuật toán tìm kiếm nhị phân (Binary Search) (https://niithanoi.edu.vn/binary-search.html)
+	đầu vào là một mảng đã được sắp xếp
+	có lợi thế lớn về độ phức tạp thời gian khi so sánh với các thuật toán tìm kiếm khác; Độ phức tạp thời gian: O (log [n] cơ số 2)
+	so sánh giá trị cần tìm với phần tử đứng giữa mảng; lặp lại bước trên với nửa trước hoặc nửa sau của mảng tùy thuộc vào việc phần tử đứng giữa đó lớn hơn hoặc nhỏ hơn giá trị cần tìm
+
+
+@@@@@@@@@@@@ thuật toán tính toán các số Fibonacci
+	ban đầu được sử dụng như một mô hình toán học cho các quần thể thỏ (thỏ được biết đến với khả năng sinh sản nhanh)
+	lời giải đơn giản: chi phí tính toán lớn
+		def FibRecurs(n):
+			return n if n <= 1 else FibRecurs(n-1) + FibRecurs(n-2)
+	lời giải hiệu quả (giải thuật qui hoạch động)
+		def FibList(n):
+			f: list = [0, 1, ]
+			for i in range(2, n):
+				f.append(f[i-1] + f[i-2])
+			return f[-1]
+@@@@@@@@@@@@ thuật toán tính toán ước số chung lớn nhất
+@@@@@@@@@@@@ mã giả
+@@@@@@@@@@@@ giải thuật đệ quy (https://viblo.asia/p/tim-hieu-ve-giai-thuat-de-quy-3Q75wVVQlWb#_bai-toan-thap-ha-noi-5)
+	khi chương trình thực thi, mỗi khi nhập vào một phương thức mới, nó sẽ đặt thông tin cho phương thức đó và callstack
+	base-case: điều kiện chấm dứt chu trình đệ qui
+		điều kiện mà ở đó hàm không còn được định nghĩa bởi chính nó (https://viblo.asia/p/tim-hieu-ve-giai-thuat-de-quy-3Q75wVVQlWb#_bai-toan-thap-ha-noi-5)
+	StackOverFlowError: lỗi callstack bị quá tải do bộ nhớ được cấp phát không đáp ứng được chiều sâu
+
+@@@@@@@@@@@@ ý tưởng đằng sau khái niệm tiệm cận:
+	không quan tâm nhiều đến các hằng số phụ thuộc vào phần cứng máy tính, hệ thống phân cấp bộ nhớ, trình biên dịch mà tập trung vào điều gì sẽ xảy ra khi input quá lớn, chúng sẽ có tỉ lệ thế nào
+	Big-O
+		thể hiện rõ tỷ lệ tăng trưởng
+		làm gọn biểu thức
+		một số qui luật chung:
+			thừa số là hằng số có thể bỏ qua
+			n^a << n^b với 0<a<b
+			n^a << b^n với a>0, b>1
+			(log n)^a << n^b với a>0, b>0
+			một đa thức tương đương với số hạng (đơn thức) lớn nhất trong đa thức đó
+		tạo mảng n phần tử -> O(n)
+		vòng lặp n lần -> O(n)
+		phép gán -> một số lượng thao tác máy cố định -> O(1)
+		return -> O(1)
+
+@@@@@@@@@@@@ Giải thuật tham lam (https://topdev.vn/blog/thuat-toan-tham-lam/)
+	Nhược điểm
+		Có thể kết quả cuối cùng không chính xác
+		phụ thuộc nhiều vào bài toán con được chọn ra để kiểm chứng
+	ưu điểm
+		tốc độ xử lý nhanh
+	tiêu chí
+		được cung cấp một danh sách các tài nguyên giống như coins, tasks, v.v…
+		có thể bắt đầu với nguồn tài nguyên có giá trị lớn nhất
+		có thể tiếp tục bổ sung các tài nguyên có giá trị lớn hơn để đạt đưuọc giải pháp tối ưu hóa nhất
+	phương pháp chung (https://viblo.asia/p/tham-lam-greedy-method-6J3ZgaeP5mB)
+		cố gắng chọn thành phần tốt nhất trong tập hợp
+		Để đánh giá được độ tốt thì cần xây dựng một hàm chọn
+		Tiếp tục xây dựng như vậy cho tới khi tạo ra đủ thành phần
+	(https://vietjack.com/cau-truc-du-lieu-va-giai-thuat/giai-thuat-tham-lam.jsp)
+		lựa chọn giải pháp nào được cho là tốt nhất ở thời điểm hiện tại
+		giải bài toán con nảy sinh từ việc thực hiện lựa chọn đó
+		Lựa chọn của giải thuật tham lam có thể phụ thuộc vào lựa chọn trước đó
+		Việc quyết định sớm và thay đổi hướng đi của giải thuật cùng với việc không bao giờ xét lại các quyết định cũ
+			sẽ dẫn đến kết quả là giải thuật này không tối ưu để tìm giải pháp toàn cục
+	ví dụ
+		Cho trước một phân số a/b, hãy tìm biểu diễn phân số Ai Cập của nó với số lượng số hạng là ít nhất có thể
+			Với một phân số a/b (1<a<b), tìm phân số đơn vị lớn nhất không vượt quá a/b bằng cách tính giá trị x=a//b
+			phân số đơn vị tìm được sẽ là 1/x
+			Sở dĩ tìm phân số 1/x lớn nhất là để cho số lượng số hạng tạo ra sẽ nhỏ nhất có thể
+			Tiếp tục lặp lại quá trình trên với hiệu a/b − 1/x, cho tới khi phân tích xong
+		có n công việc cần hoàn thành, công việc thứ i phải bắt đầu tại thời điểm ai và kết thúc tại thời điểm bi, chỉ có thể thực hiện một công việc tại một thời điểm
+		tìm cách lựa chọn các công việc sao cho số công việc được hoàn thành là nhiều nhất có thể
+			sắp xếp các công việc tăng dần theo thời gian kết thúc
+			Lựa chọn công việc đầu tiên vào danh sách các công việc sẽ làm. Coi công việc gần nhất vừa được chọn là công việc thứ j.
+			Duyệt qua công việc thứ i từ vị trí 2 tới vị trí n, nếu công việc nào có thời gian bắt đầu ai lớn hơn hoặc bằng thời gian
+				kết thúc của công việc gần nhất vừa chọn bj thì lựa chọn nó, rồi cập nhật lại j=i
+			Do các công việc đã được sắp xếp tăng dần theo thời gian kết thúc, nên công việc được chọn sẽ luôn luôn có thời gian kết thúc nhỏ nhất
+
+@@@@@@@@@@@@ Giải thuật chia để trị (https://hocspringboot.net/2021/06/15/tim-hieu-ve-giai-thuat-chia-de-tri-divide-and-conquer/)
+	thường được sử dụng trong những bài toán có kích thước lớn, chiến lược Chia để trị chính là một sự phát triển của Giải thuật đệ quy
+	Giải thuật chia để trị tồn tại hai hạn chế (https://vietjack.com/cau-truc-du-lieu-va-giai-thuat/giai-thuat-chia-de-tri.jsp)
+		Làm thế nào để chia tách bài toán một cách hợp lý thành các bài toán con
+			bởi vì nếu các bài toán con được giải quyết bằng các thuật toán khác nhau thì sẽ rất phức tạp
+		Việc kết hợp lời giải các bài toán con được thực hiện như thế nào
+	thường có đặc điểm như sau
+		Sử dụng các lời gọi đệ quy, để giải quyết các bài toán nhỏ bằng cách chia chúng thành các bài toán nhỏ hơn
+		Có từ 2 lời gọi đệ quy trở lên
+		Các bài toán con thường là độc lập với nhau
+	phương pháp chung (https://viblo.asia/p/chia-de-tri-divide-and-conquer-bJzKmd3r59N)
+		Divide: Chia bài toán lớn ban đầu thành các bài toán nhỏ
+			Một bài toán có thể coi là đủ nhỏ khi mà nó trở thành một bài toán suy biến, tức là lời giải của nó coi như hiển nhiên, hoặc quá dễ dàng
+		Conquer: Gọi đệ quy về các bài toán con tới khi thu được bài toán con hoặc đã có lời giải, hoặc có thể giải một cách dễ dàng.
+		Combine: Kết hợp nghiệm của các bài toán con lại để thu được nghiệm của bài toán lớn hơn, từ đó tiến tới nghiệm của bài toán gốc.
+	ví dụ
+		Bài toán Tháp Hà Nội
+		Merge Sort (sắp xếp trộn)
+			sắp xếp lại một dãy số không có thứ tự, thành một dãy có thứ tự, từ nhỏ đến lớn (hoặc từ lớn đến nhỏ)
+			Chia dãy số ra làm 2 nửa, nửa bên trái và nửa bên phải (bước Chia (Divide))
+			Tiến hành sắp xếp 2 nửa (2 mảng) đó (bước Trị (Conquer)) bằng cách gọi đệ quy
+				Việc gọi đệ quy được dừng lại khi mảng con được chia ra chỉ còn có 1 phần tử
+				Lúc đó mảng ở vào trạng thái đã được sắp xếp rồi (do chỉ có 1 phần tử)
+			Sau khi có được 2 dãy con đã sắp xếp, thì ta dùng một thuật toán merge để tạo thành một dãy số mới được sắp xếp (Bước Tổng Hợp (Combine))
+		Quick Sort (sắp xếp nhanh)
+			Chọn phần tử pivot. Đây có thể là phần tử ở đầu, ở cuối, hoặc ở giữa của dãy số.
+			Dùng 2 con trỏ chạy từ đầu dãy, và chạy từ cuối dãy
+				Với con trỏ chạy từ đầu dãy thì dừng lại khi gặp phần tử lớn hơn pivot
+				Với con trỏ chạy từ cuối dãy thì dừng lại khi gặp phần tử nhỏ hơn pivot
+				Swap 2 phần tử này với nhau và tiến hành duyệt tiếp
+			Dừng lại khi con trỏ chạy từ đầu gặp, hoặc vượt qua con trỏ chạy ngược lại từ cuối
+			Swap pivot vào vị trí hợp lý ta sẽ được 2 dãy con: 1 dãy gồm các phần tử nhỏ hơn pivot, 1 dãy gồm các phần tử lớn hơn pivot
+			Đây chính là 2 bài toán con mà ta cần tiếp tục giải quyết
+			Đến đây hoàn thành bước chia (divide)
+			Gọi đệ quy để tiếp tục chia nhỏ các bài toán con ra, cho đến khi gặp bài toán con với độ dài là 1, tức ở trạng thái đã được sắp xếp rồi
+			Đến đây hoàn thành bước trị (conquer)
+			ghép dãy bên trái, pivote, dãy bên phải về thành 1 mảng là có được kết quả cuối cùng là dãy được sắp xếp
+
+@@@@@@@@@@@@ Giải thuật qui hoạch động (https://topdev.vn/blog/thuat-toan-quy-hoach-dong/)
+	Có một kỹ thuật khác gọi là “memoization” cũng có cách tiếp cận tương tự với quy hoạch động
+		Memoization không phải là một thuật toán theo đúng nghĩa
+		quy hoạch động thực hiện việc tính toán theo một thứ tự định trước, trong khi memoization duyệt theo chiều sâu
+	tiêu chí
+		Về mặt cài đặt, quy hoạch động thường lưu kết quả vào một mảng
+		Bài toán có các bài toán con gối nhau
+			ví dụ: thuật toán tính toán các số Fibonacci - lời giải hiệu quả
+			tính chất:
+				chia bài toán lớn thành các bài toán con nhỏ hơn
+				các bài toán con này được gọi đi gọi lại
+				Mỗi bài toán con sẽ được lưu lại trước khi tính những bài toán con lớn hơn
+		Bài toán có cấu trúc con tối ưu
+			ví dụ: Thuật toán Dijkstra tìm đường đi ngắn nhất (https://dothanhspyb.com/thuat-toan-dijkstra)
+			giải bài toán lớn dựa vào các bài toán con đã giải được
+			Không phải bài toán nào cũng có tính chất cấu trúc con tối ưu; Nếu không có tính chất này thì không thể áp dụng quy hoạch động
+	Các dạng toán quy hoạch động
+		Bài toán tối ưu
+			tính chất cấu trúc con tối ưu: Mỗi bài toán được giải dựa trên bài toán đã được giải trước đó
+			dp[s] = min(
+				F1(dp[i], dp[j], ..., dp[k]),
+				F2(dp[u], dp[v], ..., dp[w]),
+				...,
+				Fl(dp[q], dp[p], ..., dp[z])
+			)
+			dp là mảng lưu kết quả của các bài toán con
+		Bài toán tổ hợp
+			R[s] = F1(R[i], R[j], ..., R[k]) + 
+				F2(R[u], R[v], ..., R[w]) +
+				... +
+				Fl(R[q], R[p], ..., R[z])
