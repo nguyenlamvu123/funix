@@ -260,6 +260,13 @@ Danh sách liên kết đôi (Doubly Linked List)
 	Danh sách được chia thành hai phần; liên tục tìm giá trị nhỏ nhất ở phần này (lúc đầu là toàn bộ danh sách), đặt vào ngoài cùng của phần kia (lúc đầu rỗng)
 	Phương pháp chọn khóa hoặc phần tử đầu tiên...
 
+
+@@@@@@@@@@@@ thuật toán sắp xếp chèn (Insertion Sort) (https://niithanoi.edu.vn/insertion-sort.html)
+	được sử dụng khi số lượng phần tử nhỏ
+	Độ phức tạp của insertion sort trong trường hợp xấu nhất là O(n^2), có thể giảm thành O(log n) bằng cách sử dụng tìm kiếm nhị phân
+	Lặp lại từ phần thử thứ 2 đến hết; so sánh lần lượt phần tử hiện tại với các phần tử trước đó: Di chuyển các phần tử lớn hơn lên một vị trí để tạo khoảng trống cho phần tử được hoán đổi
+
+
 @@@@@@@@@@@@ thuật toán tính toán các số Fibonacci
 	ban đầu được sử dụng như một mô hình toán học cho các quần thể thỏ (thỏ được biết đến với khả năng sinh sản nhanh)
 	lời giải đơn giản: chi phí tính toán lớn

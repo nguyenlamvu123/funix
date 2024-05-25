@@ -4,16 +4,18 @@ import java.util.Scanner;
 
 public class Array {
 	public static void main(String[] args) {
-		luuvaotep();
-		int[] mang1chieu = docfile();
-		int[] mang1chieu_ = bubbleSort(mang1chieu);
-		int[] mang1chieu__ = selectionSort(mang1chieu);
-		for (int m: mang1chieu__) {
+		int n = luuvaotep();  // yêu cầu 1
+		int[] mang1chieu = docfile(n);  // yêu cầu 2
+		int[] mang1chieu____ = indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
+		int[] mang1chieu_ = bubbleSort(mang1chieu);  // yêu cầu 3
+		int[] mang1chieu__ = selectionSort(mang1chieu);  // yêu cầu 4
+		int[] mang1chieu___ = insertionSort(mang1chieu);  // yêu cầu 5
+		for (int m: mang1chieu____) {
 			System.out.print(m + " ");
 		}
 	}
 
-	public static void luuvaotep() {
+	public static int luuvaotep() {
 		Scanner sc = new Scanner(System.in);
 		try {
 			FileWriter out = new FileWriter("INPUT.TXT");
@@ -23,13 +25,15 @@ public class Array {
 				out.write(x);
 			}
 			out.close();
+			return n;
 		} catch(IOException e) {
 			e.printStackTrace();
-		}
+			return 0;
+		}		
 	}
 
-	public static int[] docfile() {
-		int [] mang1chieu = new int[20];
+	public static int[] docfile(int n) {
+		int [] mang1chieu = new int[n];
 		try {
 			FileReader in = new FileReader("INPUT.TXT");
 			int c;
@@ -49,7 +53,11 @@ public class Array {
 	public static void chuyenmangsothanhmangkitu(int[] arr, String filename) {
 		char[] mangKyTu = new char[arr.length];
 		for (int i = 0; i < arr.length; i++) {
-			mangKyTu[i] = (char) ('0' + arr[i]);
+			if (arr[i] == 0) {
+				mangKyTu[i] = 'N';
+			} else {
+				mangKyTu[i] = (char) ('0' + arr[i]);
+			}
 		}
 
 		try {
@@ -96,4 +104,39 @@ public class Array {
 		chuyenmangsothanhmangkitu(arr, "INPUT2.TXT");
 		return arr;
         }
+
+	public static int[] insertionSort(int[] arr) {
+        	int n = arr.length;
+	        for (int i = 1; i < n; ++i) {
+        	    int key = arr[i];
+	            int j = i - 1;
+	            while (j >= 0 && arr[j] > key) {
+        	        arr[j + 1] = arr[j];
+                	j = j - 1;
+	            }
+        	    arr[j + 1] = key;
+	        }
+
+		chuyenmangsothanhmangkitu(arr, "INPUT3.TXT");
+		return arr;
+    	}
+
+	public static int[] indexelemgreaterval(int[] arr, int n) {
+		Scanner sc = new Scanner(System.in);
+		int[] indgreval = new int[n];
+		int j = 0;
+		int val = sc.nextInt();
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] > val) {
+				indgreval[j] = i;
+				// System.out.println(i + "____" + arr[i]);
+				j ++;
+			}  // else {
+				// System.out.println("%%%%%%%%%" + arr[i]);
+			// }
+		}
+
+		chuyenmangsothanhmangkitu(indgreval, "INPUT4.TXT");
+		return indgreval;
+	}
 }
