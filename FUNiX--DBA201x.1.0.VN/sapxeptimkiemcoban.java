@@ -3,28 +3,44 @@ import java.util.Scanner;
 
 
 public class Array {
+	static Scanner sc = new Scanner(System.in);
+	static int n = 0;
+	static int choice = 1;
+	static int [] mang1chieu;
 	public static void main(String[] args) {
-		int n = luuvaotep();  // yêu cầu 1
-		int[] mang1chieu = docfile(n);  // yêu cầu 2
-		// int[] mang1chieu____ = indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
-		// int[] mang1chieu_ = bubbleSort(mang1chieu);  // yêu cầu 3
-		// int[] mang1chieu__ = selectionSort(mang1chieu);  // yêu cầu 4
-		int[] mang1chieu___ = insertionSort(mang1chieu);  // yêu cầu 5
-		// for (int m: mang1chieu____) {
-			// System.out.print(m + " ");
-		// }
+		int[] vo = docfile(0, "sapxeptimkiemcoban.txt");
+		while (choice != 0) {
+			choice = sc.nextInt();
 
-		Scanner sc = new Scanner(System.in);
-		int x = sc.nextInt();
-		int bs = binarySearch(mang1chieu, 0, n - 1, x);  // yêu cầu 7
-		System.out.print(bs);
+			if (choice == 1) {
+				System.out.println("Choice 1: Manual Input");
+				System.out.println("Please enter input number of elements: ...");
+				n = luuvaotep();  // yêu cầu 1
+			} else if (choice == 2) {
+				System.out.println("Choice 2: File input");
+				System.out.println("File path is INPUT.TXT");		
+				mang1chieu = docfile(n, "INPUT.TXT");  // yêu cầu 2
+			} else if (choice == 3) {  // error
+				System.out.println("Choice 3: Bubble sort");
+				int[] mang1chieu_ = bubbleSort(mang1chieu);  // yêu cầu 3
+			}
+		}
+		// int[] mang1chieu____ = indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
+		// int[] mang1chieu__ = selectionSort(mang1chieu);  // yêu cầu 4
+		// int[] mang1chieu___ = insertionSort(mang1chieu);  // yêu cầu 5
+
+		// Scanner sc = new Scanner(System.in);
+		// int x = sc.nextInt();
+		// int bs = binarySearch(mang1chieu, 0, n - 1, x);  // yêu cầu 7
+		// System.out.print(bs);
+		// readFile();
 	}
 
 	public static int luuvaotep() {
-		Scanner sc = new Scanner(System.in);
 		try {
 			FileWriter out = new FileWriter("INPUT.TXT");
 			int n = sc.nextInt();
+			System.out.println("Please enter input elements: ...");
 			for (int i = 0; i < n; i++) {
 				int x = sc.nextInt();
 				out.write(x);
@@ -37,16 +53,22 @@ public class Array {
 		}		
 	}
 
-	public static int[] docfile(int n) {
-		int [] mang1chieu = new int[n];
+	public static int[] docfile(int n, String filename) {
+		mang1chieu = new int[n];		
+		int c;
 		try {
-			FileReader in = new FileReader("INPUT.TXT");
-			int c;
+			FileReader in = new FileReader(filename);
 			int i = 0;
 			while ((c = in.read()) != -1) {
-				// System.out.println(c);
-				mang1chieu[i] = c;
-				i++;
+				if (filename == "INPUT.TXT") {
+					System.out.print(c + " ");
+					mang1chieu[i] = c;
+					i++;
+				} else {
+					while ((c = in.read()) != -1) {
+						System.out.print((char) c);
+					}
+				}
 			}
 			in.close();
 		} catch(IOException e) {
@@ -65,12 +87,18 @@ public class Array {
 			}
 		}
 
-		try {
-			FileWriter out = new FileWriter(filename);
-			out.write(mangKyTu);
-			out.close();
-		} catch(IOException e) {
-			e.printStackTrace();
+		for (int m: mangKyTu) {
+			System.out.print(m + " ");
+		}
+
+		if (filename != "_") {
+			try {
+				FileWriter out = new FileWriter(filename);
+				out.write(mangKyTu);
+				out.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -85,8 +113,8 @@ public class Array {
 				arr[j + 1] = temp;
 				}
 			}
+			chuyenmangsothanhmangkitu(arr, "_");
 		}
-
 		chuyenmangsothanhmangkitu(arr, "INPUT1.TXT");
 		return arr;
         }
