@@ -10,30 +10,57 @@ public class Array {
 	public static void main(String[] args) {
 		int[] vo = docfile(0, "sapxeptimkiemcoban.txt");
 		while (choice != 0) {
+			System.out.print("Select ur choice: ");
 			choice = sc.nextInt();
 
 			if (choice == 1) {
 				System.out.println("Choice 1: Manual Input");
 				System.out.println("Please enter input number of elements: ...");
 				n = luuvaotep();  // yêu cầu 1
+				System.out.println("done\n");
 			} else if (choice == 2) {
 				System.out.println("Choice 2: File input");
 				System.out.println("File path is INPUT.TXT");		
 				mang1chieu = docfile(n, "INPUT.TXT");  // yêu cầu 2
-			} else if (choice == 3) {  // error
+				System.out.println("done\n");
+			} else if (choice == 3) {
 				System.out.println("Choice 3: Bubble sort");
-				int[] mang1chieu_ = bubbleSort(mang1chieu);  // yêu cầu 3
+				bubbleSort(mang1chieu);  // yêu cầu 3
+			} else if (choice == 4) {
+				System.out.println("Choice 4: Selection sort");
+				selectionSort(mang1chieu);  // yêu cầu 4
+			} else if (choice == 5) {
+				System.out.println("Choice 5: Insertion sort");
+				insertionSort(mang1chieu);  // yêu cầu 5
+			} else if (choice == 6) {
+				System.out.println("Choice 6: Linear Search");
+				System.out.println("Please enter searched input value: ...");
+				indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
+			} else if (choice == 7) {
+				System.out.println("Choice 7: Binary Search");
+				System.out.println("Please enter searched input value: ...");
+				int x = sc.nextInt();
+				int bs = binarySearch(mang1chieu, 0, n - 1, x);  // yêu cầu 7
+				if (bs == -1) {
+					System.out.println("The value does not exist!");
+				} else {
+					System.out.println("The right position: " + bs);
+				}
 			}
 		}
-		// int[] mang1chieu____ = indexelemgreaterval(mang1chieu, n);  // yêu cầu 6
-		// int[] mang1chieu__ = selectionSort(mang1chieu);  // yêu cầu 4
-		// int[] mang1chieu___ = insertionSort(mang1chieu);  // yêu cầu 5
+
 
 		// Scanner sc = new Scanner(System.in);
-		// int x = sc.nextInt();
-		// int bs = binarySearch(mang1chieu, 0, n - 1, x);  // yêu cầu 7
-		// System.out.print(bs);
+		// 
+		// 
+		// 
 		// readFile();
+	}
+
+	public static int[] copyarr(int[] arr, int n) {
+		int[] copiedArray = new int[n];
+		System.arraycopy(arr, 0, copiedArray, 0, n);
+		return copiedArray;
 	}
 
 	public static int luuvaotep() {
@@ -80,11 +107,7 @@ public class Array {
 	public static void chuyenmangsothanhmangkitu(int[] arr, String filename) {
 		char[] mangKyTu = new char[arr.length];
 		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == 0) {
-				mangKyTu[i] = 'N';
-			} else {
-				mangKyTu[i] = (char) ('0' + arr[i]);
-			}
+			mangKyTu[i] = (char) (arr[i]);
 		}
 
 		for (int m: mangKyTu) {
@@ -100,10 +123,12 @@ public class Array {
 				e.printStackTrace();
 			}
 		}
+		System.out.print("\ndone\n");
 	}
 
-	public static int[] bubbleSort(int[] arr) {
-        	int n = arr.length;
+	public static void bubbleSort(int[] arr_) {
+        	int n = arr_.length;
+		int[] arr = copyarr(arr_, n);
 
 	        for (int i = 0; i < n - 1; i++) {
 			for (int j = 0; j < n - i - 1; j++){
@@ -116,11 +141,11 @@ public class Array {
 			chuyenmangsothanhmangkitu(arr, "_");
 		}
 		chuyenmangsothanhmangkitu(arr, "INPUT1.TXT");
-		return arr;
         }
 
-	public static int[] selectionSort(int[] arr) {
-        	int n = arr.length;
+	public static void selectionSort(int[] arr_) {
+        	int n = arr_.length;
+		int[] arr = copyarr(arr_, n);
 
 		for (int i = 0; i < n - 1; i++) {
 			int min_idx = i;
@@ -129,17 +154,19 @@ public class Array {
 					min_idx = j;
 				}
 			}
+			chuyenmangsothanhmangkitu(arr, "_");
 		int temp = arr[min_idx];
 		arr[min_idx] = arr[i];
 		arr[i] = temp;
         	}
 
 		chuyenmangsothanhmangkitu(arr, "INPUT2.TXT");
-		return arr;
         }
 
-	public static int[] insertionSort(int[] arr) {
-        	int n = arr.length;
+	public static void insertionSort(int[] arr_) {
+        	int n = arr_.length;
+		int[] arr = copyarr(arr_, n);
+
 	        for (int i = 1; i < n; ++i) {
         	    int key = arr[i];
 	            int j = i - 1;
@@ -147,14 +174,14 @@ public class Array {
         	        arr[j + 1] = arr[j];
                 	j = j - 1;
 	            }
+        	    chuyenmangsothanhmangkitu(arr, "_");
         	    arr[j + 1] = key;
 	        }
 
 		chuyenmangsothanhmangkitu(arr, "INPUT3.TXT");
-		return arr;
     	}
 
-	public static int[] indexelemgreaterval(int[] arr, int n) {
+	public static void indexelemgreaterval(int[] arr, int n) {
 		Scanner sc = new Scanner(System.in);
 		int[] indgreval = new int[n];
 		int j = 0;
@@ -168,9 +195,10 @@ public class Array {
 				// System.out.println("%%%%%%%%%" + arr[i]);
 			// }
 		}
+		int[] indgreval_ = new int[j];
+		System.arraycopy(indgreval, 0, indgreval_, 0, j);
 
-		chuyenmangsothanhmangkitu(indgreval, "INPUT4.TXT");
-		return indgreval;
+		chuyenmangsothanhmangkitu(indgreval_, "INPUT4.TXT");
 	}
 
 	public static int binarySearch(int arr[], int l, int r, int x) {
