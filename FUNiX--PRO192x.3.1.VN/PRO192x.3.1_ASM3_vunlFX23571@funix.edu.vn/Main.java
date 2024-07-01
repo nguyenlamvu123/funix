@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 // import java.util.Random;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 
 class Main {
@@ -10,6 +10,7 @@ class Main {
 	private static String CUSTOMER_ID = "001093008393";  // CCCD
 	private static String CUSTOMER_NAME = "Nguyễn Lâm Vũ";  // tên
 	static Scanner sc = new Scanner(System.in);
+	static int choice = 1;  // điểm xuất phát
 	private static DigitalBank activeBank = new DigitalBank();
 
 	public static void main(String[] args) {
