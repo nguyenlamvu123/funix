@@ -11,7 +11,7 @@ class Main {
 	private static String CUSTOMER_NAME = "Nguyễn Lâm Vũ";  // tên
 	static Scanner sc = new Scanner(System.in);
 	static int choice = 1;  // điểm xuất phát
-	private static DigitalBank activeBank = new DigitalBank();
+	static DigitalBank activeBank = new DigitalBank();
 
 	public static void main(String[] args) {
 		docfile("nganhangsophienban3.txt");
