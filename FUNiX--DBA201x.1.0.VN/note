@@ -4,7 +4,7 @@
 
     - chưa làm Lab 16.2 -> ok
 
-    cần quay lại từ bài 11 đến 15, đã đọc về các giải thuật nhưng trên nguồn tài liệu chữ tự tìm
+    cần quay lại từ bài 11 đến 15, đã đọc về các giải thuật nhưng trên nguồn tài liệu chữ tự tìm -> ok
 
     - Assignment 1 - Truy vấn dữ liệu nhân sự -> ok
 
@@ -267,6 +267,7 @@ Danh sách liên kết đôi (Doubly Linked List)
 	Lặp lại từ phần thử thứ 2 đến hết; so sánh lần lượt phần tử hiện tại với các phần tử trước đó: Di chuyển các phần tử lớn hơn lên một vị trí để tạo khoảng trống cho phần tử được hoán đổi
 
 
+@@@@@@@@@@@@ thuật toán tìm kiếm tuyến tính (Linear Search) 
 @@@@@@@@@@@@ thuật toán tìm kiếm nhị phân (Binary Search) (https://niithanoi.edu.vn/binary-search.html)
 	đầu vào là một mảng đã được sắp xếp
 	có lợi thế lớn về độ phức tạp thời gian khi so sánh với các thuật toán tìm kiếm khác; Độ phức tạp thời gian: O (log [n] cơ số 2)
