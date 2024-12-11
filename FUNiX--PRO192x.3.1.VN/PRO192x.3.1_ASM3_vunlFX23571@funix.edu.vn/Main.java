@@ -17,22 +17,25 @@ class Main {
 		activeBank.addCustomer(CUSTOMER_ID, CUSTOMER_NAME);
 		docfile("nganhangsophienban3.txt");
 		while (choice != 0) {
+			ArrayList<Customer> cuss = activeBank.getCustomers();
 			System.out.print("Chon chuc nang: ");
 			choice = sc.nextInt();
 			System.out.println("Chuc nang: " + choice);
 
 			if (choice == 1) {
 				xemthongtinkhachhang();
-				// themkhachhangvaonganhang();
 			} else if (choice == 2) {
-				ArrayList<Customer> cuss = activeBank.getCustomers();
 				boolean thanhcong = false;
 				while (!thanhcong) {
-					thanhcong = themtaikhoanchokhachhang(cuss);
+					thanhcong = themtaikhoandebitchokhachhang(cuss);
 				}
 				choice = 1;  // chỉ có tác dụng quay về điểm xuất phát
 			} else if (choice == 3) {
-				hienthidanhsachkhachhang("");
+				boolean thanhcong = false;
+				while (!thanhcong) {
+					thanhcong = themtaikhoancreditchokhachhang(cuss);
+				}
+				choice = 1;  // chỉ có tác dụng quay về điểm xuất phát
 			} else if (choice == 4) {
 				while (true) {
 					sc.nextLine();
@@ -164,7 +167,7 @@ class Main {
 		}
 	}
 
-	public static boolean themtaikhoanchokhachhang(ArrayList<Customer> cuss) {
+	public static boolean themtaikhoandebitchokhachhang(ArrayList<Customer> cuss) {
 		sc.nextLine();
 		System.out.print("Xac nhan can cuoc cong dan: ");
 		String cccd_ = sc.nextLine();
@@ -192,8 +195,55 @@ class Main {
 								double sodutk = sc.nextDouble();
 								if (sodutk > 50000) {
 									tren50k = true;
-									Account a_ = new Account(accountNumb, sodutk);
-									cu.addAccount(a_);
+									SavingsAccount a_ = new SavingsAccount(accountNumb, sodutk);
+									cu.add_debit_Account(a_);
+									return true;
+								} else {
+									System.out.println("Số dư phải trên 50k");
+								}
+							}
+						}
+					} else {
+						System.out.println("Mã stk cần có đúng 6 chữ số");
+					}
+				}
+				break;
+			}
+		}
+		System.out.println("CCCD không tồn tại trong hệ thống ngân hàng. Yêu cầu nhập lại!");
+		return false;
+	}
+
+	public static boolean themtaikhoancreditchokhachhang(ArrayList<Customer> cuss) {
+		sc.nextLine();
+		System.out.print("Xac nhan can cuoc cong dan: ");
+		String cccd_ = sc.nextLine();
+		for (Customer cu: cuss) {
+			if (cu.getCustomerId().equals(cccd_)) {
+				ArrayList<Account> accs = cu.getAccounts(cccd_);
+				boolean tontai = true;
+				while (tontai) {
+					System.out.print("Nhap ma stk gom 6 chu so: ");
+					String accountNumb = sc.nextLine();
+					if (accountNumb.length() == 6) {
+						boolean tontai_ = false;
+						for (Account acc_: accs) {
+							if (accountNumb.equals(acc_.getAccountNumber())) {
+								System.out.println("STK đã tồn tại. Yêu cầu nhập lại!");
+								tontai_ = true;
+								break;
+							}
+						}
+						if (!tontai_) {
+							tontai = false;
+							boolean tren50k = false;
+							while (!tren50k) {
+								System.out.print("Nhập số dư tk khách hàng: ");
+								double sodutk = sc.nextDouble();
+								if (sodutk > 50000) {
+									tren50k = true;
+									LoansAccount a_ = new LoansAccount(accountNumb, sodutk);
+									cu.add_credit_Account(a_);
 									return true;
 								} else {
 									System.out.println("Số dư phải trên 50k");
