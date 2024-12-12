@@ -10,8 +10,16 @@ class Customer extends User {  // quản lý thông tin khách hàng
 		this.accounts = accounts;
 	}
 
-	ArrayList<Account> getAccounts(String customerId) {
+	ArrayList<Account> getAccounts() {
 		return accounts;
+	}
+
+	ArrayList<SavingsAccount> getdebitAccounts() {
+		return debit_accounts;
+	}
+
+	ArrayList<LoansAccount> getcreditAccounts() {
+		return credit_accounts;
 	}
 
 	String isPremiumAccount() {
@@ -109,11 +117,11 @@ class Customer extends User {  // quản lý thông tin khách hàng
 		String p = this.isPremiumAccount();
 		System.out.println(this.getCustomerId() + "|" + this.getName() + "  |" + p + "   |" + this.getBalance());
 		for (LoansAccount la: credit_accounts) {
-			System.out.println(thutu + "     " + la.getAccountNumber() + "| SAVINGS      |         " + la.getBalance());
+			System.out.println(thutu + "     " + la.getAccountNumber() + "| LOANS         |         " + la.getBalance());
 			thutu += 1;
 		}
 		for (SavingsAccount da: debit_accounts) {
-			System.out.println(thutu + "     " + da.getAccountNumber() + "| LOANS        |         " + da.getBalance());
+			System.out.println(thutu + "     " + da.getAccountNumber() + "| SAVINGS       |         " + da.getBalance());
 			thutu += 1;
 		}
 	}

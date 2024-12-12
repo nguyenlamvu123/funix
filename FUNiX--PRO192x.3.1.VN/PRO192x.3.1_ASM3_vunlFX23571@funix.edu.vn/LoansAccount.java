@@ -7,16 +7,24 @@ class LoansAccount extends Account implements ReportService, Withdraw {  // đ�
 		super(accountNumber, balance);
 	}
 
-	// @Override
-	// public boolean withdraw(double amount) {
-	// 	double newBalance = 0.0;
-	// 	// maybe more
-	// 	if (isAccepted(newBalance)) {
-	// 		setBalance(newBalance);
-	// 		// maybe more
-	// 		return true;
-	// 	}
-	// 	// maybe more
-	// 	return false;	
-	// }
+	@Override
+	public boolean isAccepted(double amount) {  // Hạn mức không được quá giới hạn 100.000.000đ
+		if (amount > 100000000) return false;
+		return true;
+	}
+
+	@Override
+	public boolean setBalance(double amount, Customer cu) {  // Hạn mức còn lại sau khi rút tiền không được nhỏ hơn 50.000đ
+		double sodu = cu.get_credit_Balance() - amount;
+		if (sodu < 50000) return false;
+		else return true;
+	}
+
+	@Override
+	public boolean withdraw(double amount, Customer cu) {
+		if (isAccepted(amount)) {
+			if (setBalance(amount, cu)) return true;
+		}
+		return false;	
+	}
 }

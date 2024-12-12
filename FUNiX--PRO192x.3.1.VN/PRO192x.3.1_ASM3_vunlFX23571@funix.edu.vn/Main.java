@@ -37,15 +37,17 @@ class Main {
 				}
 				choice = 1;  // chỉ có tác dụng quay về điểm xuất phát
 			} else if (choice == 4) {
-				while (true) {
-					sc.nextLine();
-					System.out.print("Nhập CCCD khách hàng: ");
-					String cc_cd = sc.nextLine();
-					if (kiemtracancuoccongdanhople(cc_cd)) {
-						hienthidanhsachkhachhang(cc_cd);
-						break;
-					} else {
-						System.out.println("So CCCD khong hop le. Vui long nhap lai hoac nhap No de thoat");
+				sc.nextLine();
+				System.out.print("Nhập số tiền giao dịch: ");
+				int amount = sc.nextInt();
+				sc.nextLine();
+				System.out.print("Giao dịch trên tài khoản credit (tín dụng) hay debit (ATM): ");
+				String taikhoan = sc.nextLine();
+				System.out.print("Xac nhan can cuoc cong dan: ");
+				String cccd_ = sc.nextLine();
+				for (Customer cu: cuss) {
+					if (cu.getCustomerId().equals(cccd_)) {
+						ruttien(cu, taikhoan, amount);
 					}
 				}
 			} else if (choice == 5) {
@@ -114,7 +116,7 @@ class Main {
 		double sodu = cus.getBalance();
 		System.out.println(cccd + " | " + ten + " | " + loaikhachhang + " | " + sodu);
 		int thutu = 0;
-		ArrayList<Account> accs = cus.getAccounts(cccd);
+		ArrayList<Account> accs = cus.getAccounts();
 		for (Account acc: accs) {
 			// String masotaikhoan = acc.getAccountNumber();
 			// double sodu_ = acc.getBalance();
@@ -167,13 +169,51 @@ class Main {
 		}
 	}
 
+	
+	static void ruttien(Customer cu, String taikhoan, int amount) {
+		double phigiaodich;
+		double hanmuc;
+		String p = cu.isPremiumAccount();
+		if (taikhoan.equals("credit")||taikhoan.equals("tín dụng")) {
+			for (LoansAccount la: cu.getcreditAccounts()) {
+				if (p.equals("Premium")) {
+					phigiaodich = 0.01;
+				}
+				else {  // else if (p.equals("Normal")) {
+					phigiaodich = 0.05;
+				}
+				phigiaodich *= amount;
+				amount += phigiaodich;
+				if (la.withdraw(amount, cu)) {
+					la.setBalance(cu.get_credit_Balance() - amount);
+				}
+			}
+		}
+		else if (taikhoan.equals("debit")||taikhoan.equals("ATM")) {
+			double debit_bal = cu.get_debit_Balance();
+			for (SavingsAccount da: cu.getdebitAccounts()) {
+				if (p.equals("Premium")) {
+					hanmuc = debit_bal;
+				}
+				else {  // else if (p.equals("")) {
+					hanmuc =  5000000;
+				}
+				if (amount < hanmuc) {
+					if (da.withdraw(amount, cu)) {
+						da.setBalance(debit_bal - amount);
+					}
+				}
+			}
+		}
+	}
+
 	public static boolean themtaikhoandebitchokhachhang(ArrayList<Customer> cuss) {
 		sc.nextLine();
 		System.out.print("Xac nhan can cuoc cong dan: ");
 		String cccd_ = sc.nextLine();
 		for (Customer cu: cuss) {
 			if (cu.getCustomerId().equals(cccd_)) {
-				ArrayList<Account> accs = cu.getAccounts(cccd_);
+				ArrayList<Account> accs = cu.getAccounts();
 				boolean tontai = true;
 				while (tontai) {
 					System.out.print("Nhap ma stk gom 6 chu so: ");
@@ -220,7 +260,7 @@ class Main {
 		String cccd_ = sc.nextLine();
 		for (Customer cu: cuss) {
 			if (cu.getCustomerId().equals(cccd_)) {
-				ArrayList<Account> accs = cu.getAccounts(cccd_);
+				ArrayList<Account> accs = cu.getAccounts();
 				boolean tontai = true;
 				while (tontai) {
 					System.out.print("Nhap ma stk gom 6 chu so: ");
