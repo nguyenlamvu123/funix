@@ -1,0 +1,25 @@
+apt-cache search figlet  # to search for packages and to list information about available packages
+sudo apt-get install figlet  # prints enlarged text on the terminal
+yum search speaking cow
+sudo yum install cowsay
+cowsay "Brought to you by yum"
+
+sudo apt-get remove figlet
+sudo yum remove cowsay
+
++ Office Applications
+	Both LibreOffice and Apache OpenOffice are open source software, but LibreOffice is licensed
+under LGPLv3 and Apache OpenOffice is licensed under Apache License 2.0
++ Web Browsers
+	The main web browsers in the Linux environment are Google Chrome (maintained by Google but is based on the open source browser named
+Chromium) and Mozilla Firefox (a browser whose origins are linked to Netscape)
++ Multimedia
+	Blender (A 3D renderer)
+	GIMP (can be compared with Adobe Photoshop)
+	Inkscape (A vector graphics editor, Inkscape’s default format is
+SVG)
+	Audacity (An audio editor)
+	ImageMagick ( a command line tool to convert and edit most image file types)
+
+Server Programs...
+
