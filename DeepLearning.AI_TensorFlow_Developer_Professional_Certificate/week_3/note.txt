@@ -1,0 +1,25 @@
+convolution `tf.keras.layers.Conv2D(64, (3,3), activation='relu')`
+	Add some layers to do convolution before you have the dense layers, and then the information going to the dense layers is more focused and possibly more accurate.
+	We're asking Keras to generate 64 filters for us (64 is the number of convolutions which are generated). The value here is purely arbitrary but it's good to use powers of 2 starting from 32.
+	3x3 is the size of the Convolution
+
+MaxPool2D layer which is designed to compress the image `tf.keras.layers.MaxPooling2D(2, 2)`
+	the idea is that it creates a 2x2 array of pixels, and picks the biggest one. Thus, it turns 4 pixels into 1
+
+overfitting occurs when the network learns the data from the training set really well, but it's too specialised to only that data, and as a result is less effective at interpreting other unseen data
+
+# Define the model
+model = tf.keras.models.Sequential([
+                                                         
+    # Add convolutions and max pooling
+    tf.keras.Input(shape=(28,28,1)),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+
+    # Add the same layers as before
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dense(10, activation='softmax')
+])
