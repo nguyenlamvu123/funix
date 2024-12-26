@@ -1,0 +1,98 @@
+One simple method to avoid overfitting is to augment the images. What if you tweak with the images a bit -- rotate the image, squash it, etc.  That's what image augementation is all about. To do that, you will build a data augmentation model, which will transform the data during training to introduce variations of the same image, with preprocessing layers for image augmentation
+
+def create_model():
+    '''Creates a CNN with 4 convolutional layers'''
+    model = tf.keras.models.Sequential([
+        tf.keras.Input(shape=(150, 150, 3)),
+        tf.keras.layers.Rescaling(1./255),
+        tf.keras.layers.Conv2D(32, (3,3), activation='relu'),
+        tf.keras.layers.MaxPooling2D(2, 2),
+        tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+        tf.keras.layers.MaxPooling2D(2,2),
+        tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+        tf.keras.layers.MaxPooling2D(2,2),
+        tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+        tf.keras.layers.MaxPooling2D(2,2),
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(512, activation='relu'),
+        tf.keras.layers.Dense(1, activation='sigmoid')
+    ])
+
+    return model
+
+def plot_loss_acc(history):
+    '''Plots the training and validation loss and accuracy from a history object'''
+    acc = history.history['accuracy']
+    val_acc = history.history['val_accuracy']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+
+    epochs = range(len(acc))
+
+    fig, ax = plt.subplots(1,2, figsize=(12, 6))
+    ax[0].plot(epochs, acc, 'bo', label='Training accuracy')
+    ax[0].plot(epochs, val_acc, 'b', label='Validation accuracy')
+    ax[0].set_title('Training and validation accuracy')
+    ax[0].set_xlabel('epochs')
+    ax[0].set_ylabel('accuracy')
+    ax[0].legend()
+
+    ax[1].plot(epochs, loss, 'bo', label='Training Loss')
+    ax[1].plot(epochs, val_loss, 'b', label='Validation Loss')
+    ax[1].set_title('Training and validation loss')
+    ax[1].set_xlabel('epochs')
+    ax[1].set_ylabel('loss')
+    ax[1].legend()
+
+    plt.show()
+
+# Define fill mode.
+FILL_MODE = 'nearest'
+# Create the augmentation model.
+data_augmentation = tf.keras.Sequential([
+    # Specify the input shape.
+    tf.keras.Input(shape=(150,150,3)),
+    # Add the augmentation layers
+    tf.keras.layers.RandomFlip("horizontal"),
+    tf.keras.layers.RandomRotation(0.2, fill_mode=FILL_MODE),
+    tf.keras.layers.RandomTranslation(0.2,0.2, fill_mode=FILL_MODE),
+    tf.keras.layers.RandomZoom(0.2, fill_mode=FILL_MODE)
+    ])
+
+# Instantiate the base model
+model_without_aug = create_model()
+# Prepend the data augmentation layers to the base model
+model_with_aug = tf.keras.models.Sequential([
+    data_augmentation,
+    model_without_aug
+])
+
+# Compile the model
+model_with_aug.compile(
+    loss='binary_crossentropy',
+    optimizer=tf.keras.optimizers.RMSprop(learning_rate=1e-4),
+    metrics=['accuracy'])
+
+EPOCHS=80
+# Train the new model
+history_with_aug = model_with_aug.fit(
+      train_dataset_final,
+      epochs=EPOCHS,
+      validation_data=validation_dataset_final,
+      verbose=2)
+########################################################################################
+model
+	16 (3, 3) (2, 2)| 32 (3, 3) (3, 3)| 32 (5, 5) (3, 3)| 32 (3, 3) (3, 3)| 128
+		accuracy: 0.7956 - loss: 0.4289 - val_accuracy: 0.8434 - val_loss: 0.3565
+	16 (3, 3) (2, 2)| 128 (3, 3) (3, 3)| 32 (5, 5) (3, 3)| 32 (3, 3) (3, 3)| 128
+		Epoch 22/35: accuracy: 0.8049 - loss: 0.4117 - val_accuracy: 0.8490 - val_loss: 0.3
+		MSE 33.710 > 20
+	16 (3, 3) (2, 2)| 64 (3, 3) (3, 3)| 32 (5, 5) (3, 3)| 32 (3, 3) (3, 3)| 128
+		Epoch 23/35: accuracy: 0.8005 - loss: 0.4253 - val_accuracy: 0.8262 - val_loss: 0.3
+		MSE 28.490 > 20
+	16 (3, 3) (2, 2)| 64 (3, 3) (3, 3)| 32 (5, 5) (3, 3)| 32 (3, 3) (3, 3)| 512
+		Epoch 28/35: accuracy: 0.8027 - loss: 0.4150 - val_accuracy: 0.8464 - val_loss: 0.3378
+		pass
+	16 (3, 3) (2, 2)| 128 (3, 3) (3, 3)| 128 (5, 5) (3, 3)| 64 (3, 3) (3, 3)| 128
+		Epoch 17/35: accuracy: 0.8090 - loss: 0.4054 - val_accuracy: 0.8609 - val_loss: 0.3076
+		MSE 24.792 > 20
