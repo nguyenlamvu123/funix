@@ -1,0 +1,30 @@
+CSRF stands for cross-site request forgery, which is a way for a malicious actor to force a user to perform an unintended action
+
+author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+	ForeignKey can be used either by passing the class itself, or passing a string which is parsed to load and refer to the class. By passing settings.AUTH_USER_MODEL, we’ll be able to change the model class that’s used for authentication by updating the Django settings, and all models that refer to this setting will update automatically to use the right model. By default, the value is auth.User, which refers to the User model in the Django auth application
+	
+created_at = models.DateTimeField(auto_now_add=True)
+	sets auto_now_add to True which means that when a Post is saved, its creation date and time will automatically be set.
+	
+modified_at = models.DateTimeField(auto_now=True)
+	set auto_now to True, which means it will be set to the current date and time whenever a Post is saved.
+	
+slug = models.SlugField()
+	A slug is a short string designed to be used as an identifier, such as in a URL.
+##################################################################################
+The main use of the contenttypes framework is to dynamically load models classes based on their name, and subsequently, query objects for that model.
+The main model is ContentType, which is importable from django.contrib.contenttypes.model. This works like a normal model whose objects you can query. If you know the model you want, you can query it using the app name and model name.
+
+python3 manage.py shell
+	from django.contrib.contenttypes.models import ContentType
+	
+	post_type = ContentType.objects.get(app_label="blog", model="post")
+	post_type
+	post_type.model_class()
+	post_type.model_class().objects.get(pk=1)  # is the same as `post_type.get_object_for_this_type(pk=1)`
+	
+	ContentType.objects.all()
+	
+	from blog.models import Post
+	ContentType.objects.get_for_model(Post)
+
