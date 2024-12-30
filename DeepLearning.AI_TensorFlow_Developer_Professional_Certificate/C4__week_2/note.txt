@@ -1,0 +1,108 @@
+To measure the performance of our forecasting model, we typically want to split the time series into a training period, a validation period and a test period
+	in general, the validation set has higher values (i.e. y-axis) than those in the training set. Your model should be able to predict those values just by learning from the trend and seasonality of the training set.
+
+a windowing technique
+	group consecutive elements of your data and use that to predict a future value
+
+shuffle your dataset to reduce sequence bias while training your model. This refers to the neural network overfitting to the order of inputs and consequently, it will not perform well when it does not see that particular order when testing
+
+for a linear regression, all you need is creating a single dense layer
+use the methodology instead of the raw string for the optimizer; so parameters, which are such as the learning rate and the momentum, can be set to initialize it
+
+when you have more complex ones, spending some time to tune the learning rate can lead to better training results
+	tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10**(epoch / 20))
+	dynamically set the learning rate based on the epoch number during training
+
+# Generate a tf dataset with 10 elements (i.e. numbers 0 to 9)
+dataset = tf.data.Dataset.range(10)
+
+# Window the data but only take those with the specified size
+dataset = dataset.window(
+	size=5,
+	shift=1,
+	drop_remainder=True
+)
+
+# Print the result
+for window_dataset in dataset:
+  print([item.numpy() for item in window_dataset])
+
+# Flatten the windows by putting its elements in a single batch
+dataset = dataset.flat_map(lambda window: window.batch(5))
+
+# Create tuples with features (first four elements of the window) and labels (last element)
+dataset = dataset.map(lambda window: (window[:-1], window[-1]))
+
+# Shuffle the windows
+dataset = dataset.shuffle(buffer_size=10)
+
+# Print the results
+for x,y in dataset:
+  print("x = ", x.numpy())
+  print("y = ", y.numpy())
+  
+def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+    """Generates dataset windows
+
+    Args:
+      series (array of float) - contains the values of the time series
+      window_size (int) - the number of time steps to include in the feature
+      batch_size (int) - the batch size
+      shuffle_buffer(int) - buffer size to use for the shuffle method
+
+    Returns:
+      dataset (TF Dataset) - TF Dataset containing time windows
+    """
+  
+    # Generate a TF Dataset from the series values
+    dataset = tf.data.Dataset.from_tensor_slices(series)
+    
+    # Window the data but only take those with the specified size
+    dataset = dataset.window(window_size + 1, shift=1, drop_remainder=True)
+    
+    # Flatten the windows by putting its elements in a single batch
+    dataset = dataset.flat_map(lambda window: window.batch(window_size + 1))
+
+    # Create tuples with features and labels 
+    dataset = dataset.map(lambda window: (window[:-1], window[-1]))
+
+    # Shuffle the windows
+    dataset = dataset.shuffle(shuffle_buffer)
+    
+    # Create batches of windows
+    dataset = dataset.batch(batch_size)
+    
+    # Optimize the dataset for training
+    dataset = dataset.cache().prefetch(1)
+    
+    return dataset
+    
+# Build the single layer neural network
+l0 = tf.keras.layers.Dense(1)  # l0.get_weights()
+model = tf.keras.models.Sequential([
+    tf.keras.Input(shape=(window_size,)),
+    l0
+])
+
+# Build the Model
+model_tune = tf.keras.models.Sequential([
+    tf.keras.Input(shape=(window_size,)),
+    tf.keras.layers.Dense(10, activation="relu"), 
+    tf.keras.layers.Dense(10, activation="relu"), 
+    tf.keras.layers.Dense(1)
+])
+lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10**(epoch / 20))
+history = model_tune.fit(dataset, epochs=100, callbacks=[lr_schedule])
+
+# Define the learning rate array
+lrs = 1e-8 * (10 ** (np.arange(100) / 20))
+# Set the figure size
+plt.figure(figsize=(10, 6))
+# Set the grid
+plt.grid(True)
+# Plot the loss in log scale
+plt.semilogx(lrs, history.history["loss"])
+# Increase the tickmarks size
+plt.tick_params('both', length=10, width=1, which='both')
+# Set the plot boundaries
+plt.axis([1e-8, 1e-3, 0, 300])

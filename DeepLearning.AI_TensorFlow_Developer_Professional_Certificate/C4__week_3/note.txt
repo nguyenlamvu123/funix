@@ -1,0 +1,90 @@
+A Recurrent Neural Network, or RNN is a neural network that contains recurrent layers
+	the full input shape when using RNNs is three-dimensional
+		the batch size
+		the timestamps
+		the dimensionality of the inputs at each time step
+	cells that took batches as input or x, and they calculated a Y output as well as a state vector that fed into the cell along with the next x, which then resulted in the Y and the state vector and so on
+		These steps will continue until we reach the end of our input dimension
+A simple RNN, the state output H is just a copy of the output matrix Y
+	At each time step, the memory cell gets both the current input and also the previous output
+	The shape of the input, which is window size one, has an additional dimension that you didn't use when dealing only with dense layers
+A Lambda layer allows you to perform arbitrary operations to effectively expand the functionality of the model
+The Huber function is a loss function that's less sensitive to outliers
+	if data can get a little bit noisy, it's worth giving it a shot
+Lstms add a cell state that keep a state throughout the life of the training, so that the state is passed from cell to cell, time step to time step, and it can be better maintained; because state's impact can diminish greatly over time steps
+	
+
+def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
+    """Generates dataset windows
+
+    Args:
+      series (array of float) - contains the values of the time series
+      window_size (int) - the number of time steps to include in the feature
+      batch_size (int) - the batch size
+      shuffle_buffer(int) - buffer size to use for the shuffle method
+
+    Returns:
+      dataset (TF Dataset) - TF Dataset containing time windows
+    """
+
+    # Add an axis for the feature dimension of RNN layers
+    series = tf.expand_dims(series, axis=-1)  # SimpleRNN layers expect a 3-dimensional tensor input with the shape [batch, timesteps, feature]
+    # Generate a TF Dataset from the series values
+    dataset = tf.data.Dataset.from_tensor_slices(series)
+    # Window the data but only take those with the specified size
+    dataset = dataset.window(window_size + 1, shift=1, drop_remainder=True)
+    # Flatten the windows by putting its elements in a single batch
+    dataset = dataset.flat_map(lambda window: window.batch(window_size + 1))
+    # Create tuples with features and labels 
+    dataset = dataset.map(lambda window: (window[:-1], window[-1]))
+    # Shuffle the windows
+    dataset = dataset.shuffle(shuffle_buffer)
+    # Create batches of windows
+    dataset = dataset.batch(batch_size)
+    # Optimize the dataset for training
+    dataset = dataset.cache().prefetch(1)
+    
+    return dataset
+dataset = windowed_dataset(x_train, window_size, batch_size, shuffle_buffer_size)
+val_set = windowed_dataset(x_valid, window_size, batch_size, shuffle_buffer_size)
+
+# Build the Model
+model_tune = tf.keras.models.Sequential([
+    tf.keras.Input(shape=(window_size, 1)),
+    tf.keras.layers.SimpleRNN(40, return_sequences=True),
+    tf.keras.layers.SimpleRNN(40),
+    tf.keras.layers.Dense(1),
+    tf.keras.layers.Lambda(lambda x: x * 100.0)  # scaling up the output to around the same figures as labels
+])
+model = tf.keras.models.Sequential([
+    tf.keras.Input(shape=(window_size, 1)),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True)),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+    tf.keras.layers.Dense(1),
+    tf.keras.layers.Lambda(lambda x: x * 100.0)
+])
+
+# Set the learning rate scheduler
+lr_schedule = tf.keras.callbacks.LearningRateScheduler(
+    lambda epoch: 1e-8 * 10**(epoch / 20))
+# Initialize the optimizer
+optimizer = tf.keras.optimizers.SGD(momentum=0.9)
+# Set the training parameters
+model_tune.compile(loss=tf.keras.losses.Huber(), optimizer=optimizer)
+# Train the model
+history = model_tune.fit(dataset, epochs=100, callbacks=[lr_schedule])
+# history = model.fit(dataset,epochs=100, validation_data=val_set)
+
+# Set the figure size
+plt.figure(figsize=(10, 6))
+# Set the grid
+plt.grid(True)
+# Plot the loss in log scale
+plt.semilogx(lrs, history.history["loss"])
+# Increase the tickmarks size
+plt.tick_params('both', length=10, width=1, which='both')
+# Set the plot boundaries
+plt.axis([1e-7, 1e-4, 0, 20])
+
+
+
