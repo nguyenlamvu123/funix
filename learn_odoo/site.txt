@@ -1,0 +1,4 @@
+https://www.cybrosys.com/blog/how-to-setup-odoo-17-development-environment-using-pycharm-in-ubuntu-20-04
+
+https://www.cybrosys.com/blog/how-to-install-odoo-17-on-ubuntu-20-04-lts-server
+
