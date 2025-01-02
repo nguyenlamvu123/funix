@@ -1,0 +1,70 @@
+odoo 17
+# python3.10
+	sudo add-apt-repository ppa:deadsnakes/ppa
+	sudo apt update
+	sudo apt-get install python3.10 python3.10-dev
+	curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+# Outdated python version detected, Odoo requires Python >= 3.10 to run
+	https://www.odoo.com/forum/help-1/installation-of-version-v17-0-with-error-in-python-243648
+	sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2
+	sudo update-alternatives --config python3
+
+hdh nên dùng: Ubuntu
+
+# Sub-process /usr/bin/dpkg returned an error code (1)
+	sudo apt remove --purge odoo
+	sudo apt autoremove -y
+
+sudo apt-get install -y python-dev libldap2-dev libsasl2-dev libssl-dev
+python3.10 -m venv venv
+source venv/bin/activate
+pip install -r odoo17/requirements.txt
+pip install psycopg2-binary
+git clone https://www.github.com/odoo/odoo --depth 1 --branch 17.0 --single-branch odoo17
+odoo17/odoo-bin -c odoo17/odoo.conf
+
+./odoo-bin scaffold <ten_module> <duong_dan_chua_module>
+"refresh" lại danh sách app:
+	sửa url `http://127.0.0.1:8017/web#action=38&model=ir.module.module&view_type=kanban&cids=1&menu_id=15` thành `http://127.0.0.1:8017/web?debug=True#action=38&model=ir.module.module&view_type=kanban&cids=1&menu_id=15`
+	Update Apps List -> Update
+	hoặc
+	`./odoo-bin -u module_name -d database_name`
+
+__manifest__.py: chứa một Python dictionary tiêu chuẩn, gồm các cặp khóa/giá trị.
+	name: Quy định tên hiển thị của module.
+	sumary: Mô tả gắn gọn module, thường chỉ có một dòng.
+	description: Mô tả tính năng module một cách đầy đủ có hỗ trợ định dạng văn bản ReStructuredText(RST). Mô tả này thường được bọc trong 3 nháy kép giúp định dạng chuỗi đa dòng
+	author: Một chuỗi thể hiện tên của tác giả. Nếu có nhiều hơn một tác giả hãy sử dụng dấu ',' giữa các tên, lưu ý sử dụng chuỗi thay vì list.
+	website: Chỉ định URL mà người dùng nên truy cập để biết thêm thông tin về module cũng như tác giả.
+	category: Trường này dùng để tổ chức các module thành các cụm theo chức năng, đặc tính để dễ quản lý và phát triển.
+	version: Là chuỗi với định dạng x.x.x quy định phiên bản của module. Trường này được Ứng dụng Odoo sử dụng để phát hiện phiên bản mới đối với những module đã được cài đặt. Nếu chuỗi không bắt đầu bằng phiên bản của Odoo thì phiên bản Odoo sẽ tự động được nối vào đầu
+	depends: Là một list tên kỹ thuật các module mà module hiện tại phụ thuộc vào. Đừng quên thêm những module khai báo dữ liệu mà module này cần sử dụng để tránh gặp vấn đề khi cài module và gây khó khăn trong việc tìm lỗi.
+	data: Là một list chỉ định các đường dẫn tương đối của các file dữ liệu, những file này sẽ được nạp khi cài hoặc nâng cấp module
+	demo: list các đường dẫn tương đối đến các file dữ liệu khai báo sẵn trong module, tuy nhiên những dữ liệu này chỉ phục vụ mục đích demo nên sẽ chỉ được nạp nếu database của bạn kích hoạt nạp dữ liệu demo (kích hoạt khi tạo database hoặc trong menu Thiết lập).
+	*********** Ảnh được sử dụng làm ảnh hiển thị cho module là file PNG có vị trí tại static/description/icon.png.
+	Có một vài cặp khóa/giá trị khác bạn cũng hay gặp trong module manifest: license, application, auto_install, installable, external_dependencies, {pre_init, post_init, uninstall}_hook
+	Ngoài ra, còn có một số khóa đặc biệt được dùng cho việc đăng bán module trên cửa hàng ứng dụng: price, currency, live_test_url, images
+
+
+models/: chứa các file code backend
+
+views/: chứa các file xml khai báo giao diện người dùng với các bản ghi action, form, list, menu
+
+data/: chứa các file dữ liệu cứng khi cài đặt module sẽ có mà không phải tạo thông qua giao diện người dùng
+
+demo/: chứa các file dữ liệu demo dùng trong mục đích kiểm thử, thực hành hay đánh giá module.
+
+i18n/: chứa các file dịch có đuôi .pot và .po
+
+security/: chứa các file khai báo quyền truy cập model (ir.model.access.csv), và có thể có các file XML khai báo các nhóm người dùng và quyền cho nhóm người dùng ở mức quyền truy cập từng bản ghi
+
+controllers/: chứa các file code cho website controller
+
+static/: là nơi chứa tất cả các tài nguyên web
+
+wizard/: chứa tất cả các file liên quan đến wizard. Trong Odoo, wizard được sử dụng làm cầu nối, lưu các giá trị tạm thời làm trung gian
+
+report/: Odoo cung cấp các tính năng xuất tài liệu PDF như đơn bán, hóa đơn
+
+--init, -i  # cài đặt trực tiếp các module từ giao diện dòng lệnh
+
