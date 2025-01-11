@@ -1,0 +1,30 @@
+Module quản lý chỉ tiêu kế hoạch và thực hiện trên phần mềm
+	Chức năng đổ số liệu và cập nhật số liệu
+		Phòng kế hoạch đầu tư hoặc mỗi chi nhánh sẽ cập nhật trên phần mềm hoặc đổ dữ liệu lên phần mềm bằng file excel
+			Báo cáo kết quả kinh doanh tháng
+			Tổng hợp chi phí tháng
+			Sổ nhật ký bán hàng
+			File excel nhập kế hoạch tháng và năm
+		Phòng kế toán sẽ gửi 2 file tổng hợp các chi nhánh và gửi phòng kế hoạch đầu tư cập nhật hoặc đổ vào và đè lên dữ liệu mục 1, và đây được coi là dữ liệu chốt
+			Báo cáo kết quả kinh doanh tháng.......
+			Tổng hợp chi phí tháng.......
+				tách chi phí thuê ts và tổng các loại chi phí thành chi nhánh riêng
+		Phòng KHĐT xuất ra file excel từ phần mềm
+			Mẫu excel chi phí chi nhanh
+			Mẫu excel Sản xuất kinh doanh
+			Mẫu excel nhập xuất tồn, kinh doanh ( Từ phòng kinh doanh):
+				Dữ liệu bán hàng, mua hàng đẩy vào mẫu excel chung theo tháng.
+				Bảng excel này thì Ngoc phan tích và đưa ra task dựa vào https://docs.google.com/spreadsheets/d/1cAns10siMwA3c7AvtOGImwdfOJiP5dRl/edit?gid=916327344#gid=916327344
+					các sheet theo tháng Hỏi lại lấy từ nguồn nào
+		* Tổng hợp chức năng đưa ra kết quả là các báo cáo
+			Báo cáo hoạt động sản xuất kinh doanh tháng và lũy kế tháng
+			Báo cáo sơ kết 6 tháng đầu năm
+			Báo cáo tổng kết năm
+*******************************************************************************************
+object = self.env['spj.export.report.sxkd'].sudo()
+
+class SpjExportReportSXKD(models.Model):
+    _name = 'spj.export.report.sxkd'
+*******************************************************************************************
+self.env['spj.business.report.month.line.report']._read_group(domain, aggregates=[f'{aggregate}:sum'])[0][0] ~ sql command
+
