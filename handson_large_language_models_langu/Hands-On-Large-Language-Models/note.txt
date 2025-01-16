@@ -1,0 +1,59 @@
+part I
+	Chapter 1: an overview of the field and common techniques - understanding language models
+	Chapter 2: two central components of these models, tokenization and embeddings - using pretrained language models
+	Chapter 3: an updated and expanded version of Jay’s well-known Illustrated Transformer - training and fine-tunning language models
+part II
+	Chapter 4: use language models for supervised classification
+	Chapter 5: use language models for text clustering and topic modeling, leveraging embedding models
+	Chapter 6: use language models for semantic search
+	Chapters 7 and 8: use language models for generating text
+	Chapter 9: extending the capabilities of text generation to the visual domain
+part III
+	Chapter 10: create and fine-tune an embedding model
+	Chapter 11: review how to fine-tune BERT for classification
+	Chapter 12: several methods for fine-tuning generation models
+############################################################################################
+Our history of Language AI starts with a technique called bag-of-words
+	The first step of the bag-of-words model is tokenization
+	after tokenization, we combine all unique words from each sentence to create a vocabulary
+	create representations of text in the form of numbers, which is also called vectors or vector representations
+Released in 2013, word2vec was one of the first successful attempts at capturing the meaning of text in embeddings
+	Using neural networks, word2vec generates word embeddings
+	Embeddings are vector representations of data that attempt to capture its meaning
+recurrent neural networks (RNNs) are used for two tasks
+	encoding or representing an input sentence
+	decoding or generating an output sentence
+In 2014, a solution called attention was introduced that highly improved upon the original architecture
+	Attention allows a model to focus on parts of the input sequence that are relevant to one another (“attend” to each other) and amplify their signal
+	Compared to word2vec, this architecture allows for representing the sequential nature of text and the context in which it appears by “attending” to the entire sentence
+Transformer, which was first explored in the well-known “Attention is all you need” paper released in 2017, was solely based on the attention mechanism and removed the recurrence network
+	encoding and decoder components are stacked on top of each other
+	both the encoder and decoder blocks would revolve around attention instead of leveraging an RNN with attention features
+	The encoder block consists of two parts
+		self-attention
+		a feedforward neural network
+	Apart from the widely popular Transformer architecture, new promising architectures have emerged such as Mamba and RWKV
+	
+encoder-only models can be refered to as representation models
+	mainly focus on representing language, for instance, by creating embeddings, and typically do not generate text
+In contrast, decoder-only models can be refered to as generative models
+	focus primarily on generating text and typically are not trained to generate embeddings
+
+BERT (Bidirectional Encoder Representations from Transformers) was introduced in 2018 that could be leveraged for a wide variety of tasks and would serve as the foundation of Language AI for years to come
+	only uses the encoder and removes the decoder entirely
+	BERT-like models are commonly used for transfer learning, which involves first pretraining it for language modeling and then fine-tuning it for a specific task
+GPT (Generative Pre-trained Transformer) which is a decoder-only architecture was proposed in 2018 to target generative tasks
+	stacks decoder blocks similar to the encoder-stacked architecture of BERT
+	GPT-1 consisted of 117 million parameters; GPT-2 had 1.5 billion parameters; GPT-3 used 175 billion parameters; These models, especially the “larger” models, are commonly referred to as large language models (LLMs)
+
+############################################################################################
+Representation models are teal with a small vector icon (to indicate its focus on vectors and embeddings) whilst generative models are pink with a small chat icon (to indicate its generative capabilities).
+############################################################################################
+OpenAI
+	Click “sign up” on the site to create a free account. This account allows you to create an API key, which can be used to access GPT-3.5. Then, go to “API keys” to create a secret key.
+Cohere
+	Register a free account on the website. Then, go to “API keys” to create a secret key.
+	Note that with both accounts, rate limits apply and that these free API keys only allow for a limited number of calls per minute. Throughout all examples, we have taken that into account and provided local alternatives if necessary.
+	For the open source models, you do not need to create an account with the exception of the Llama 2 model in Chapter 2. To use that model, you will need a Hugging Face account
+Hugging Face
+	Click “sign up” on the Hugging Face website to create a free account. Then, in “Settings” go to “Access Tokens” to create a token that you can use to download certain LLMs.
