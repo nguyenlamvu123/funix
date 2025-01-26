@@ -79,7 +79,8 @@ history_with_aug = model_with_aug.fit(
       train_dataset_final,
       epochs=EPOCHS,
       validation_data=validation_dataset_final,
-      verbose=2)
+      verbose=2  # set the verbose parameter to 2 to indicate that you want to print just the results per epoch. Setting it to 1 (default) displays a progress bar per epoch, while 0 silences all displays
+)
 ########################################################################################
 model
 	16 (3, 3) (2, 2)| 32 (3, 3) (3, 3)| 32 (5, 5) (3, 3)| 32 (3, 3) (3, 3)| 128

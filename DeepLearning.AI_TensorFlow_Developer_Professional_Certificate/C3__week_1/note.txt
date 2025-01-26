@@ -1,0 +1,40 @@
+input sentences need to be converted into numeric sequences
+text data need to be prepared with uniform size before being fed to model
+
+import tensorflow as tf
+
+# Sample inputs
+sentences = [
+    'I love my dog',
+    'I love my cat',
+    'You love my dog!',
+    'Do you think my dog is amazing?'
+    ]
+
+# Initialize the layer
+vectorize_layer = tf.keras.layers.TextVectorization()
+vectorize_layer_ = tf.keras.layers.TextVectorization(ragged=True)
+# Convert the list to tf.data.Dataset
+sentences_dataset = tf.data.Dataset.from_tensor_slices(sentences)
+
+# Compute the vocabulary
+vectorize_layer.adapt(sentences)
+vectorize_layer_.adapt(sentences)
+
+
+# Get the vocabulary
+vocabulary = vectorize_layer.get_vocabulary()  # ['', '[UNK]', 'my', 'love', 'dog', 'you', 'i', 'think', 'is', 'do', 'cat', 'amazing']
+
+sequence = vectorize_layer(sample_input)  # tf.Tensor([6 3 2 4], shape=(4,), dtype=int64)
+
+sequences_post = vectorize_layer(sentences)  # tf.Tensor([[] [] [] []], shape=(4, 7), dtype=int64)
+sequences = sentences_dataset.map(vectorize_layer)  # <_MapDataset element_spec=TensorSpec(shape=(None,), dtype=tf.int64, name=None)>
+
+ragged_sequences = vectorize_layer_(sentences)  # <tf.RaggedTensor [[], [], [], []]>  # vectors do not have the same size
+sequences_pre = tf.keras.utils.pad_sequences(ragged_sequences.numpy())
+
+sequences_pre = tf.keras.utils.pad_sequences(
+	sequences,
+	# maxlen=5,  # max length
+	padding='pre'
+)  # [[] [] [] []]  # <class 'numpy.ndarray'>
