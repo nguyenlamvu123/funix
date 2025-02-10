@@ -1,0 +1,25 @@
+Time series is typically defined as an ordered sequence of values that are usually equally spaced over time
+	Univariate Time Series: a single value at each time step
+	Multivariate Time Series: multiple values at each time step
+	The trend describes the general tendency of the values to go up or down as time progresses. Given a certain time period, you can see if the graph is following an upward/positive trend, downward/negative trend, or just flat. For instance, the housing prices in a good location can see a general increase in valuation as time passes.
+	seasonality refers to a recurring pattern at regular time intervals
+	Noise
+a naive forecast where you assume that the next value will be the same as the previous time step
+Moving Average sums up a series of time steps and the average will be the prediction for the next time step.
+
+
+# GRADED FUNCTION: compute_metrics
+def compute_metrics(true_series, forecast):
+    """compute mean squared error and mean absolute error for predictions
+
+    Args:
+        true_series (np.ndarray): original (true) series
+        forecast (np.ndarray): forecast series
+
+    Returns:
+        (np.float64, np.float64): MSE and MAE
+    """
+    mse = tf.keras.metrics.mse(true_series, forecast).numpy()
+    mae = tf.keras.metrics.mae(true_series, forecast).numpy()
+    return mse, mae
+
