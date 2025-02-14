@@ -38,6 +38,7 @@ encoder-only models can be refered to as representation models
 	mainly focus on representing language, for instance, by creating embeddings, and typically do not generate text
 In contrast, decoder-only models can be refered to as generative models
 	focus primarily on generating text and typically are not trained to generate embeddings
+Representation models are teal with a small vector icon (to indicate its focus on vectors and embeddings) whilst generative models are pink with a small chat icon (to indicate its generative capabilities).
 
 BERT (Bidirectional Encoder Representations from Transformers) was introduced in 2018 that could be leveraged for a wide variety of tasks and would serve as the foundation of Language AI for years to come
 	only uses the encoder and removes the decoder entirely
@@ -45,9 +46,17 @@ BERT (Bidirectional Encoder Representations from Transformers) was introduced in
 GPT (Generative Pre-trained Transformer) which is a decoder-only architecture was proposed in 2018 to target generative tasks
 	stacks decoder blocks similar to the encoder-stacked architecture of BERT
 	GPT-1 consisted of 117 million parameters; GPT-2 had 1.5 billion parameters; GPT-3 used 175 billion parameters; These models, especially the “larger” models, are commonly referred to as large language models (LLMs)
-
+	Creating LLMs
+		Language modeling - pretraining
+			An LLM is trained on a vast corpus of internet text allowing the model to learn grammar, context, and language patterns
+		Fine-tuning - post-training
+			using the previously trained model and further training it on a narrower task
+Closed source LLMs are models that do not have their weights and architecture shared with the public
+Open LLMs are models that share their weights and architecture with the public to use
+Open source LLMs require you to use certain packages to run them
+Hugging Face is the organization behind the well-known Transformers package, which for years has driven the development of language models in general
 ############################################################################################
-Representation models are teal with a small vector icon (to indicate its focus on vectors and embeddings) whilst generative models are pink with a small chat icon (to indicate its generative capabilities).
+Tokens and embeddings are two of the central concepts of using large language models (LLMs)
 ############################################################################################
 OpenAI
 	Click “sign up” on the site to create a free account. This account allows you to create an API key, which can be used to access GPT-3.5. Then, go to “API keys” to create a secret key.
