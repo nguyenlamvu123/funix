@@ -1,3 +1,4 @@
+tạm bỏ qua trang 68 - 77
 part I
 	Chapter 1: an overview of the field and common techniques - understanding language models
 	Chapter 2: two central components of these models, tokenization and embeddings - using pretrained language models
@@ -57,6 +58,19 @@ Open source LLMs require you to use certain packages to run them
 Hugging Face is the organization behind the well-known Transformers package, which for years has driven the development of language models in general
 ############################################################################################
 Tokens and embeddings are two of the central concepts of using large language models (LLMs)
+Before the prompt is presented to the language model, however, it first has to go through a tokenizer that breaks it into pieces
+	the model does not in fact receive the text prompt
+	the tokenizers processed the input prompt, and returned the information the model needed in the variable input_ids, which the model used as its input
+		There are three major factors that dictate how a tokenizer breaks down an input prompt
+			the creator of the model chooses a tokenization method
+				Popular methods include byte pair encoding (BPE) (widely used by GPT models) and WordPiece (used by BERT)
+			make a number of tokenizer design choices like vocabulary size and what special tokens to use
+			trained the tokenizer on a specific dataset to establish the best vocabulary it can use to represent that dataset
+		description above is called subword tokenization. There are four notable ways to tokenize
+			Word tokens
+			Subword tokens
+			Character tokens
+			Byte tokens
 ############################################################################################
 OpenAI
 	Click “sign up” on the site to create a free account. This account allows you to create an API key, which can be used to access GPT-3.5. Then, go to “API keys” to create a secret key.
