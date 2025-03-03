@@ -1,0 +1,65 @@
+ip link  # list and modify interfaces on the host
+ip addr  # see the IP addresses assigned to those interfaces
+ip addr add  # set ip addresses on the interfaces
+route  # view the routing table
+ip route add  # add entries into the routing table
+hostname
+
+
+################################################################################################################################################################################
+have 2 systems (laptops, desktops, VMs on the Cloud, wherever) (192.168.1.10 (host A) and 192.168.1.11 (host B))
+use an interface on the host to connect them to a switch -> the switch creates a network containing the two systems
+	ip link  # show name of the interface that we will be using to connect to the switch
+	cat >> /etc/hosts  # when I say db, I mean the IP 192.168.1.11
+		192.168.1.11	db
+	when referencing another host by its name from host A, it looks into /etc/hosts file in local to find out the IP address
+	but for complex environment, move all these entries into a single server who will manage it centrally. It is called DNS server
+		cat /etc/resolv.conf
+			nameserver	192.168.1.100
+			search          mycompany.com  # web -> web.company.com
+		this name with your www. and .com at the end is called a domain name
+			the reason they are in this format, separated by dots, is to group like things together
+			www. is a subdomain, if there is anything between www. and .domain, it is a subdomain
+			the dot is the root
+			the top level domains
+				com for commercial or general purpose
+				net for educational organizations
+				org for nonprofit organizations
+	tool to test DNS resolution
+		ping
+		nslookup
+		dig
+have a network with the address (192.168.1.0)
+assign the systems with IP addresses on the same network
+	ip addr add 192.168.1.10/24 dev enp1s0
+The switch can only enable communication within 1 network
+
+have 2 other systems (laptops, desktops, VMs on the Cloud, wherever) (192.168.2.10 and 192.168.2.11)
+A router helps connect 2 networks together, it can be thought as another server with many network ports (assign the first network to IP address/gateway 192.168.1.1; assign the second to gateway at 192.168.2.1)
+	route
+	ip route add 192.168.2.0/24 via 192.168.1.1  # can reach the 192.168.2.0 network through the door or gateway at 192.168.1.1
+	ip route add 192.168.1.0/24 via 192.168.2.1  # can reach the 192.168.1.0 network through the door or gateway at 192.168.2.1
+	ip route add default via 192.168.2.1  # for any network that you don't know a route 2, use this router as the default gateway
+		could also say 0.0.0.0 instead of the word `default`. It means any IP destination
+how we can set up a Linux host as a router
+	three host, A, B, C
+	A and B are connected to a network (192.168.1.0) both using interface eth0
+	B and C to another (192.168.2.0) both using interface eth1 in B and eth0 in C
+	A has IP 192.168.1.5
+	C has 192.168.2.5
+	B has an IP on both the networks, 192.168.1.6 and 192.168.2.6
+		ping 192.168.2.5  # Host A need to reach host C at 192.168.2.0 network
+			ip route add 192.168.2.0/24 via 192.168.1.6  # add a route to access network 192.168.2 through the gateway 192.168.1.6
+			ip route add 192.168.1.0/24 via 192.168.2.6  # host C will have to send back responses to host A
+	By default, in Linux, packets are not forwarded from one interface to the next.
+		For example, packets received on eth0 on host B are not forwarded to elsewhere through eth1.
+		This is this way for security reasons. For example, eth0 connected to private network and eth1 to a public network
+		-> the value in /file/proc/sys/net/ipv4/ip_forward is set to 0
+		echo 1>/file/proc/sys/net/ipv4/ip_forward  # the pins go through
+		etc/sysctl.conf
+			net.ipv4.ip_forforwardforward = 1
+
+
+################################################################################################################################################################################
+On host01, if we have an entry for app01 in /etc/hosts file like 172.168.238.12 app01 and the DNS server which is used by host01 has 172.168.239.10 as app01's IP then which IP host01 will pick for app01 as per priority.
+
