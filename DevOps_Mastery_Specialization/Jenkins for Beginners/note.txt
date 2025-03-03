@@ -1,0 +1,41 @@
+continuous integration and continuous deployment/delivery (CI/CD) is a way to take code, package it up, and deploy it to a system
+	CI process
+		taking the code
+		packaging it up
+		giving it to the CD process
+	CD process
+		deploy the code to some system
+		continuous delivery: There's some magical button that you have to press to deploy the code
+		continuous deployment: There's zero human intervention, everything is automatic
+www.jenkins.io
+	the full CI/CD suite, all of the plugins, the ability to deploy it, the ability to host it yourself, it is all 100% free
+	there are a ton of plugins
+	install: https://www.jenkins.io/doc/book/installing/linux/
+		(centos)
+		sudo yum install epel-release -y
+		sudo yum install fontconfig java-17-openjdk -y
+		sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --no-check-certificate
+		sudo rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+		sudo yum install jenkins -y
+		
+		modifying JENKINS_PORT environment variable in /lib/systemd/system/jenkins.service file
+			sudo vi /lib/systemd/system/jenkins.service
+				Environment="JENKINS_PORT=8090"
+			
+		take an ssh key, a public one, and pop it in ssh keys form in the UI -> it is able to work on the terminal via the Jenkins cli
+		
+		https://www.jenkins.io/doc/book/system-administration/systemd-services/
+			systemctl status jenkins
+			systemctl start jenkins
+			systemctl restart jenkins
+			systemctl stop jenkins
+			
+		backup
+			do file system snapshots, snapshots aren't real backups
+			or use plug-ins for backups
+				Manage Jenkins -> Manage plugins-> Available -> ThinBackup -> Install without restart
+					Manage Jenkins
+			or write a shell script that backs up the Jenkins in sense
+				https://github.com/sue445/jenkins-backup-script
+		restore 
+
