@@ -1,0 +1,2 @@
+https://keras.io/api/layers/preprocessing_layers/image_augmentation/
+https://www.tensorflow.org/guide/keras/preprocessing_layers?hl=vi#image_data_augmentation

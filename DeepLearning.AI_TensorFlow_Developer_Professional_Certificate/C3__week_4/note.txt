@@ -1,0 +1,88 @@
+instantiate the text vectorization layer and adapt it to data which is generated beforeText
+create the input sequences and pad the sequences up to the max sequence length then pre pad it
+split the sub phrases into inputs and labels
+	inputs to the model will be padded sequences, while labels are one-hot encoded arrays
+convert these labels to one hot encoded arrays using tf.keras.utils.to_ categorical
+build a sequential model
+predict words using the model
+	use the adapted text vectorization layer to generate a token sequence
+	sequence gets padded to the actual length and is passed to the model
+
+
+# Define data 
+data = "..."
+# Split the long string per line and put in a list
+corpus = data.lower().split("\n")
+
+# Initialize the vectorization layer
+vectorize_layer = tf.keras.layers.TextVectorization()
+
+# Build the vocabulary
+vectorize_layer.adapt(corpus)
+
+# Get the vocabulary and its size
+vocabulary = vectorize_layer.get_vocabulary()
+vocab_size = len(vocabulary)
+
+input_sequences = []
+# Loop over every line
+for line in corpus:
+	# Generate the integer sequence of the current line
+	sequence = vectorize_layer(line).numpy()
+	# Loop over the line several times to generate the subphrases
+	for i in range(1, len(sequence)):
+		# Generate the subphrase
+		n_gram_sequence = sequence[:i+1]
+		# Append the subphrase to the sequences list
+		input_sequences.append(n_gram_sequence)
+
+# Get the length of the longest line
+max_sequence_len = max([len(x) for x in input_sequences])
+
+# Pad all sequences
+input_sequences = np.array(tf.keras.utils.pad_sequences(input_sequences, maxlen=max_sequence_len, padding='pre'))
+
+# Create inputs and label by splitting the last token in the subphrases
+xs, labels = input_sequences[:,:-1],input_sequences[:,-1]
+
+# Convert the label into one-hot arrays
+ys = tf.keras.utils.to_categorical(labels, num_classes=vocab_size)
+
+# Build the model
+model = tf.keras.models.Sequential([
+            tf.keras.Input(shape=(max_sequence_len-1,)),
+            tf.keras.layers.Embedding(vocab_size, 64),  # set the output at 64 dimensions
+            tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(20)),  # 20 LSTM units
+            tf.keras.layers.Dense(vocab_size, activation='softmax')
+])
+# Use categorical crossentropy because this is a multi-class problem
+crossenmodel.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# Define seed text
+seed_text = ""
+# Define total words to predict
+next_words = 100
+# Loop until desired length is reached
+for _ in range(next_words):
+	# Convert the seed text to an integer sequence
+	sequence = vectorize_layer(seed_text)
+	# Pad the sequence
+	sequence = tf.keras.utils.pad_sequences([sequence], maxlen=max_sequence_len-1, padding='pre')
+	# Feed to the model and get the probabilities for each index
+	probabilities = model.predict(sequence, verbose=0)
+	
+	# Get the index with the highest probability
+	predicted = np.argmax(probabilities, axis=-1)[0]
+ 	## Pick a random number from [1,2,3]
+	# choice = np.random.choice([1,2,3])
+	## Sort the probabilities in ascending order and get the random choice from the end of the array
+	# predicted = np.argsort(probabilities)[0][-choice]
+	
+	
+	# Ignore if index is 0 because that is just the padding.
+	if predicted != 0:
+		# Look up the word associated with the index.
+		output_word = vocabulary[predicted]
+		# Combine with the seed text
+		seed_text += " " + output_word
+	

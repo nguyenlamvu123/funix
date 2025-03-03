@@ -1,0 +1,68 @@
+The concept of transfer learning is taking an existing model that's trained on far more data, and using the features that that model learned
+The idea behind Dropout is to remove a random number of neurons in your neural network
+	neighboring neurons often end up with similar weights, which can lead to overfitting, so dropping some out at random can remove this
+	often a neuron can over-weigh the input from a neuron in the previous layer, and can over specialize as a result
+
+import os
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# Set the weights file you downloaded into a variable
+local_weights_file = '/tf/model/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5'
+
+# Initialize the base model.
+# Set the input shape and remove the dense layers.
+pre_trained_model = tf.keras.applications.inception_v3.InceptionV3(
+    input_shape = (150, 150, 3),
+    include_top = False,
+    weights = None)
+
+# Load the pre-trained weights you downloaded.
+pre_trained_model.load_weights(local_weights_file)
+
+# Freeze the weights of the layers.
+# lock/freeze a layer from retraining
+for layer in pre_trained_model.layers:
+    layer.trainable = False
+
+# Choose `mixed7` as the last layer of your base model
+last_layer = pre_trained_model.get_layer('mixed7')
+print('last layer output shape: ', last_layer.output.shape)
+last_output = last_layer.output
+
+# Flatten the output layer to 1 dimension
+x = tf.keras.layers.Flatten()(last_output)
+# Add a fully connected layer with 1,024 hidden units and ReLU activation
+x = tf.keras.layers.Dense(1024, activation='relu')(x)
+# Add a dropout rate of 0.2
+x = tf.keras.layers.Dropout(0.2)(x)
+# Add a final sigmoid layer for classification
+x = tf.keras.layers.Dense  (1, activation='sigmoid')(x)
+
+# Append the dense network to the base model
+model = tf.keras.Model(pre_trained_model.input, x)
+
+# Print the model summary. See your dense network connected at the end.
+model.summary()
+
+# Create a model with data augmentation layers
+data_augmentation = tf.keras.Sequential([
+    tf.keras.layers.RandomFlip("horizontal"),
+    tf.keras.layers.RandomRotation(0.4),
+    tf.keras.layers.RandomTranslation(0.2,0.2),
+    tf.keras.layers.RandomContrast(0.4),
+    tf.keras.layers.RandomZoom(0.2),
+    ])
+
+# Attach the data augmentation model to the base model
+inputs = tf.keras.Input(shape=(150, 150, 3))
+x = data_augmentation(inputs)
+x = model(x)
+
+model_with_aug = tf.keras.Model(inputs, x)
+
+# Set the training parameters
+model_with_aug.compile(
+    optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.0001),
+    loss = 'binary_crossentropy',
+    metrics = ['accuracy'])

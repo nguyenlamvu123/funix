@@ -1,0 +1,39 @@
+Overfitting happens when a model exposed to too few examples learns patterns that do not generalize to new data
+
+
+# GRADED FUNCTION: train_val_datasets
+def train_val_datasets():
+    """Creates datasets for training and validation.
+    Returns:
+        (tf.data.Dataset, tf.data.Dataset): Training and validation datasets.
+    """
+    training_dataset, validation_dataset = tf.keras.utils.image_dataset_from_directory( 
+        directory='PetImages/',
+        image_size=(150, 150),
+        batch_size=128,
+        label_mode='binary',
+        validation_split=0.1,
+        subset='both',
+        seed=42 
+    )
+    return training_dataset, validation_dataset
+
+# Build the classification model
+model = tf.keras.models.Sequential([
+    # Rescale the image. Note the input shape is the desired size of the image: 150x150 with 3 bytes for color
+    tf.keras.Input(shape=(150, 150, 3)),
+    tf.keras.layers.Rescaling(1./255),
+    # Convolution and Pooling layers
+    tf.keras.layers.Conv2D(16, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(32, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    # Flatten the results to feed into a DNN
+    tf.keras.layers.Flatten(),
+    # 512 neuron hidden layer
+    tf.keras.layers.Dense(512, activation='relu'),
+    # Only 1 output neuron. It will contain a value from 0-1 where 0 for one class ('cats') and 1 for the other ('dogs')
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
