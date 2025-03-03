@@ -1,0 +1,4 @@
+java
+	older versions of Java before version 8 also refer to the version numbers as 1.8 instead of just 8
+	Up until version 8 it was known as 1.5, 1.6, 1.7 and 1.8, but from version 9 onwards it changed to 9, 10, 11, 12, 13
+	JDK stands for Java Development Kit. It is a set of tools that will help you develop, build and run Java applications on a system
