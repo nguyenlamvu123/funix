@@ -1,0 +1,75 @@
+the most common and the most loved platform used for development work happens to be Linux
+Linux systems have both CLI and GUI interfaces
+The text based command line interface that helps you run commands to interact with the operating system is called the Linux shell
+	echo
+	ls
+	cd
+	pwd
+	mkdir
+		mkdir -p
+	rm
+		rm -r
+	cp
+		cp -r
+	mv  # move and/or rename
+	touch  # create a new empty file
+	cat > newfile.txt  # create a new file with content
+		type content
+		CTRL + D
+
+vi index.html
+VI Editor has two modes of operation
+	the command mode (default): copy and paste lines, or delete a line or a word, or navigate between lines, etc
+		move: the arrow keys or press k, j, h, l on your keyboard
+		delete a character: press x
+		deletes the entire line: type `dd`
+		copy a line: type `yy`
+		paste: press p
+		scroll the page up or down: press the Ctrl + u or d buttons
+		save the changes made to the file and write the file to disk: type `:w`, `:w filename`
+		discard any unsaved changes made to the file and quit vim: type `:q`
+		find the word `of`: type `/of`
+			find next: press n
+	the insert mode: write contents to the file
+
+
+whoami  # which user you are
+id  # more information about the user
+su username  # switch user
+ssh username@hostname  # access one system from another system using (SSH for example) and log into the other system using a different user than your current user
+sudo
+curl url_to_file  # just print the file on screen
+	curl url_to_file -O  # save the result to a file
+wget url_to_file -O filename
+sudo cat /etc/*release*  # To know the current os
+
+rpm, yum (CentOS)
+
+service service_name start  # start that service use the service command
+systemctl start service_name # start that service use the system cuddle command
+	The service command uses the system cuddle utility underneath
+systemctl stop service_name
+systemctl status service_name
+systemctl enable service_name  # start automatically when system boots up
+systemctl diable service_name  # stop starting automatically when system boots up
+systemctl daemon-reload  # let systemd know that there is a new service configured
+
+configure your application to run as a service 
+	A systemd service is configured using a systemd unit file. These files may be located at /etc/systemd/system path
+	create a unit file at /etc/systemd/system path: my_app.service
+		`
+		[Unit]
+		DescDescription=describe the application
+		
+		[Service]
+		ExecStart=/usr/bin/python3 /otp/code/my_app.py  # script to run application
+		ExecStartPre=/otp/code/startpre.sh  # scripts to be run before starting the application
+		ExecStartPost=/otp/code/startpost.sh  # scripts to be run after starting the application
+		Restart=always  # application automatically restart in case it crashes
+		
+		[Install]
+		WantedBy=multimulti-user.target  # configure this service to run after the multi-user.target run level is started
+		`
+	systemctl daemon-reload
+	systemctl start my_app
+
