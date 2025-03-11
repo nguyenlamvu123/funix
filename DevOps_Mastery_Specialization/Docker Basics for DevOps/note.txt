@@ -1,0 +1,205 @@
+Docker has two editions
+	the community edition
+		be available on Linux, Mac, Windows, or on cloud platforms like AWS or Azure
+	the enterprise edition
+		comes with enterprise add ons
+			image management
+			image security
+			universal control plane for managing
+			orchestrating container runtimes
+			...
+When you install Docker on a Linux host, you're actually installing three different components
+	The Docker daemon is a background process
+		manages Docker objects such as the images, containers, volumes, and networks
+	The Docker Rest API server is the API interface
+		talk to the daemon and provide instructions
+	The Docker CLI is the command line interface
+		perform actions such as docker run, docker stop, rmi,...
+		The -H option is for the Docker CLI work with a remote Docker engine
+			docker -H=host:port run nginx
+default docket local folder is /var/lib/docker
+	Docker reuses the same layers (which have the same instructions in Dockerfile) it built for previous applications from the cache and only creates layers with new instructions
+When you install Docker, it creates three networks automatically
+	Bridge is the default network
+		a private internal network created by Docker on the host
+		The containers get an internal IP address, usually in the range 172.17 series
+		The containers can access each other using this internal IP if required.
+	host
+		cho phép container chia sẻ trực tiếp giao diện mạng của máy chủ
+		container sử dụng địa chỉ IP và cổng mạng giống như máy chủ Docker.
+		docker run Ubuntu --network=host 
+	none
+		Container không được kết nối với bất kỳ mạng nào, kể cả mạng host
+		docker run Ubuntu --network=none
+	docker network ls  # list all networks
+	docker network inspect bridge  # network in detail
+	By default, Docker only creates one internal bridge network. We could create our own internal network using
+		docker network create --driver bridge --subnet 182.18.0.0/16 --gateway 182.18.0.1 custom-isolated-network
+			Tùy chọn --gateway chỉ định địa chỉ IP của gateway (cổng mặc định) cho mạng này.
+				Gateway là điểm truy cập mặc định cho các container trên mạng nếu chúng cần liên lạc với mạng ngoài.
+			Tùy chọn --subnet chỉ định phạm vi địa chỉ IP mà mạng này sẽ sử dụng.
+				subnet 182.18.0.0/16 nghĩa là có thể sử dụng các địa chỉ IP từ 182.18.0.1 đến 182.18.255.254.
+	the built in DNS server always runs at address 127.0.0.11
+--link: Tùy chọn này được sử dụng để tạo kết nối giữa hai container. Nó cho phép container hiện tại (trong trường hợp này là container webapp) giao tiếp trực tiếp với một container khác (ở đây là mysql-db), thông qua tên miền giả (alias).
+	docker run --link mysql-db:mysql-db kodekloud/simple-webapp-mysql
+	Nói cách khác, container webapp có thể tham chiếu đến container mysql-db bằng tên miền giả mysql-db khi truy cập các dịch vụ hoặc ứng dụng được chạy bên trong container đó.
+	Tùy chọn --link không được khuyến nghị sử dụng. Thay vào đó nên cấu hình mạng Docker bằng cách sử dụng `docker network`
+Docker Hub is Docker's default registry, the DNS name for which is docker.io
+	image name: registry/user account/image repository
+		for example: docker.io/library/nginx
+		docker.io is the default of registry
+	The registry is where all the images are stored
+	Whenever you create a new image or update an existing image, you push it to the registry and every time anyone deploys this application, it is pulled from that registry
+	some other registry
+		Google's Registry is at gcr.io
+	Many Cloud service providers such as AWS, Azure, or GCP provide a private registry by default
+	Besides public and private repositories, it also provides: automated builds
+		integration with source control solutions like Github and Bitbucket etc.
+	The Docker registry is itself another application, and of course, is available as a Docker image
+	
+	docker run -d -p 5000:5000 --name registry registry:2  # Run a registry server with name using registry:2 image with host port set to 5000
+	docker image tag my-image localhost:5000/my-image  # re-tag the image before pushing it 
+	docker push localhost:5000/my-image
+
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo systemctl stop docker
+https://docs.docker.com/
+	https://docs.docker.com/engine/install/ubuntu/
+		sudo apt-get update
+		sudo apt-get install ca-certificates curl
+		sudo install -m 0755 -d /etc/apt/keyrings
+		sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+		sudo chmod a+r /etc/apt/keyrings/docker.asc
+		echo \
+		  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+		  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+		  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+		sudo apt-get update
+		sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo docker version
+https://hub.docker.com/
+
+container
+	an instance of the image
+	Unlike virtual machines, containers are not meant to host an operating system.
+		Containers are meant to run a specific task or process, such as to host an instance of a web server or application server or a database, or simply to carry some kind of computation or analysis task
+	A container only lives as long as the process inside it is alive.
+image
+	Dockerfile is a text file written in an instruction and arguments format
+		instruction
+			instruct docker to perform a specific action while creating the image
+			from
+				Every docker image must be based off of another image
+				all Dockerfiles must start with a from instruction
+			run
+				run a particular command on those base images
+			copy
+				copy files from the local system onto the docker image
+			EXPOSE
+				port which the web application run within the container
+			cmd
+				stand for command that defines the program that will be run within the container when it starts
+				the command line parameters passed will get replaced entirely
+					CMD sleep 5  # CMD ["sleep", "5"]
+			entrypoint
+				specify a command that will be run when the image is run as a container
+				the command line parameters will get appended
+					ENTRYPOINT ["sleep"]
+				combination between cmd and entrypoint below will set default for command instruction in ENTRYPOINT
+					ENTRYPOINT ["sleep"]
+					CMD ["sleep", "5"]
+						instructions should be in a JSON format
+				can override command instruction in ENTRYPOINT by using --entrypoint option in the Docker run command
+					
+		arguments
+			Every docker image must be based off of another image, either an OS or another image that was created before based on an OS
+	build image and specify the Dockerfile as input as well as a tag name for the image
+		`docker build . -t mmumshad/my-custom-app`
+	Docker builds the images in a layered architecture.
+		Each line of instruction creates a new layer in the docker image with just the changes from the previous layer
+		docker history image_id_or_image_name
+			show information about the layered architecture of image
+	docker login
+	docker push
+		if you didn't specify an organization in image's name, it's going to try and push it to the default organization or the default account
+		That's only for default Docker-supported official repositories, so need to tag image with account name
+
+docker run --name name_of_container image_id_or_image_name
+	run an instance of the image on the docker host if it already exists
+	If the image is not present on the host, it will go out to docker hub and pull the image down
+	could instruct docker to run a process with the docker run command
+		for example `docker run ubuntu sleep 5`
+	runs in the foreground or in an attached mode
+		meaning you will be attached to the console or the standard out of the docker container
+		see the output of the web service on screen
+	docker run -d image_id_or_image_name
+		runs the docker container in the background mode or in the detached mode and will be back to prompt immediately
+	The -i parameter is for interactive mode
+	The -t stands for a pseudo terminal
+		docker run -i kodekloud/simple-prompt-docker
+		docker run -it centos bash  # automatically be logged into the Docker container
+	The -e parameter is for environment variable
+		docker run -e APP_COLORCOLOR=blue kodekloud/simple-prompt-docker
+			can find the environment variable set on a container that's already running with `docker inspect`
+	the ways to access to apapplication running in docker
+		using the internal IP
+			be inside Docker host
+			open up a browser and go to the internal IP address
+			could use the Docker inspect command to find out the internal IP of container
+		mapping a port to my Docker host and accessing it using the external IP
+			The -p parameter maps a Port of local host to a port on the Docker container
+				docker run -p 80:5000 kodekloud/simple-prompt-docker  # 80 is a port of local host, 5000 is a port on the docker container
+				This way, you can run multiple instances of your application and map them to different ports on the Docker host
+				or run instances of different applications on different ports
+	the way data is persisted in a Docker container
+		the docker container has its own isolated file system and any changes to any files happen within the container
+		the -v option maps a directory outside the container on the Docker host to a directory inside the container
+			2 types of mounts
+				a volume mounting
+					docker volume create name_of_volume  # mount name_of_volume volume in /var/lib/docker/volumes/
+				a bind mount
+					a directory from any location on the Docker host
+			docker run -v /opt/datadir:/var/lib/mysql mysql  # the same script is below
+				/opt/datadir is the directory on the Docker host
+				/var/lib/mysql is the directory inside the Docker container
+			docker run --mount type=bind,source=/opt/datadir,target=/var/lib/mysql mysql
+				the preferred way, is the same with `-v`
+				source is the location on host
+				target is the location on container
+Every docker container gets an IP assigned by default
+
+docker exec container_id_or_container_name command
+	for example `docker exec distracteded_mcclintok cat /etc/hosts`
+	run a command inside a running Docker container
+docker attach container_id_or_container_name
+	attach back to the container which is running in the detached mode
+docker logs container_id_or_container_name
+	view the logs, which happens to be the contents written to the standard out of that container
+	
+docker ps
+	lists all running containers and some basic information about them
+		the container id
+		the name of the image we use to run the containers
+		the current status
+		the name of the container
+	docker ps -a  # see all containers running or not
+		exit code 0: exited under normal conditions
+		exit code 137: be killed using the stop command
+docker inspect container_id_or_container_name
+	returns all details of a container in a JSON format, such as
+		the state
+		mounds
+		configuration data
+		network settings
+		...
+
+docker stop container_id_or_container_name
+docker rm container_id_or_container_name
+docker images
+	see a list of available images and their sizes
+docker rmi image_id_or_image_name
+	You must stop and delete all dependent containers to be able to delete an image
+docker pull image_id_or_image_name(:tag)
+	pulls the image and stores it on host, not runs the container
+	tag is the version which is separated by a colon, the default tag is `latest`
