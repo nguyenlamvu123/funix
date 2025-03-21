@@ -1,0 +1,19 @@
+start building idea
+need to host application on a system that is never turned off -> a data center or a virtual machine 
+	evelopment environment, production environment
+	purchase a domain name and map that to server
+building the code: Converting code from a text format to a binary or executable format
+need a solution that can help collaborate. Git helps all developers to work on the same application at the same time and collaborate efficiently.
+Git is the underlying technology, and GitHub is the publicly hosted Git-based central repository of code
+	Some other similar platforms are GitLab and Bitbucket
+
+workflow
+	developers pushing code to a central GitHub repository
+	the CI/CD pipeline pulls the code to the build server
+		CI/CD tools release features faster and more frequently with less manual effort
+	builds it to Docker images
+	image is used to test the application in the test environment
+		Containers package the application and its dependencies into an image that can then be run on any system without worrying about dependencies
+	deployed in a production environment as containers by Container orchestration platform
+		Container orchestration platform auto scale containers as well as the underlying infrastructure based on need and manage resources on the underlying service to ensure optimal resource utilization
+
