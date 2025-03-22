@@ -8,22 +8,13 @@
             const response = await fetch(`/get-repos/?username=${username}`);
             const data = await response.json();
 
+            console.log(data); // Ghi dữ liệu JSON vào console
             const results = document.getElementById('results');
-            results.innerHTML = '';
 
             if (data.error) {
                 results.textContent = data.error;
             } else {
-                const list = document.createElement('ul');
-                data.repositories.forEach(repo => {
-                    const item = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = repo.url;
-                    link.textContent = repo.name;
-                    item.appendChild(link);
-                    list.appendChild(item);
-                });
-                results.appendChild(list);
+                results.textContent = JSON.stringify(data, null, 2); // Hiển thị JSON trong giao diện
             }
         }
     </script>
