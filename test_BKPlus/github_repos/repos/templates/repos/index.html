@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Repositories</title>
+    <script>
+        async function fetchRepos() {
+            const username = document.getElementById('username').value;
+            const response = await fetch(`/get-repos/?username=${username}`);
+            const data = await response.json();
+
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+
+            if (data.error) {
+                results.textContent = data.error;
+            } else {
+                const list = document.createElement('ul');
+                data.repositories.forEach(repo => {
+                    const item = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = repo.url;
+                    link.textContent = repo.name;
+                    item.appendChild(link);
+                    list.appendChild(item);
+                });
+                results.appendChild(list);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>GitHub Repositories</h1>
+    <input type="text" id="username" placeholder="Enter GitHub username" />
+    <button onclick="fetchRepos()">Get Repos</button>
+    <div id="results"></div>
+</body>
+</html>
