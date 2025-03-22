@@ -10,11 +10,21 @@
 
             console.log(data); // Ghi dữ liệu JSON vào console
             const results = document.getElementById('results');
+            results.innerHTML = ''; // Xóa nội dung cũ
 
             if (data.error) {
                 results.textContent = data.error;
             } else {
-                results.textContent = JSON.stringify(data, null, 2); // Hiển thị JSON trong giao diện
+                const jsonPre = document.createElement('pre');
+                jsonPre.textContent = JSON.stringify(data, null, 2); // Hiển thị JSON với định dạng đẹp (indentation)
+                jsonPre.style.fontFamily = 'monospace'; // Font dễ nhìn cho JSON
+                jsonPre.style.whiteSpace = 'pre-wrap'; // Đảm bảo hiển thị chính xác trong giao diện web
+                jsonPre.style.backgroundColor = '#f4f4f4'; // Nền nhẹ để dễ đọc
+                jsonPre.style.padding = '10px'; // Khoảng cách bên trong
+                jsonPre.style.borderRadius = '5px'; // Góc bo đẹp mắt
+                jsonPre.style.border = '1px solid #ddd'; // Viền nhẹ
+
+                results.appendChild(jsonPre);
             }
         }
     </script>
