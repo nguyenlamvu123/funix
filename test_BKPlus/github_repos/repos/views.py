@@ -16,8 +16,8 @@ def get_repos(request):
     repos = response.json()
     repo_list = [{'name': repo['name'], 'url': repo['html_url']} for repo in repos]
 
-    # return JsonResponse({'repositories': repo_list})
-    return render(request, 'repos/index.html', {'repositories': repo_list})
+    return JsonResponse({'repositories': repo_list})
+    # return render(request, 'repos/index.html', {'repositories': repo_list})
 
 def index(request):
     return render(request, 'repos/index.html')
