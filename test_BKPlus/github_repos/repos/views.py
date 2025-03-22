@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 def get_repos(request):
     username = request.GET.get('username', '')
-    if not username:
+    if username == '':
         return JsonResponse({'error': 'Username is required.'}, status=400)
 
     url = f"https://api.github.com/users/{username}/repos"
@@ -16,7 +16,8 @@ def get_repos(request):
     repos = response.json()
     repo_list = [{'name': repo['name'], 'url': repo['html_url']} for repo in repos]
 
-    return JsonResponse({'repositories': repo_list})
+    # return JsonResponse({'repositories': repo_list})
+    return render(request, 'repos/index.html', {'repositories': repo_list})
 
 def index(request):
     return render(request, 'repos/index.html')
