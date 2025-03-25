@@ -1,0 +1,16 @@
+cách tiếp cận
+    branch gốc là test_bkplus, sau khi đọc và phân tích yêu cầu thì trao đổi với copilot, nhận được code ở 8f6b19e
+    code này thỏa mãn gần hết các yêu cầu, nhưng kết quả trả về không dưới dạng JSON
+        trong file index có đoạn code javascript nằm trong cặp thẻ <script></script> trong cặp thẻ <head></head> sẽ tự rend code để hiện kết quả mà không tải lại trang
+    nếu tự làm, sẽ làm như branch instead_of_javascript, không dùng javascript, dùng thuần code python và html
+        song sẽ dùng JsonResponse() để kết quả trả về đảm bảo dạng json như ở 8ea0dc9
+        nhưng có 1 điểm có vẻ sẽ không thỏa mãn với yêu cầu, đó là kết quả trả về kéo theo tải lại trang
+        nếu theo dự án này và nếu thời gian cho phép, sẽ tìm cách để cải thiện nhược điểm trên
+            chẳng hạn, tự điều hướng trở lại url ban đầu, hiện kết quả json vừa trả ra như lịch sử
+    trở lại branch gốc với code của copilot, dùng 1 hàm của javascript thay vào đó để hiện json kết quả như ở 532c453
+         định dạng lại json cho dễ nhìn như ở branch beautify_json
+         các yêu cầu đã được thỏa mãn hết
+quyết định
+    merge nhánh return_json_ vào branch gốc, do đã đảm bảo được kết quả json trả về và không phải tải lại trang
+    thông báo riêng cho lỗi tên người dùng không hợp lệ và lỗi giới hạn tần suất như ở branch except
+        thử đề xuất phương án, để thành TODO trong code
