@@ -9,12 +9,12 @@ class Tender(models.Model):
     # Fields
     tender_code = fields.Char(required=True)
     name = fields.Text(required=True)
-    region = fields.Many2One('res_region', string="Region", required=False)
-    bidders = fields.Many2Many('bidding.bidder', string="Participating Bidders", required=True)
+    region = fields.Many2one('res_region', string="Region", required=False)
+    bidders = fields.Many2many('bidding.bidder', string="Participating Bidders", required=True)
     notes = fields.Text()
     content = fields.Html()
     application_period = fields.Datetime()
-    tender_routes = fields.Many2Many('tender.route')
+    tender_routes = fields.Many2many('tender.route')
     status = fields.Selection([
         ('draft', 'Draft'),
         ('sent', 'Sent to Bidders'),
@@ -34,16 +34,16 @@ class Bidder(models.Model):
     _name = "bidding.bidder"
     
     name = fields.Char(required=True)
-    contact_person = fields.Many2One('res_partner')
-    email = fields.Email(required=True)
-    phone = fields.Phone()
+    contact_person = fields.Many2one('res_partner')
+    email = fields.Char(required=True)
+    phone = fields.Char(string="Số điện thoại")
     address = fields.Text()
 
 
 class TenderDeadline(models.Model):
     _name = "tender.deadline"
     
-    tender_id = fields.Many2One('tender.tender')
+    tender_id = fields.Many2one('tender.tender')
     deadline_date = fields.Datetime(required=True)
     description = fields.Text()
     action_type = fields.Selection([
@@ -62,5 +62,5 @@ class TenderTemplate(models.Model):
     
     template_name = fields.Char(required=True)
     content = fields.Html()
-    attached_documents = fields.Many2Many('document.document')
+    attached_documents = fields.Many2many('document.document')
 
