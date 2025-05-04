@@ -1,0 +1,5 @@
+https://github.com/ollama/ollama-python _ https://dev.to/extinctsion/how-run-deepseek-locally-with-ollama-4kbd
+	curl -fsSL https://ollama.ai/install.sh | sh
+https://ollama.com/library/deepseek-coder/blobs/d040cc185215
+https://api-docs.deepseek.com/
+
