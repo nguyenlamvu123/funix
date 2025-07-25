@@ -1,4 +1,4 @@
-# scrapy crawl spi
+# scrapy crawl spi -o quotes.json
 from coordinate import *
 
 class MASpider(scrapy.Spider):
@@ -51,7 +51,6 @@ class MASpider(scrapy.Spider):
     def parse(self, response):
         self.driver.get(response.url)
         time.sleep(5)  # đợi JS tải
-
         try:
             clickkk(self.driver, xpath_loadmore);print('*')
             clickkk(self.driver, xpath_loadmore);print('**')
@@ -59,22 +58,15 @@ class MASpider(scrapy.Spider):
             pass
         eles = findelem(self.driver, xpath_vids, getall=True)
         print(len(eles))
-        lis_jso = list()
         for elem in eles[:6]:
             href = get_in4from_elem(elem, 'href')
             self.driver.execute_script("window.open('');")
             self.driver.switch_to.window(self.driver.window_handles[-1])
             self.driver.get(href)
             jso = self.sele2jso()
-            lis_jso.append(json.dumps(jso, sort_keys=True, indent=4))
+            yield jso
             self.driver.close()
             self.driver.switch_to.window(self.driver.window_handles[0])
-        lis2file(lis_jso)
-        # for title in titles:
-        #     yield {
-        #         'title': title.text,
-        #         'link': title.get_attribute('href')
-        #     }
 
     def closed(self):
         self.driver.quit()
