@@ -22,6 +22,9 @@ xpath_more = os.getenv("xpath_more")
 url = os.getenv("url")
 debug = bool(os.getenv("debug"))
 
+mongouri = os.getenv("mongouri")
+mongodb = os.getenv("mongodb")
+
 
 def lis2file(jso):
     now = datetime.datetime.now()
