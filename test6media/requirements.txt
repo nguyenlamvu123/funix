@@ -2,3 +2,4 @@ scrapy
 selenium
 jupyter
 python-dotenv
+pymongo

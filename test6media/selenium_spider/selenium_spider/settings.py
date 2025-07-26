@@ -6,6 +6,7 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from coordinate import mongodb, mongouri
 
 BOT_NAME = "selenium_spider"
 
@@ -58,9 +59,11 @@ DOWNLOAD_DELAY = 1
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "selenium_spider.pipelines.SeleniumSpiderPipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "selenium_spider.pipelines.MongoDBPipeline": 300,
+}
+MONGO_URI = mongouri
+MONGO_DATABASE = mongodb
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
